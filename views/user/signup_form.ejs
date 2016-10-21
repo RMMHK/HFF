@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<% if(- flash && flash.err)
+{
+  Object.keys(flash.err).forEach(function(error){- JSON.stringify(flash.err[error])})
+} %>
+
+<h2> LEVEL HY SIR APKA</h2>
+	<form action="/user/create" method="POST" enctype='application/json'>
+<br><br><br><br><br><br><br><br>
+
+
+
+
+<b>username:</b>
+<input type="text" name="name" required>
+<br><br>
+
+<b>email:  </b>
+<input type="email" name="email" required><br><br>
+
+<b>V_ID:  </b>
+<input type="number" name="v_id" required><br><br>
+
+<b>contact: &nbsp&nbsp&nbsp</b>
+<input type ="number" name="cell" required>
+
+
+<input type="submit"  value="Create" >
+
+
+		</form>
+</body>
+</html>
