@@ -1,4 +1,4 @@
-/**
+/*
  * Development environment settings
  *
  * This file can include shared settings for a development team,
@@ -10,15 +10,15 @@
  *
  */
 
-module.exports = {
+/*module.exports = {
 
   /***************************************************************************
    * Set the default database connection for models in the development       *
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-     models: {
+  /*   models: {
      connection: 'HomeFoodiesServer'
    },
-hookTimeout:40000
-};
+hookTimeout:40000*/
+//};
