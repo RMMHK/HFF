@@ -38,7 +38,7 @@ module.exports = {
       {from: "Home Foodies<homefooodies@gmail.com>", to: email, subject: "Number changed notification"},
       function (err, success) {
         console.log(err)
-        if (err || !success) {
+        if (err!=null || !success) {
           console.log(err)
           res.json({status: "error"})
         }
