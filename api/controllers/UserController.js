@@ -17,7 +17,7 @@ module.exports = {
  made: function(req, res, next) {
 	//console.log("This is create fucntion");
    console.log( req.url);
-   console.log( req.headers);
+  // console.log( req.headers);
    var params = req.body;
 
    var type = params.type;
