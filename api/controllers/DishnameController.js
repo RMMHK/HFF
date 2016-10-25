@@ -11,11 +11,10 @@ module.exports = {
   dishOperations:function (req,res,next) {
     var params = req.body;
     console.log(params)
-    var dishName=params.dishName;
-    var dishType=req.dishType;
 
 
-    Dishname.create({dishName:params.dishName}).then(function (err,data) {
+
+    Dishname.create({dishName:"biryani"}).then(function (err,data) {
 
       if (!err)
         res.json({data})
