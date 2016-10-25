@@ -10,7 +10,7 @@ module.exports = {
   attributes: {
     dish_type: {
       type: 'string',
-      require:true,
+     // require:true,
       unique:true
     },
 
