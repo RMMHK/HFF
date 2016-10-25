@@ -11,31 +11,68 @@ module.exports = {
     var params = req.body;
     console.log(params)
 
-/*
-    Dishtype.create({dishType: params.dishType, joint: '580f204a1ccc5c0300ceddd6'}).then(function (err, data) {
+
+    Dishname.findOne({dishName:params.dishName}).then(function(data,err) {
       if (data && data != "" && !data.undefined) {
-        res.json({type: "inserted"})
+
+        var dish_id = data.id;
+        console.log("**DSHHHHHH**" + dish_id);
+        Dishtype.create({dishType: params.dishType, joint: dish_id}).then(function (data, err) {
+          if (data && data != "" && !data.undefined) {
+            res.json({type: "inserted"})
+          }
+          else if (err)
+            res.json({type: "not inserted"})
+
+        })
       }
-      else
-        res.json({type: "not inserted"})
 
-    })}*/
+       else if(!data||data=="")
+     {
+       Dishname.create({dishName:params.dishName}).then(function (data,err) {
+         var dish_id = data.id;
+         if (data && data != "" && !data.undefined)
+         {
+           Dishtype.create({dishType: params.dishType, joint: dish_id}).then(function (data, err) {
+             if (data && data != "" && !data.undefined) {
+               res.json({type: "Data inserted"})
+             }
+             else if (err)
+               res.json({type: "Data - not inserted"})
 
-   Dishname.findOne({dishName:params.dishName}).then(function(data,err)
-   {
-     if (data && data != "" && !data.undefined) {
-
-       var dish_id = data.id;
-       console.log("**DSHHHHHH**"+dish_id);
-       Dishtype.create({dishType: params.dishType, joint: dish_id}).then(function (data, err) {
-         if (data && data != "" && !data.undefined) {
-           res.json({type: "inserted"})
+           })
          }
-         else if (err)
-           res.json({type: "not inserted"})
+           else if(err!=null)
+           res.json({err:err})
+       })}
 
-       })
-     }})}
+       else if (err)
+      {res.json({err:err})}
+
+     }
+   )}
+
+
+
+  /*
+   Dishtype.create({dishType: params.dishType, joint: '580f204a1ccc5c0300ceddd6'}).then(function (err, data) {
+   if (data && data != "" && !data.undefined) {
+   res.json({type: "inserted"})
+   }
+   else
+   res.json({type: "not inserted"})
+
+   })}*/
+
+
+
+
+
+
+
+
+
+
    /* Dishname.create({dishName:params.dishName}).then(function (err,data) {
 
       if (!err)
