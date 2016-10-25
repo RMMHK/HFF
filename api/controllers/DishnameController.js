@@ -11,7 +11,7 @@ module.exports = {
     var params = req.body;
     console.log(params)
 
-
+/*
     Dishtype.create({dishType: params.dishType, joint: '580f204a1ccc5c0300ceddd6'}).then(function (err, data) {
       if (data && data != "" && !data.undefined) {
         res.json({type: "inserted"})
@@ -19,23 +19,23 @@ module.exports = {
       else
         res.json({type: "not inserted"})
 
-    })}
-  /*
-   Dishname.findOne({dishName:params.dishName}).then(function(err,data)
+    })}*/
+
+   Dishname.findOne({dishName:params.dishName}).then(function(data,err)
    {
      if (data && data != "" && !data.undefined) {
 
        var dish_id = data.id;
        console.log("**DSHHHHHH**"+dish_id);
-       Dishtype.create({dishtype: params.dishtype, joint: dish_id}).then(function (err, data) {
+       Dishtype.create({dishType: params.dishType, joint: dish_id}).then(function (data, err) {
          if (data && data != "" && !data.undefined) {
            res.json({type: "inserted"})
          }
-         else
+         else if (err)
            res.json({type: "not inserted"})
 
        })
-     }})}*/
+     }})}
    /* Dishname.create({dishName:params.dishName}).then(function (err,data) {
 
       if (!err)
