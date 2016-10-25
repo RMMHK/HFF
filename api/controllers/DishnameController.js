@@ -12,7 +12,7 @@ module.exports = {
     console.log(params)
 
 
-    Dishtype.create({dishtype: params.dishtype, joint: "580f204a1ccc5c0300ceddd6"}).then(function (err, data) {
+    Dishtype.create({dishType: params.dishType, joint: '580f204a1ccc5c0300ceddd6'}).then(function (err, data) {
       if (data && data != "" && !data.undefined) {
         res.json({type: "inserted"})
       }
