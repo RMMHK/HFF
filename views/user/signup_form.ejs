@@ -5,10 +5,6 @@
 </head>
 <body>
 
-<% if(- flash && flash.err)
-{
-  Object.keys(flash.err).forEach(function(error){- JSON.stringify(flash.err[error])})
-} %>
 
 
 	<form action="/user/create" method="POST" enctype='application/json'>
