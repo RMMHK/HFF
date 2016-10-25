@@ -9,8 +9,9 @@ module.exports = {
 
 
   dishOperations:function (req,res,next) {
-
-    var dishName=req.dish_name;
+    var params = req.body;
+    console.log(params)
+    var dishName=params.dish_name;
     var dishType=req.dish_type;
 
 
