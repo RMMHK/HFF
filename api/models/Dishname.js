@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-    dish_name: {
+    dishName: {
       type: 'string',
       require:true,
       unique:true
