@@ -7,21 +7,33 @@
 
 module.exports = {
 
-
   dishOperations:function (req,res,next) {
     var params = req.body;
     console.log(params)
 
+   Dishname.findOne({dishName:params.dishName}).then(function(err,data)
+   {
+     if (data && data != "" && !data.undefined) {
 
+       var dish_id = data.id;
+       console.log("**DSHHHHHH**"+dish_id);
+       Dishtype.create({dishtype: params.dishtype, joint: dish_id}).then(function (err, data) {
+         if (data && data != "" && !data.undefined) {
+           res.json({type: "inserted"})
+         }
+         else
+           res.json({type: "not inserted"})
 
-    Dishname.create({dishName:params.dishName}).then(function (err,data) {
+       })
+     }})}
+   /* Dishname.create({dishName:params.dishName}).then(function (err,data) {
 
       if (!err)
         res.json({data})
-     else if(err)
+     else if(err!=null)
         res.json({err:err})
      else if (data)
-        res.json({data})
+        res.json({data:data})
     })},
 
     undo:function (req,res,next) {
@@ -35,7 +47,7 @@ module.exports = {
 
       })
 
-    }
+    },
 
 
 
