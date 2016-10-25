@@ -14,7 +14,7 @@ module.exports = {
 
 
 
-    Dishname.create({dishName:"biryani"}).then(function (err,data) {
+    Dishname.create({dishName:params.dishName}).then(function (err,data) {
 
       if (!err)
         res.json({data})
