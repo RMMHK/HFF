@@ -4,7 +4,7 @@
 
 
 
-
+/*
 module.exports.adapters={
 
   'default' :'mongo',
@@ -15,3 +15,4 @@ module.exports.adapters={
     schema: true
   }
 };
+*/

@@ -37,7 +37,8 @@ module.exports.routes = {
 
  'get/user/ping':'UserController.ping',
   'post/user/made':'UserController.made',
-  '/email' : 'EmailController.sendEmail'
+  '/email' : 'EmailController.sendEmail',
+  'post/facilitateInfo':'DishController.dishOperations'
 
   /*module.exports.routes = {
 ss
