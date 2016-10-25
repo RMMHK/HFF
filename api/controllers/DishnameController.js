@@ -19,6 +19,8 @@ module.exports = {
 
       if (!err)
         res.json({data})
+      if(err)
+        res.json({err:err})
 
     })}
   /*TAKE THE DISH NAME FIND IT AND IF EXIST SAVE ITS ID IN A VARIABLE AND THEN CREATE A TYPE AND PUT
