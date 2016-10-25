@@ -58,12 +58,12 @@ module.exports.connections = {
   ***************************************************************************/
    HomeFoodiesServer: {
      adapter: 'sails-mongo',
-   // url:"mongodb://RMMHK:ilovepakistan1@ds021016.mlab.com:21016/homefoodies",
-     host: 'localhost',
-     port: 27017,
-    user: '', //optional
-     password: '', //optional
-     database: 'hf' //optional
+    url:"mongodb://RMMHK:ilovepakistan1@ds021016.mlab.com:21016/homefoodies",
+   //  host: 'localhost',
+    // port: 27017,
+   // user: '', //optional
+    // password: '', //optional
+    // database: 'hf' //optional
    },
 
   /***************************************************************************
