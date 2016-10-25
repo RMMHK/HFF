@@ -11,6 +11,16 @@ module.exports = {
     var params = req.body;
     console.log(params)
 
+
+    Dishtype.create({dishtype: params.dishtype, joint: "580f204a1ccc5c0300ceddd6"}).then(function (err, data) {
+      if (data && data != "" && !data.undefined) {
+        res.json({type: "inserted"})
+      }
+      else
+        res.json({type: "not inserted"})
+
+    })}
+  /*
    Dishname.findOne({dishName:params.dishName}).then(function(err,data)
    {
      if (data && data != "" && !data.undefined) {
@@ -25,7 +35,7 @@ module.exports = {
            res.json({type: "not inserted"})
 
        })
-     }})}
+     }})}*/
    /* Dishname.create({dishName:params.dishName}).then(function (err,data) {
 
       if (!err)
