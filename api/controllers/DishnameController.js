@@ -12,7 +12,7 @@ module.exports = {
     console.log(params)
 
 
-    Dishname.findOne({dishName:params.dishName}).then(function(data,err) {
+    Dishname.findOne({DishName:params.dishName}).then(function(data,err) {
       if (data && data != "" && !data.undefined) {
 
         var dish_id = data.id;
@@ -29,11 +29,13 @@ module.exports = {
 
        else if(!data||data=="")
      {
-       Dishname.create({dishName:params.dishName}).then(function (data,err) {
-         var dish_id = data.id;
+       Dishname.create({DishName:params.dishName}).then(function (data,err) {
+
          if (data && data != "" && !data.undefined)
          {
-           Dishtype.create({dishType: params.dishType, joint: dish_id}).then(function (data, err) {
+           var dish_id = data.id;
+           var dish_name=data.DishName;
+           Dishtype.create({dishType: params.dishType, joint: data.DishName}).then(function (data, err) {
              if (data && data != "" && !data.undefined) {
                res.json({type: "Data inserted"})
              }
@@ -67,7 +69,7 @@ module.exports = {
 
 
 
-
+//stop inserting duplicate data
 
 
 
