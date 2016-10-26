@@ -11,7 +11,7 @@ module.exports = {
 
     index:{
       type:'string',
-      unique:true;
+      unique:true
     }
   }
 };
