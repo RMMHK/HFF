@@ -34,8 +34,8 @@ module.exports = {
          if (data && data != "" && !data.undefined)
          {
            var dish_id = data.id;
-           var dish_name=data.DishName;
-           Dishtype.create({dishType: params.dishType, joint: data.DishName}).then(function (data, err) {
+
+           Dishtype.create({dishType: params.dishType, joint: dish_id}).then(function (data, err) {
              if (data && data != "" && !data.undefined) {
                res.json({type: "Data inserted"})
              }
