@@ -13,11 +13,13 @@ module.exports = {
 
      var params = req.body
 
+     console.log(params)
+
      Fooditem.create({name:params.name,status:params.status}).then(function (data,err) {
 
-       if (data[0])
+       if (data)
        {
-         res.json({item:data[0]})
+         res.json({item:data})
        }
      else
        {
@@ -29,8 +31,9 @@ module.exports = {
 
 
    updateItemStatus:function (req,res,next) {
-     var params = req.bodyS
+     var params = req.body
      console.log(params)
+
      Fooditem.update({id:params.id},{status:params.status}).then(function (data,err) {
 
        if (data)
@@ -53,7 +56,8 @@ module.exports = {
   searchItem:function (req,res,next) {
     var params = req.body
     console.log(params)
-    Fooditem.find({name:params.name,status:params.status}).then(function (data,err) {
+
+    Fooditem.find({name:params.name, status:params.status}).then(function (data,err) {
 
       if (data)
       {
