@@ -9,7 +9,7 @@ module.exports = {
 
 
 
-   create:function (req,res,next) {
+   made:function (req,res,next) {
 
      Fooditem.create({name:req.name,status:req.status}).then(function (data,err) {
 
