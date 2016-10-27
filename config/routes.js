@@ -38,8 +38,8 @@ module.exports.routes = {
  'get/user/ping':'UserController.ping',
   'post/user/made':'UserController.made',
   'post/fooditem/made':'FooditemController.made',
-  'post/fooditem/update_status':'FooditemController.update_item_status',
-  'post/fooditem/search':'FooditemController.search_item',
+  'post/fooditem/update_status':'FooditemController.updateItemStatus',
+  'post/fooditem/search':'FooditemController.searchItem',
   '/email' : 'EmailController.sendEmail',
   'post/dishname/dishOperations':'DishnameController.dishOperations'
 
