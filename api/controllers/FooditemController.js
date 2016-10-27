@@ -11,7 +11,9 @@ module.exports = {
 
    made:function (req,res,next) {
 
-     Fooditem.create({name:req.name,status:req.status}).then(function (data,err) {
+     var params = req.body
+
+     Fooditem.create({name:params.name,status:params.status}).then(function (data,err) {
 
        if (data)
        {
@@ -27,8 +29,8 @@ module.exports = {
 
 
    update_item_status:function (req,res,next) {
-
-     Fooditem.update({id:req.id},{status:req.status}).then(function (data,err) {
+     var params = req.body
+     Fooditem.update({id:params.id},{status:params.status}).then(function (data,err) {
 
        if (data)
        {
@@ -48,8 +50,8 @@ module.exports = {
 
 
   search_item:function (req,res,next) {
-
-    Fooditem.find({name:req.name,status:req.status}).then(function (data,err) {
+    var params = req.body
+    Fooditem.find({name:params.name,status:params.status}).then(function (data,err) {
 
       if (data)
       {
