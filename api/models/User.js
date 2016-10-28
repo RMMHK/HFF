@@ -60,7 +60,6 @@ module.exports = {
 
 EShop:{
   model:'EShop',
-  unique:false
 }
 
  /* toJSON: function() {

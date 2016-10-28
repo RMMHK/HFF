@@ -15,7 +15,7 @@ module.exports = {
 
      console.log(params)
 
-     Fooditem.create({name:params.name,status:params.status}).then(function (data,err) {
+     Fooditem.create({name:params.name,description:params.description,price:params.price,typeOf:params.typeId,eshop:params.eshopId}).then(function (data,err) {
 
        if (data)
        {
@@ -34,7 +34,7 @@ module.exports = {
      var params = req.body
      console.log(params)
 
-     Fooditem.update({id:params.id},{status:params.status}).then(function (data,err) {
+     Fooditem.update({id:params.id},{status:params.status}).then(function (err,data) {
 
        if (data)
        {
@@ -57,7 +57,7 @@ module.exports = {
     var params = req.body
     console.log(params)
 
-    Fooditem.find({name:params.name, status:params.status}).then(function (data,err) {
+    Fooditem.find({name:params.name, status:params.status}).then(function (err,data) {
 
       if (data)
       {

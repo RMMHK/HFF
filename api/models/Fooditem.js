@@ -10,11 +10,48 @@ module.exports = {
   attributes: {
 
     status: {
-      type:'boolean'
+      type:'boolean',
+      defaultsTo:false
     },
     name:
     {
       type:'string'
+    },
+    description:
+    {
+    type:'string'
+    },
+
+    price:
+    {
+      type:'integer'
+    },
+
+    quality_meter:
+    {
+      type:'integer',
+      defaultsTo:0
+    },
+
+    taste_meter:
+    {
+      type:'integer',
+      defaultsTo:0
+    },
+
+    served:
+    {
+      type:'integer',
+      defaultsTo:0
+    },
+
+    typeOf:{
+      model:'Dishtype'
+    },
+
+    eshop:
+    {
+      model:'EShop'
     }
   }
 };

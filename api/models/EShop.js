@@ -32,5 +32,12 @@ module.exports= {
       model:'user',
      unique:true
     }*/
+
+   ES_Shopitems:
+   {
+     collection:'Fooditem',
+     via:'eshop'
+   }
+
   }
 };

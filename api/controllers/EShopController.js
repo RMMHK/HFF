@@ -9,7 +9,7 @@ module.exports={
     EShop.create({ES_REG_DATE:new Date()}).exec(function (err,shop) {
       if(err) res.json({msg:'error'});
      // if(shop) res.json({shop:shop});})
-    User.update({v_id:req.param('v_id')},{EShop:shop.id}).then(function (ok,err)
+    User.update({id:req.param('id')},{EShop:shop.id}).then(function (ok,err)
       {
         if(ok) res.json({CustomerDetails:ok, ShopDetails: ok.EShop})
         if(err) res.json({msg:'CANNOT ASSIGN TWO SHOPS TO ONE CUSTOMERS'})

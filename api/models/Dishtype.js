@@ -17,6 +17,11 @@ module.exports = {
     joint: {
       model: 'Dishname'
     }
+  },
+
+  fooditems:{
+    collection:'Fooditem',
+    via:'typeOf'
   }
 };
 
