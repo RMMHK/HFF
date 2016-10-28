@@ -11,8 +11,9 @@ module.exports = {
 
 
     var params = req.body;
-    var dishTypeFullName=params.dishType+params.dishName+"";
+    var dishTypeFullName=params.dishType + params.dishName+"";
     console.log(params)
+    console.log(dishTypeFullName)
 
     Dishname.findOne({DishName:params.dishName}).then(function(data,err) {
 
