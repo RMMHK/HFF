@@ -57,14 +57,14 @@ module.exports = {
     var items={}
       Fooditem.find({name:params.foodTypeName,status:true}).populate('eshop').then(function (data,err) {
         if (data) {
-         // console.log(data)
-          for (var i = 0; i < data.length; i++) {
+          console.log("DATA ------> " + data)
+          for(var i = 0; i < data.length; i++) {
 
-            console.log(data)
+            console.log("FOR ------->" + data)
 
             if (data[i].eshop.ES_STATUS == "true" && data[i].eshop.ES_BLOCK == "false") {
 
-                 console.log(data)
+                 console.log("IF --------->" + data)
 
             }}}/*
               result.push(
