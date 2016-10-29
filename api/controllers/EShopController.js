@@ -6,9 +6,8 @@ module.exports={
 
   e_create: function (req,res,next) {
 
-    EShop.create({ES_REG_DATE:new Date()}).exec(function (err,shop) {
+    EShop.create({ES_REG_DATE:new Date()}).then(function (err,shop) {
       if(err) res.json({msg:'error'});
-     // if(shop) res.json({shop:shop});})
     User.update({id:req.param('id')},{EShop:shop.id}).then(function (ok,err)
       {
         if(ok) res.json({CustomerDetails:ok, ShopDetails: ok.EShop})

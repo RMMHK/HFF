@@ -59,20 +59,19 @@ module.exports = {
     var params = req.body
     console.log(params)
 
-    Fooditem.find({name:params.name, status:params.status}).then(function (err,data) {
+    HashTable.findOne({foodTypeName:params.foodTypeName}).then(function(data,err)
+    {
+      DishType.find({id:data.foodTypeId}).populate('fooditems').then(function (data,err) {
 
-      if (data)
-      {
-        res.json({success:data})
-      }
-
-      else
-      {
-        res.json({error:err})
-      }
-
-    })
-
+        if (data)
+        {
+          res.json({item:data})
+        }
+        else
+        {
+          res.json({error:err})
+        }
+      })})
   },
 
 

@@ -20,8 +20,8 @@ module.exports = {
   },
 
   fooditems:{
-    collection:'Fooditem',
-    via:'typeOf'
+     collection:'Fooditem',
+     via:'typeOf'
   }
 };
 
