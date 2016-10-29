@@ -19,7 +19,7 @@ module.exports = {
     }
   },
 
-  fooditems:{
+  items:{
      collection:'Fooditem',
      via:'typeOf'
   }

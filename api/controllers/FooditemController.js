@@ -54,27 +54,56 @@ module.exports = {
 
 
 
-
   searchItem:function (req,res,next) {
     var params = req.body
     console.log(params)
 
-    HashTable.findOne({foodTypeName:params.foodTypeName}).then(function(data,err)
-    {
-      Dishtype.find({id:data.foodTypeId}).populate('fooditems').then(function (data,err) {
+      Fooditem.find({name:data.foodTypeName,status:true}).then(function (data,err) {
+       var result=[]
+        if (data) {
+          for (var i = 0; i < data.length; i++) {
+            if (data[i].eshop.ES_STATUS == "true" && data[i].eshop.ES_BLOCK == "false") {
+              result.push(
+                {
+                  "name": data[i].name,
+                  "description": data[i].description,
+                  "price": data[i].price,
+                  "location": data[i].eshop.ES_LOCATION,
+                  "taste": data[i].taste_meter,
+                  "quality": data[i].quality_meter,
+                  "served": data[i].served,
+                  "status": "available"
 
-        if (data)
-        {
-          res.json({item:data})
+                }
+              )
+            }
+          }
+          if (!result == "")
+            res.result;
+          else
+            res.json({rsponse: "no result"})
         }
         else
         {
           res.json({error:err})
         }
-      })})
+      })
   },
 
 
 
 };
+/*
+HashTable.findOne({foodTypeName:params.foodTypeName}).then(function(data,err)
+{
+  Dishtype.find({id:data.foodTypeId}).populate('fooditems').then(function (data,err) {
 
+    if (data)
+    {
+      res.json({item:data})
+    }
+    else
+    {
+      res.json({error:err})
+    }
+  })})*/
