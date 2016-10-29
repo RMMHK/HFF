@@ -65,12 +65,31 @@ module.exports = {
 
              if(data[i].eshop.ES_STATUS ==true && data[i].eshop.ES_BLOCK == false) {
 
-              console.log("IF --------->" + data)
-            }
-            else
-                console.log('in here')
+               result.push(
+                 {
+                   "name": data[i].name,
+                   "description": data[i].description,
+                   "price": data[i].price,
+                   "location": data[i].eshop.ES_LOCATION,
+                   "taste": data[i].taste_meter,
+                   "quality": data[i].quality_meter,
+                   "served": data[i].served,
+                   "status": "available"
 
-            }}/*
+                 }
+               )
+               console.log(result)
+             }
+
+          }
+          if (items != "")
+            res.json({result:result});
+
+          else
+            res.json({response: "no result"})
+        }
+
+           /*
               result.push(
                 {
                   "name": data[i].name,
