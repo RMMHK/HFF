@@ -57,7 +57,7 @@ module.exports = {
     var items={}
       Fooditem.find({name:params.foodTypeName}).then(function (data,err) {
         if (data) {
-          console.log("DATA ------> " + data)
+          console.log(data)
           for(var i = 0; i < data.length; i++) {
 
             console.log("FOR ------->" + data)
