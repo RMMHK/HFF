@@ -61,7 +61,7 @@ module.exports = {
 
     HashTable.findOne({foodTypeName:params.foodTypeName}).then(function(data,err)
     {
-      DishType.find({id:data.foodTypeId}).populate('fooditems').then(function (data,err) {
+      Dishtype.find({id:data.foodTypeId}).populate('fooditems').then(function (data,err) {
 
         if (data)
         {
