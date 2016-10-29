@@ -61,6 +61,8 @@ module.exports = {
           console.log(data)
           for (var i = 0; i < data.length; i++) {
             if (data[i].eshop.ES_STATUS == "true" && data[i].eshop.ES_BLOCK == "false") {
+
+
               result.push(
                 {
                   "name": data[i].name,
@@ -74,13 +76,12 @@ module.exports = {
 
                 }
               )
-              items.item=result
+              console.log(result)
             }
 
           }
           if (items != "")
-
-            res.json({result:items});
+            res.json({result:result});
 
           else
             res.json({response: "no result"})
