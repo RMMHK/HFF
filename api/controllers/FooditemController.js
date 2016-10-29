@@ -55,7 +55,7 @@ module.exports = {
     console.log(params)
     var result=[]
     var items={}
-      Fooditem.find({name:req.foodTypeName}).then(function (data,err) {
+      Fooditem.find({name:params.foodTypeName}).then(function (data,err) {
 
         if (data) {
           console.log(data)
