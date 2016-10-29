@@ -61,7 +61,7 @@ module.exports = {
           for(var i = 0; i < data.length; i++) {
 
             console.log(data)
-
+           var  data= JSON.parse(data)
             if (data[i].eshop.ES_STATUS == "true" && data[i].eshop.ES_BLOCK == "false") {
 
               console.log("IF --------->" + data)
