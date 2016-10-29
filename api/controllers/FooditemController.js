@@ -61,9 +61,9 @@ module.exports = {
           for(var i = 0; i < data.length; i++) {
 
             console.log(data[i])
-            console.log(data[i].eshop)
+            console.log(data[i].eshop.ES_STATUS)
 
-             if(data[i].eshop.ES_STATUS == "true" && data[i].eshop.ES_BLOCK == "false") {
+             if(data[i].eshop.ES_STATUS ==true && data[i].eshop.ES_BLOCK == false) {
 
               console.log("IF --------->" + data)
             }
