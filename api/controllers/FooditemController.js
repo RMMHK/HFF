@@ -58,6 +58,7 @@ module.exports = {
       Fooditem.find({name:req.foodTypeName,status:true}).then(function (data,err) {
 
         if (data) {
+          console.log(data)
           for (var i = 0; i < data.length; i++) {
             if (data[i].eshop.ES_STATUS == "true" && data[i].eshop.ES_BLOCK == "false") {
               result.push(
@@ -77,7 +78,7 @@ module.exports = {
             }
 
           }
-          if (!items == "")
+          if (items != "")
 
             res.json({result:items});
 
