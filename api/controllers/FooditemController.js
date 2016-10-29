@@ -12,20 +12,22 @@ module.exports = {
    made:function (req,res,next) {
 
      var params = req.body
-
      console.log(params)
 
-     Fooditem.create({name:params.name,description:params.description,price:params.price,typeOf:params.typeId,eshop:params.eshopId}).then(function (data,err) {
+     HashTable.findOne({foodTypeName:params.foodTypeName}).then(function(data,err)
+       {
+         Fooditem.create({name:params.foodTypeName,description:params.description,price:params.price,typeOf:data.foodTypeId,eshop:params.eshopId}).then(function (data,err) {
 
-       if (data)
-       {
-         res.json({item:data})
-       }
-     else
-       {
-         res.json({error:err})
-       }
-     })
+           if (data)
+           {
+             res.json({item:data})
+           }
+           else
+           {
+             res.json({error:err})
+           }
+         })})
+
    },
 
 

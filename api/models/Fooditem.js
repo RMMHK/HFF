@@ -30,19 +30,19 @@ module.exports = {
     quality_meter:
     {
       type:'integer',
-      defaultsTo:0
+      defaultsTo: 0
     },
 
     taste_meter:
     {
       type:'integer',
-      defaultsTo:0
+      defaultsTo: 0
     },
 
     served:
     {
       type:'integer',
-      defaultsTo:0
+      defaultsTo: 0
     },
 
     typeOf:{
