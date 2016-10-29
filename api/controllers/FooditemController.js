@@ -29,9 +29,6 @@ module.exports = {
          })})
 
    },
-
-
-
    updateItemStatus:function (req,res,next) {
      var params = req.body
      console.log(params)
@@ -53,13 +50,13 @@ module.exports = {
    },
 
 
-
   searchItem:function (req,res,next) {
     var params = req.body
     console.log(params)
+    var result=[]
+    var items={}
+      Fooditem.find({name:req.foodTypeName,status:true}).then(function (data,err) {
 
-      Fooditem.find({name:data.foodTypeName,status:true}).then(function (data,err) {
-       var result=[]
         if (data) {
           for (var i = 0; i < data.length; i++) {
             if (data[i].eshop.ES_STATUS == "true" && data[i].eshop.ES_BLOCK == "false") {
@@ -76,12 +73,16 @@ module.exports = {
 
                 }
               )
+              items.item=result
             }
+
           }
-          if (!result == "")
-            res.result;
+          if (!items == "")
+
+            res.json({result:items});
+
           else
-            res.json({rsponse: "no result"})
+            res.json({response: "no result"})
         }
         else
         {
