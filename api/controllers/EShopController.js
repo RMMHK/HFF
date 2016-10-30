@@ -10,12 +10,12 @@ getEShop:function (req,res,next) {
 
   var params = req.body
 
-  User.findOne({id: params.id}.populate('EShop')).then(function (user,err) {
+  User.findOne({id: params.id}).populate('EShop').then(function (user,err) {
 
     if(user.EShop!=""&&user.EShop.ES_BLOCK==false)
     {
 
-        EShop.find({id:user.EShop.id}.populate('ES_Shopitems')).then(function (items,err) {
+        EShop.find({id:user.EShop.id}).populate('ES_Shopitems').then(function (items,err) {
 
          if (items)
         res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items})
@@ -42,7 +42,7 @@ getEShop:function (req,res,next) {
 
              if(ok)
              {
-              EShop.find({id:shop.id}.populate('ES_Shopitems')).then(function (items,err) {
+              EShop.find({id:shop.id}).populate('ES_Shopitems').then(function (items,err) {
               if (items)
                 res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items})
 
