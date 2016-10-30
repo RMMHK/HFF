@@ -37,14 +37,14 @@ module.exports = {
      var params = req.body
      console.log(params)
 
-     Fooditem.update({id:params.id},{status:params.status}).then(function (err,data) {
+     Fooditem.update({id:params.id},{status:params.status}).then(function (data,err) {
 
        if (data)
        {
          res.json({success:data})
        }
 
-       else
+       else if (err)
        {
          res.json({error:err})
        }
@@ -59,14 +59,14 @@ module.exports = {
     console.log(params)
 
 
-    Fooditem.update({id:params.id},{description:params.description,price:params.price}).then(function (err,data) {
+    Fooditem.update({id:params.id},{description:params.description,price:params.price}).then(function (data,err) {
 
       if (data)
       {
         res.json({status:1,item:data})
       }
 
-      else
+      else if(err)
       {
         res.json({status:0})
       }
