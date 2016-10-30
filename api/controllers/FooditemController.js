@@ -8,7 +8,7 @@
 module.exports = {
 
 
-
+//create food item function
    made:function (req,res,next) {
 
      var params = req.body
@@ -29,6 +29,10 @@ module.exports = {
          })})
 
    },
+
+
+  //fucntion of updating item status
+  //parameter food item id and status
    updateItemStatus:function (req,res,next) {
      var params = req.body
      console.log(params)
@@ -50,6 +54,9 @@ module.exports = {
    },
 
 
+
+//FUNCTION OF SEARCHING
+  //parameter foodName
   searchItem:function (req,res,next) {
     var params = req.body
     console.log(params)
@@ -82,37 +89,12 @@ module.exports = {
              }
 
           }
-          if (items != "")
+          if (result.length!=0)
             res.json({result:result});
 
           else
-            res.json({response: "no result"})
+            res.json({result: 0})
         }
-
-           /*
-              result.push(
-                {
-                  "name": data[i].name,
-                  "description": data[i].description,
-                  "price": data[i].price,
-                  "location": data[i].eshop.ES_LOCATION,
-                  "taste": data[i].taste_meter,
-                  "quality": data[i].quality_meter,
-                  "served": data[i].served,
-                  "status": "available"
-
-                }
-              )
-              console.log(result)
-            }
-
-          }
-          if (items != "")
-            res.json({result:result});
-
-          else
-            res.json({response: "no result"})
-        }*/
         else
         {
           res.json({error:err})

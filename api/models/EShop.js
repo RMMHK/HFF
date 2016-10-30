@@ -19,7 +19,8 @@ module.exports= {
       type: 'date'
     },
     ES_LOCATION: {
-      type: 'string'
+      type: 'string',
+      defaultsTo:'need to fix'
     },
 
     ES_BLOCK: {

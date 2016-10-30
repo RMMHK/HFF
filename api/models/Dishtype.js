@@ -10,18 +10,18 @@ module.exports = {
   attributes: {
     dishType: {
       type: 'string',
-      required:true,
-      unique:true
+      required: true,
+      unique: true
     },
 
     joint: {
       model: 'Dishname'
-    }
-  },
+    },
 
-  items:{
-     collection:'Fooditem',
-     via:'typeOf'
+  items: {
+    collection: 'Fooditem',
+    via: 'typeOf'
   }
+},
 };
 
