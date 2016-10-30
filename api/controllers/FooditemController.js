@@ -75,6 +75,28 @@ module.exports = {
 
   },
 
+  deleteItem:function (req,res,next) {
+    var params = req.body
+    console.log(params)
+
+
+    Fooditem.destroy({id:params.id}).then(function (data,err) {
+
+      if (data)
+      {
+        res.json({status:1})
+      }
+
+      else if(err)
+      {
+        res.json({status:0})
+      }
+
+    })
+
+  },
+
+
 
 
 //FUNCTION OF SEARCHING
