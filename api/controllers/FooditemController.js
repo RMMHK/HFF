@@ -54,6 +54,28 @@ module.exports = {
    },
 
 
+  editItem:function (req,res,next) {
+    var params = req.body
+    console.log(params)
+
+
+    Fooditem.update({id:params.id},{description:params.description,price:params.price}).then(function (err,data) {
+
+      if (data)
+      {
+        res.json({status:1,item:data})
+      }
+
+      else
+      {
+        res.json({status:0})
+      }
+
+    })
+
+  },
+
+
 
 //FUNCTION OF SEARCHING
   //parameter foodName
