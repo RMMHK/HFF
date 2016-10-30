@@ -12,22 +12,23 @@ getEShop:function (req,res,next) {
 
   User.findOne({id: params.id}).populate('EShop').then(function (user,err) {
 
+    try{
     if(user.EShop!=""&&user.EShop.ES_BLOCK==false)
     {
 
-        EShop.find({id:user.EShop.id}).populate('ES_Shopitems').then(function (items,err) {
+        EShop.find({id:user.EShop.id}).populate('ES_items').then(function (items,err) {
 
          if (items)
-        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items})
+        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items.ES_items})
 
           if(err)
           {
             res.json({status:0})
           }
        })
-    }
+    }}
 
-    else if(user.EShop=="")
+    catch (exception)
     {
 
       EShop.create({ES_REG_DATE:new Date()}).then(function (shop,err) {
@@ -42,9 +43,9 @@ getEShop:function (req,res,next) {
 
              if(ok)
              {
-              EShop.find({id:shop.id}).populate('ES_Shopitems').then(function (items,err) {
+              EShop.find({id:shop.id}).populate('ES_items').then(function (items,err) {
               if (items)
-                res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items})
+                res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items.ES_items})
 
               if(err)
               {
@@ -63,14 +64,15 @@ getEShop:function (req,res,next) {
 
         }})}
 
+   try {
+     if (user.EShop!=""&&user.EShop.ES_BLOCK==true)
+     {
+       res.json({status:-1})
+     }
+   }
+   catch (ex){}
 
-    else if (user.EShop!=""&&user.EShop.ES_BLOCK==true)
-    {
-      res.json({status:-1})
-    }
-
-
-    else if(err)
+      if(err)
     {
       res.json({status:0})
     }

@@ -34,7 +34,7 @@ module.exports= {
      unique:true
     }*/
 
-   ES_Shopitems:
+   ES_items:
    {
      collection:'Fooditem',
      via:'eshop'
