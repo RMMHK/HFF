@@ -52,9 +52,15 @@ module.exports = {
       type:'string',
       unique:true
     },
+
+    eshop_id:
+    {
+      type: 'string',
+      defaultsTo:'null'
+    },
   /*  account_secret:
     {
-      required:true,
+      required:true,//account secret needs to be connected
       type:'string'
     },*/
 

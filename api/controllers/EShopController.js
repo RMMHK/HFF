@@ -38,7 +38,7 @@ getEShop:function (req,res,next) {
 
         else if(shop)
         {
-          User.update({id:params.id},{EShop:shop.id}).then(function (ok,err)
+          User.update({id:params.id},{EShop:shop.id,eshop_id:shop.id}).then(function (ok,err)
           {
 
              if(ok)
@@ -81,6 +81,29 @@ getEShop:function (req,res,next) {
 
 },
 
+  getShopId:function (req,res,next) {
+      var params = req.body;
 
+      User.findOne({v_id:params.v_id}).then(function(data,err){
+
+        var params = req.body;
+        console.log(params.v_id);
+
+        if (err)
+        {
+          res.json({exists: false});
+          // console.log("err"+o);
+        }
+        else if (data==""||!data)
+        {res.json({exists: false});}
+
+        else if (data)
+        {  res.json({exists:true,eshop_id:data})
+          console.log(data.eshop_id)
+        }
+      })
+
+
+    },
 
 };
