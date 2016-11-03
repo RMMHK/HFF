@@ -21,7 +21,7 @@ getEShop:function (req,res,next) {
 var item= []
           item= item.ES_items
          if (items)
-        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:item})
+        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items})
 
           if(err)
           {
