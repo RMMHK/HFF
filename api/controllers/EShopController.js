@@ -19,14 +19,22 @@ getEShop:function (req,res,next) {
         EShop.find({id:user.EShop.id}).populate('ES_items').then(function (items,err) {
 
          if (items)
-        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items})
+        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:user.EShop.ES_items})
 
           if(err)
           {
             res.json({status:0})
           }
        })
-    }}
+    }
+    else if (user.EShop!=""&&user.EShop.ES_BLOCK==true)
+      {
+        res.json({status:-1})
+      }
+
+    else if(err)
+        {res.json({status:0})}
+    }
 
     catch (exception)
     {
@@ -45,7 +53,7 @@ getEShop:function (req,res,next) {
              {
               EShop.find({id:shop.id}).populate('ES_items').then(function (items,err) {
               if (items)
-                res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items})
+                res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items}) //returning items
 
               if(err)
               {
@@ -64,18 +72,7 @@ getEShop:function (req,res,next) {
 
         }})}
 
-   try {
-     if (user.EShop!=""&&user.EShop.ES_BLOCK==true)
-     {
-       res.json({status:-1})
-     }
-   }
-   catch (ex){}
 
-      if(err)
-    {
-      res.json({status:0})
-    }
   })
 
 
