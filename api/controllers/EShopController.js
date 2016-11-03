@@ -16,12 +16,10 @@ getEShop:function (req,res,next) {
     if(user.EShop!=""&&user.EShop.ES_BLOCK==false)
     {
 
-        EShop.find({id:user.EShop.id}).populate('ES_items').then(function (items,err) {
+        EShop.findOne({id:user.EShop.id}).populate('ES_items').then(function (items,err) {
 
-var item= []
-          item= item.ES_items
          if (items)
-        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items})
+        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items[0].ES_items})
 
           if(err)
           {
