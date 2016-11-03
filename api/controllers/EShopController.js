@@ -9,7 +9,7 @@ getEShop:function (req,res,next) {
   //parameters user  id
 
   var params = req.body
-  console.log(body)
+  console.log(params)
 
   User.findOne({id: params.id}).populate('EShop').then(function (user,err) {
 
