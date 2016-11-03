@@ -19,7 +19,7 @@ getEShop:function (req,res,next) {
         EShop.find({id:user.EShop.id}).populate('ES_items').then(function (items,err) {
 
          if (items)
-        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:user.EShop.ES_items})
+        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items.EShop.ES_items})
 
           if(err)
           {
@@ -53,7 +53,7 @@ getEShop:function (req,res,next) {
              {
               EShop.find({id:shop.id}).populate('ES_items').then(function (items,err) {
               if (items)
-                res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items}) //returning items
+                res.json({status:1,shop_status:user.EShop.ES_STATUS,items:user.EShop.ES_items}) //returning items
 
               if(err)
               {
