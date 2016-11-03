@@ -79,25 +79,24 @@ getEShop:function (req,res,next) {
 
 },
 
-  getShopId:function (req,res,next) {
+  shopStatus:function (req,res,next) {
       var params = req.body;
 
-      User.findOne({v_id:params.v_id}).then(function(data,err){
+      EShop.update({id:params.id},{ES_STATUS:params.status}).then(function(data,err){
 
         var params = req.body;
         console.log(params.v_id);
 
         if (err)
         {
-          res.json({exists: false});
+          res.json({status: 0});
           // console.log("err"+o);
         }
         else if (data==""||!data)
-        {res.json({exists: false});}
+        {res.json({status: 0});}
 
         else if (data)
-        {  res.json({exists:true,eshop_id:data})
-          console.log(data.eshop_id)
+        {  res.json({status:1,status:data.ES_STATUS})
         }
       })
 
