@@ -15,11 +15,11 @@ getEShop:function (req,res,next) {
     try{
     if(user.EShop!=""&&user.EShop.ES_BLOCK==false)
     {
-
+                                                                                         //needs to fastt
         EShop.findOne({id:user.EShop.id}).populate('ES_items').then(function (items,err) {
 
          if (items)
-        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items.ES_items})
+        res.json({status:1,shop_id:user.EShop.id,shop_status:user.EShop.ES_STATUS,items:items.ES_items})
 
           if(err)
           {
@@ -50,10 +50,10 @@ getEShop:function (req,res,next) {
           {
 
              if(ok)
-             {
-              EShop.find({id:shop.id}).populate('ES_items').then(function (items,err) {
+             {                                                              //needs to fast
+              EShop.findOne({id:shop.id}).populate('ES_items').then(function (items,err) {
               if (items)
-                res.json({status:1,shop_status:user.EShop.ES_STATUS,items:user.EShop.ES_items}) //returning items
+                res.json({status:1,shop_id:user.EShop.id,shop_status:user.EShop.ES_STATUS,items:items.ES_items}) //returning items
 
               if(err)
               {
