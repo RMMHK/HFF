@@ -96,7 +96,7 @@ getEShop:function (req,res,next) {
         {res.json({status: 0});}
 
         else if (data)
-        {  res.json({status:1,status:data.ES_STATUS})
+        {  res.json({status:1,eshop_status:data.ES_STATUS})
         }
       })
 
