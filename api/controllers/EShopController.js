@@ -18,8 +18,10 @@ getEShop:function (req,res,next) {
 
         EShop.find({id:user.EShop.id}).populate('ES_items').then(function (items,err) {
 
+var item= []
+          item= item.ES_items
          if (items)
-        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:items.ES_items})
+        res.json({status:1,shop_status:user.EShop.ES_STATUS,items:item})
 
           if(err)
           {
