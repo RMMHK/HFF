@@ -51,8 +51,9 @@ module.exports = {
 
        if (data)
        {
-         console.log(data[0].eshop.id)
-         EShop.findOne({id:data[0].eshop.id}).populate('ES_items').then(function (items,err) {
+         console.log(data[0].eshop)
+
+         EShop.findOne({id:data[0].eshop}).populate('ES_items').then(function (items,err) {
 
            if (items)
              res.json({status:1,item_status:data[0].status,items:items.ES_items})
