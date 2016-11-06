@@ -51,6 +51,7 @@ module.exports = {
 
        if (data)
        {
+         console.log(data[0].eshop.id)
          EShop.findOne({id:data[0].eshop.id}).populate('ES_items').then(function (items,err) {
 
            if (items)
