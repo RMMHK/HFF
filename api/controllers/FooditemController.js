@@ -14,14 +14,14 @@ module.exports = {
      var params = req.body
      console.log(params)
 
-     //parameters NAME , DECRIPTION, PRICE , ESHOP ID...
+     //parameters NAME , DECRIPTION, PRICE , ESHOP ID...//food type
      HashTable.findOne({foodTypeName:params.foodTypeName}).then(function(data,err)
        {
          Fooditem.create({name:params.name,description:params.description,price:params.price,typeOf:data.foodTypeId,eshop:params.eshop_id}).then(function (data,err) {
 
            if (data)
            {
-             EShop.findOne({id:user.EShop.id}).populate('ES_items').then(function (items,err) {
+             EShop.findOne({id:params.eshop_id}).populate('ES_items').then(function (items,err) {
 
                if (items)
                  res.json({status:1 ,new_item:data,items:items.ES_items})//response
