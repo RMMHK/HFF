@@ -51,12 +51,12 @@ module.exports = {
 
        if (data)
        {
-         res.json({success:data})
+         res.json({status:1,item_status:data.status})
        }
 
        else if (err)
        {
-         res.json({error:err})
+         res.json({status:0})
        }
 
      })
