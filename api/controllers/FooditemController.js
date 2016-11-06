@@ -14,17 +14,27 @@ module.exports = {
      var params = req.body
      console.log(params)
 
+     //parameters NAME , DECRIPTION, PRICE , ESHOP ID...
      HashTable.findOne({foodTypeName:params.foodTypeName}).then(function(data,err)
        {
-         Fooditem.create({name:params.foodTypeName,description:params.description,price:params.price,typeOf:data.foodTypeId,eshop:params.eshopId}).then(function (data,err) {
+         Fooditem.create({name:params.name,description:params.description,price:params.price,typeOf:data.foodTypeId,eshop:params.eshop_id}).then(function (data,err) {
 
            if (data)
            {
-             res.json({item:data})
+             EShop.findOne({id:user.EShop.id}).populate('ES_items').then(function (items,err) {
+
+               if (items)
+                 res.json({status:1 ,new_item:data,items:items.ES_items})//response
+
+               if(err)
+               {
+                 res.json({status:0})//response
+               }
+             })
            }
            else
            {
-             res.json({error:err})
+             res.json({status:0})//response
            }
          })})
 
