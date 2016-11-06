@@ -51,7 +51,7 @@ module.exports = {
 
        if (data)
        {
-         res.json({status:1,item_status:data.status})
+         res.json({status:1,item_status:data[0].status})
        }
 
        else if (err)
