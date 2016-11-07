@@ -81,7 +81,7 @@ module.exports = {
     console.log(params)
 
 
-    Fooditem.update({id:params.id},{description:params.description,price:params.price}).then(function (data,err) {
+    Fooditem.update({id:params.id},{name:params.name,description:params.description,price:params.price}).then(function (data,err) {
 
       if (data)
       {
