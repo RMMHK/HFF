@@ -117,7 +117,7 @@ module.exports = {
 
       if (data)
       {
-
+        console.log(data)
         EShop.findOne({id:data[0].eshop}).populate('ES_items').then(function (items,err) {
 
           if (items)
