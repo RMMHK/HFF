@@ -114,11 +114,10 @@ module.exports = {
 
 
     Fooditem.destroy({id:params.id}).then(function (data,err) {
-
+      console.log(data)
       if (data)
       {
-        console.log(data)
-        EShop.findOne({id:data[0].eshop}).populate('ES_items').then(function (items,err) {
+        EShop.findOne({id:data.eshop}).populate('ES_items').then(function (items,err) {
 
           if (items)
             res.json({status:1,the_item:data[0].id,items:items.ES_items})
