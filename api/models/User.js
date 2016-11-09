@@ -53,11 +53,17 @@ module.exports = {
       unique:true
     },
 
+    token:
+    {
+      type:'string'
+    },
     eshop_id:
     {
       type: 'string',
       defaultsTo:'null'
     },
+
+
   /*  account_secret:
     {
       required:true,//account secret needs to be connected
