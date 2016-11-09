@@ -10,16 +10,23 @@ module.exports = {
   send:function (req,res,next) {
     var FCM = require('fcm-node');
 
+    var params= req.body;
+
+    var body= params.body;
+    var title = params.title;
+    var CK = params.keys;
+    var token = params.token;
+
     var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
     var fcm = new FCM(serverKey);
 
     var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
-      to: 'cHhVD4FbMZY:APA91bGoloVp5RKXTqHl2czI9dj6Aj9qlZhKl3lk_BA0l2N4gHUducNcEU3gAc52mDlT9HS08x8ndVUQ38gRSSLe1jCnoziYEocO6wQiRd-n9yKkkUUY_l4nEpwk0r0NfzAgu7OOBvuY',
-      collapse_key: 'your_collapse_key',
+      to: token,
+      collapse_key: CK,
 
       notification: {
-        title: 'HELLO',
-        body: 'FIRST NOTIFICATION'
+        title: title,
+        body: body
       },
 
       data: {  //you can send only notification or only data(or include both)

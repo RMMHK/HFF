@@ -40,7 +40,7 @@ module.exports = {
          {User.create({v_id: params.v_id, name: params.name, email: params.email,account_secret:params.account_secret, cell: params.cell, cnic: null, f_status: false, f_warnings: 0, current_location: null}).then(function (data, err) {
              if (data)
              {
-               res.json({status:true,user:data});
+               res.json({status:true,user:data});//response
              }
              else if(err) {
                (res.json({status:false}));
@@ -70,7 +70,7 @@ module.exports = {
                    }
 
                    else if (data) {
-                     res.json({status: true, user: data})
+                     res.json({status: true, user: data})//response
                    }
                  })
 
@@ -92,7 +92,7 @@ module.exports = {
              }
 
              else if (data) {
-               res.json({status: true, user: data})
+               res.json({status: true, user: data})//response
              }
            })})
      }
@@ -134,7 +134,7 @@ verify:function (req,res,next){
       {res.json({exists: false});}
 
       else if (data)
-      {  res.json({exists:true,user:data})
+      {  res.json({exists:true,user:data})//response
       console.log(data)}
     })
 

@@ -55,7 +55,8 @@ module.exports = {
 
     token:
     {
-      type:'string'
+      type:'string',
+      defaultsTo:'N/A'
     },
     eshop_id:
     {
