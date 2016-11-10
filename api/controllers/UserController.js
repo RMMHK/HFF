@@ -180,11 +180,11 @@ verify:function (req,res,next){
                   else if (err) {
                     res.json({exists: false})
                   }
-
-                  else if (data) {
-                    res.json({exists: true, user: user[0]})
-                  }
                 })
+              }
+
+              else if (data) {
+                res.json({exists: true, user: user[0]})
               }
 
               else if (err) {
