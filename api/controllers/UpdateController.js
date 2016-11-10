@@ -102,7 +102,7 @@ module.exports = {
              console.log(app_token)
              token=app_token //putting tokens on the line
              //console.log(token)
-
+              message.to=app_token
              fcm.send(message, function(err, response){
 
                console.log(message.to)
