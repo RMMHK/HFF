@@ -89,7 +89,7 @@ module.exports = {
         dish_types=[]
       }
 
-    //  res.json({list:container})
+      res.json({dish_names:dish_names,list:container})
       }
 
       Apptokens.find({}).then(function (data,err) {
@@ -99,7 +99,7 @@ module.exports = {
            for(i=0;i<data.length;i++)
            {
              var app_token= data[i].application_token;
-             console.log(app_token)
+          //   console.log(app_token)
              token=app_token //putting tokens on the line
              //console.log(token)
               message.to=app_token
