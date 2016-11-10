@@ -31,10 +31,10 @@ module.exports = {
             }//dishnames working fine
       for(i=0;i<data.length;i++)
 
-        console.log(data_length)
       {
-        var dish_name=  data[i].DishName.toString();
-       console.log(dish_types)
+        console.log(data_length)
+        var dish_name=  data[i].DishName
+      // console.log(dish_types)
         for(j=0;j<data[i].Types.length;j++)
         {
           dish_types.push(
