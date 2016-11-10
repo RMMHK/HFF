@@ -46,7 +46,7 @@ module.exports = {
 
           dishname:dish_name,dishType:dish_types
         })
-        dish_types.clearData()
+        dish_types=""
       }
 
       res.json({list:container})
