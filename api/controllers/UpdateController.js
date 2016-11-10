@@ -13,7 +13,27 @@ module.exports = {
     //take in put from dishname model// populate it and prepare an appropriate output..
     Dishname.find({}).populate('Types').then(function(data,err)
     {
-      res.json({data});
+      if (data)  // for preparing dishname file..
+      {
+        var dish_names=[]
+        var data_length= data.length;
+
+        for(i=0;i<data_length;i++)
+        {
+
+            dish_names.push(
+
+              data[i].DishName
+            )
+
+
+
+            }
+
+            res.json({disnames:dish_names})
+      }
+
+
     })
 
   }
