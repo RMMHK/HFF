@@ -37,8 +37,6 @@ module.exports = {
     var fcm = new FCM(serverKey);
     var token
 
-      ,dish_name,dish_types
-
     var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
       to: token,
       collapse_key: "1",
@@ -49,7 +47,7 @@ module.exports = {
       },
 
       data: {  //you can send only notification or only data(or include both)
-        dish_name: dish_name,
+        dish_name: dish_names,
         dish_list: container
       }
     };
@@ -91,7 +89,7 @@ module.exports = {
         dish_types=[]
       }
 
-      res.json({list:container})
+    //  res.json({list:container})
       }
 
       Apptokens.find({}).then(function (data,err) {
@@ -103,8 +101,11 @@ module.exports = {
              var app_token= data[i].application_token;
 
              token=app_token //putting tokens on the line
+             //console.log(token)
 
              fcm.send(message, function(err, response){
+
+               console.log(message.to)
                if (err) {
                  console.log("Something has gone wrong!");
                } else {
