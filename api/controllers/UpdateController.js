@@ -35,16 +35,16 @@ module.exports = {
 
         for(j=0;j<data[i].Types.length;j++)
         {
-          dish_types.push({
-            types: data[i].Types[j].single_name
-          })
+          dish_types.push(
+             data[i].Types[j].single_name
+          )
 
 
         }
 
         container.push({
 
-          dishname:dish_name,dishType:types
+          dishname:dish_name,dishType:dish_types
         })
         dish_types.clearData()
       }
