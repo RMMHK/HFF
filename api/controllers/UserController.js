@@ -33,15 +33,37 @@ module.exports = {
 
        if (type=="REGISTER")
        {
-       User.find({email:params.email}).then(function(data,err) {
-         if (data!="") {res.json({status: "duplicate"})}
+       User.find({email:params.email}).then(function(mail,err) {
+         if (mail!="") {res.json({status: "duplicate"})}
 
-         else if (data==""||!data)
-         {User.create({v_id: params.v_id, name: params.name, email: params.email,account_secret:params.account_secret, cell: params.cell, cnic: null, f_status: false, f_warnings: 0, current_location: null,token:params.token}).then(function (data, err) {
-             if (data)
+         else if (mail==""||!mail)
+         {User.create({v_id: params.v_id, name: params.name, email: params.email,account_secret:params.account_secret, cell: params.cell, cnic: null, f_status: false, f_warnings: 0, current_location: null,token:params.token}).then(function (user, err) {
+             if (user)
              {
-               res.json({status:true,user:data});//response
+               Apptokens.findOne({application_token:params.token}).then(function (data,err) {
 
+                 if(!data||data==""||data.undefined)
+                 {
+                   Apptokens.create({application_token:params.token}).then(function (data,err) {
+                      if (data)
+                      {
+                        res.json({status:true,user:user});//response
+                      }
+
+                      else if (err)
+                        (res.json({status:false}));
+
+                     else if(data)
+                      {
+                        res.json({status:true,user:user})
+                      }
+                   })
+                 }
+
+                 else if (err)
+                 {(res.json({status:false}));}
+
+               })
 
 
 
@@ -124,40 +146,59 @@ verify:function (req,res,next){
 
   var params = req.body;
 
-    User.findOne({v_id:params.v_id}).then(function(data,err){
+    User.findOne({v_id:params.v_id}).then(function(data,err) {
 
-      console.log( req.url);
-      console.log( req.headers);
+      console.log(req.url);
+      console.log(req.headers);
       var params = req.body;
       console.log(params.v_id);
       console.log(params.token);
 
-      if (err)
-      {
+      if (err) {
         res.json({exists: false});
-       // console.log("err"+o);
+        // console.log("err"+o);
       }
-      else if (data==""||!data)
-      {res.json({exists: false});}
+      else if (data == "" || !data) {
+        res.json({exists: false});
+      }
 
-      else if (data)
-      {
+      else if (data) {
         //response
 
-        User.update({v_id: params.v_id},{token:params.token}).then(function (data,err) {
+        User.update({v_id: params.v_id}, {token: params.token}).then(function (user, err) {
 
-          if(data) {
-            res.json({exists: true, user: data[0]})
-            console.log(data)
+          if (user[0]) {
+
+            Apptokens.findOne({application_token: params.token}).then(function (data, err) {
+
+              if (!data || data == "" || data.undefined) {
+                Apptokens.create({application_token: params.token}).then(function (data, err) {
+                  if (data) {
+                    res.json({exists: true, user: user[0]})//response
+                  }
+
+                  else if (err) {
+                    res.json({exists: false})
+                  }
+
+                  else if (data) {
+                    res.json({exists: true, user: user[0]})
+                  }
+                })
+              }
+
+              else if (err) {
+                res.json({exists: false})
+              }
+            })
           }
-
-       else if (err)
-         {res.json({exists: false})}
+          if (err) {
+            res.json({exists: false})
+          }
         })
+
       }
     })
-
-
   },
 
 

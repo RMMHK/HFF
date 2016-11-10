@@ -9,6 +9,17 @@ module.exports = {
 
   attributes: {
 
+    application_token:
+    {
+      type :'string',
+      defaultsTo:'null'
+    },
+
+    common:
+    {
+      type:'string',
+      defaultsTo:'app_token'
+    }
   }
 };
 
