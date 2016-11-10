@@ -99,7 +99,7 @@ module.exports = {
            for(i=0;i<data.length;i++)
            {
              var app_token= data[i].application_token;
-
+             console.log(app_token)
              token=app_token //putting tokens on the line
              //console.log(token)
 
