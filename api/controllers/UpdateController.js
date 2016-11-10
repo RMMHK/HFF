@@ -11,13 +11,13 @@ module.exports = {
   send:function (req,res,next) {
 
     //take in put from dishname model// populate it and prepare an appropriate output..
-    Dishname.find({}).then(function(data,err)
+    Dishname.find({}).populate('Types').then(function(data,err)
     {
       res.json({data});
     })
 
   }
-  
+
 
 };
 
