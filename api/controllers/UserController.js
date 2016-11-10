@@ -37,10 +37,16 @@ module.exports = {
          if (data!="") {res.json({status: "duplicate"})}
 
          else if (data==""||!data)
-         {User.create({v_id: params.v_id, name: params.name, email: params.email,account_secret:params.account_secret, cell: params.cell, cnic: null, f_status: false, f_warnings: 0, current_location: null}).then(function (data, err) {
+         {User.create({v_id: params.v_id, name: params.name, email: params.email,account_secret:params.account_secret, cell: params.cell, cnic: null, f_status: false, f_warnings: 0, current_location: null,token:params.token}).then(function (data, err) {
              if (data)
              {
                res.json({status:true,user:data});//response
+
+
+               
+
+
+
              }
              else if(err) {
                (res.json({status:false}));
@@ -134,8 +140,20 @@ verify:function (req,res,next){
       {res.json({exists: false});}
 
       else if (data)
-      {  res.json({exists:true,user:data})//response
-      console.log(data)}
+      {
+        //response
+
+        User.update({v_id: params.v_id},{token:params.token}).then(function (data,err) {
+
+          if(data) {
+            res.json({exists: true, user: data})
+            console.log(data)
+          }
+
+       else if (err)
+         {res.json({exists: false})}
+        })
+      }
     })
 
 
