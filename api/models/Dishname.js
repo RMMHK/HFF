@@ -14,8 +14,9 @@ module.exports = {
       unique:true
     },
 
-    Common:{
+    order_unit:{
       type: 'string',
+      required:true
     },
 
     Types:{

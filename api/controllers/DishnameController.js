@@ -48,7 +48,7 @@ module.exports = {
 
       else if(!data||data=="")
      {
-       Dishname.create({DishName:params.dishName}).then(function (data,err)
+       Dishname.create({DishName:params.dishName,order_unit:params.unit}).then(function (data,err)
        {
          if (data && data != "" && !data.undefined)
          {

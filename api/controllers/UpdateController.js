@@ -69,10 +69,9 @@ module.exports = {
             )
             }//dishnames working fine
       for(i=0;i<data.length;i++)
-
       {
-        console.log(data_length)
         var dish_name=  data[i].DishName
+        var order_unit= data[i].order_unit;
       // console.log(dish_types)
         for(j=0;j<data[i].Types.length;j++)
         {
@@ -84,12 +83,12 @@ module.exports = {
         }
         container.push({
 
-          dishname:dish_name,dishType:dish_types
+          dishname:dish_name,order_unit:order_unit,dishType:dish_types
         })
         dish_types=[]
       }
 
-      res.json({dish_names:dish_names,list:container})
+      res.json({dish_names:dish_names,order_unit:order_unit,list:container})
       }
 
       Apptokens.find({}).then(function (data,err) {
