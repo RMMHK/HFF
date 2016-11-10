@@ -35,7 +35,10 @@ module.exports = {
     var FCM = require('fcm-node');
     var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
     var fcm = new FCM(serverKey);
-    var token,dish_name,dish_types
+    var token
+
+      ,dish_name,dish_types
+
     var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
       to: token,
       collapse_key: "1",
@@ -50,6 +53,7 @@ module.exports = {
         dish_list: container
       }
     };
+
     //take in put from dishname model// populate it and prepare an appropriate output..
     Dishname.find({}).populate('Types').then(function(data,err)
     {
@@ -89,14 +93,14 @@ module.exports = {
 
       res.json({list:container})
       }
-      
+
       Apptokens.find({}).then(function (data,err) {
 
         if (data)
         {
            for(i=0;i<data.length;i++)
            {
-             var app_token= data.application_token;
+             var app_token= data[i].application_token;
 
              token=app_token //putting tokens on the line
 
