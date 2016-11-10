@@ -8,10 +8,16 @@
 module.exports = {
 
   attributes: {
+
     dishType: {
       type: 'string',
       required: true,
       unique: true
+    },
+
+    single_name:{
+      type:'string',
+      defaultsTo:'null'
     },
 
     joint: {

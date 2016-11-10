@@ -29,7 +29,7 @@ module.exports = {
           }
           else
           {
-            Dishtype.create({dishType: dishTypeFullName, joint: dish_id}).then(function (data, err) {
+            Dishtype.create({dishType: dishTypeFullName, single_name:params.dishType,joint: dish_id}).then(function (data, err) {
               if (data && data != "" && !data.undefined)
               {
                 HashTable.create({foodTypeName:data.dishType,foodTypeId:data.id}).then(function (data,err) {
@@ -54,7 +54,7 @@ module.exports = {
          {
            var dish_id = data.id;
 
-           Dishtype.create({dishType: dishTypeFullName, joint: dish_id}).then(function (data, err) {
+           Dishtype.create({dishType: dishTypeFullName,single_name:params.dishType, joint: dish_id}).then(function (data, err) {
              if (data && data != "" && !data.undefined) {
 
                HashTable.create({foodTypeName: data.dishType, foodTypeId: data.id}).then(function (data, err) {

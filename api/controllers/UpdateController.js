@@ -16,6 +16,7 @@ module.exports = {
       if (data)  // for preparing dishname file..
       {
         var dish_names=[]
+        var dish_types=[]
         var data_length= data.length;
 
         for(i=0;i<data_length;i++)
@@ -25,12 +26,18 @@ module.exports = {
 
               data[i].DishName
             )
+            }//dishnames working fine
+      for(i=0;i<data.length;i++)
+      {
 
+        for(j=0;j<data[i].Types.length;j++)
+        {
 
+          data[i].Types[j].dishType
 
-            }
+        }
+      }
 
-            res.json({disnames:dish_names})
       }
 
 
