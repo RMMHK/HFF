@@ -43,7 +43,7 @@ module.exports = {
                res.json({status:true,user:data});//response
 
 
-               
+
 
 
 
@@ -130,6 +130,7 @@ verify:function (req,res,next){
       console.log( req.headers);
       var params = req.body;
       console.log(params.v_id);
+      console.log(params.token);
 
       if (err)
       {
