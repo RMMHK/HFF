@@ -147,7 +147,7 @@ verify:function (req,res,next){
         User.update({v_id: params.v_id},{token:params.token}).then(function (data,err) {
 
           if(data) {
-            res.json({exists: true, user: data})
+            res.json({exists: true, user: data[0]})
             console.log(data)
           }
 
