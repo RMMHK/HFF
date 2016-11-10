@@ -53,13 +53,14 @@ module.exports = {
                       else if (err)
                         (res.json({status:false}));
 
-                     else if(data)
-                      {
-                        res.json({status:true,user:user})
-                      }
+
                    })
                  }
 
+                 else if(data)
+                 {
+                   res.json({status:true,user:user})
+                 }
                  else if (err)
                  {(res.json({status:false}));}
 
