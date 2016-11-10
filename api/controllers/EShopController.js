@@ -47,12 +47,12 @@ getEShop:function (req,res,next) {
 
         else if(shop)
         {
-          User.update({id:params.id},{EShop:shop.id,eshop_id:shop.id}).then(function (ok,err)
+          User.update({id:params.id},{EShop:shop[0].id,eshop_id:shop[0].id}).then(function (ok,err)
           {
 
              if(ok)
              {                                                              //needs to fast
-              EShop.findOne({id:shop.id}).populate('ES_items').then(function (items,err) {
+              EShop.findOne({id:shop[0].id}).populate('ES_items').then(function (items,err) {
               if (items)
                 res.json({status:1,eshop_id:user.EShop.id,eshop_status:user.EShop.ES_STATUS,items:items.ES_items}) //returning items
 
