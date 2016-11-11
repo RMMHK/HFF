@@ -36,8 +36,8 @@ module.exports = {
 
 
       notification: {
-        title: "Menu Update",
-        body: "tap to add new dishes on menu"
+        title: "Menu Updated",
+        body: "Now you have more dishes to sell and taste"
       },
 
       data: {  //you can send only notification or only data(or include both)
