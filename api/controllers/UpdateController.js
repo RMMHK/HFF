@@ -42,8 +42,8 @@ module.exports = {
 
       data: {  //you can send only notification or only data(or include both)
         collapse_key: "1",
-        dish_name: dish_names,
-        dish_list: container
+    //    dish_name: dish_names,
+    //    dish_list: container
       }
     };
 
@@ -97,8 +97,8 @@ module.exports = {
               //putting tokens on the line
              //console.log(token)
               message.to=app_token
-             message.data.dish_name=dish_names;
-             message.data.dish_list=container;
+         //    message.data.dish_name=dish_names;
+        //     message.data.dish_list=container;
              message.collapse_key="1"
              fcm.send(message, function(err, response){
 
