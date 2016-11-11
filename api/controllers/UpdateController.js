@@ -36,8 +36,8 @@ module.exports = {
       collapse_key: "1",
 
       notification: {
-        title: "we have new dishes for you",
-        body: "tap to install"
+        title: "Menu Update",
+        body: "tap to add new dishes on menu"
       },
 
       data: {  //you can send only notification or only data(or include both)

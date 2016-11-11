@@ -45,6 +45,17 @@ module.exports = {
       defaultsTo: 0
     },
 
+    least_order:
+    {
+      type:'integer',        /* needs to be setup in front end and back end also */
+      defaultsTo:1
+    },
+    max_order:
+    {
+      type:'integer',
+      defaultsTo:5
+    },
+
     typeOf:{
       model:'Dishtype'
     },
