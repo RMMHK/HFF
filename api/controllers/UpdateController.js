@@ -33,7 +33,7 @@ module.exports = {
 
     var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
       to: token,
-      collapse_key: "1",
+
 
       notification: {
         title: "Menu Update",
@@ -41,6 +41,7 @@ module.exports = {
       },
 
       data: {  //you can send only notification or only data(or include both)
+        collapse_key: "1",
         dish_name: dish_names,
         dish_list: container
       }
@@ -93,9 +94,13 @@ module.exports = {
            {
              var app_token= data[i].application_token;
           //   console.log(app_token)
-             token=app_token //putting tokens on the line
+              //putting tokens on the line
              //console.log(token)
               message.to=app_token
+             console.log(message.data.dish_name)
+           /*  message.data.dish_name=dish_names;
+             message.data.dish_list=container;
+             message.collapse_key="1"*/
              fcm.send(message, function(err, response){
 
                console.log(message.to)
