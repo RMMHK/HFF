@@ -82,7 +82,7 @@ module.exports = {
         dish_types=[]
       }
 
-      res.json({dish_names:dish_names,order_unit:order_unit,list:container})
+   //   res.json({dish_names:dish_names,order_unit:order_unit,list:container})
       }
 
       Apptokens.find({}).then(function (data,err) {
