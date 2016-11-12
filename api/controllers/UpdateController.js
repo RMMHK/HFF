@@ -111,7 +111,7 @@ module.exports = {
            //  message.data.dish_list:container;
              message.collapse_key="1"
              fcm.send(message, function(err, response){
-               console.log("this"+payload);
+            //   console.log("this"+payload);
                console.log(message.to)
                console.log(message.data.dish_name)
                if (err) {
