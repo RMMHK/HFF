@@ -92,7 +92,8 @@ module.exports = {
       }
 
       Apptokens.find({}).then(function (data,err) {
-
+         var v=JSON.stringify(dish_names);
+        console.log(v);
         if (data)
         {
            for(i=0;i<data.length;i++)
@@ -102,12 +103,13 @@ module.exports = {
               //putting tokens on the line
              //console.log(token)
               message.to=app_token
-             message.data.dish_names=dish_names
+             message.data.dish_names=
              message.data.dish_list=container;
              message.collapse_key="1"
              fcm.send(message, function(err, response){
 
                console.log(message.to)
+               console.log(message.data.dish_name)
                if (err) {
                  console.log("Something has gone wrong!");
                } else {
