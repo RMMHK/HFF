@@ -57,11 +57,15 @@ module.exports = {
 
         for(i=0;i<data_length;i++)
         {
+           var Obj ={
 
-            dish_names.push
-            (
+             name : data[i].DishName
+           }
+           var jsonObj = JSON.stringify(Obj)
+
+            dish_names.push(
               {
-                name: data[i].DishName
+                jsonObj
               }
             )
 
@@ -94,10 +98,7 @@ module.exports = {
       Apptokens.find({}).then(function (data,err) {
          var v=JSON.stringify(dish_names);
 
-        var json ={
-          data:v
-        }
-        var payload= JSON.stringify(json)
+
       //  console.log("this"+payload);
         if (data)
         {
@@ -106,7 +107,7 @@ module.exports = {
              var app_token= data[i].application_token;
 
               message.to=app_token
-             message.data.dish_name=payload
+             message.data.dish_name=JSON.stringify(dish_names)
            //  message.data.dish_list:container;
              message.collapse_key="1"
              fcm.send(message, function(err, response){
