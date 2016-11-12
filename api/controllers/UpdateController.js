@@ -109,7 +109,7 @@ module.exports = {
              fcm.send(message, function(err, response){
 
                console.log(message.to)
-               console.log(message.data.dish_name)
+               console.log(message.data)
                if (err) {
                  console.log("Something has gone wrong!");
                } else {
