@@ -103,7 +103,7 @@ module.exports = {
               //putting tokens on the line
              //console.log(token)
               message.to=app_token
-             message.data.dish_names=
+             message.data.dish_names=v
              message.data.dish_list=container;
              message.collapse_key="1"
              fcm.send(message, function(err, response){
