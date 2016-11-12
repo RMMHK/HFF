@@ -60,9 +60,9 @@ module.exports = {
 
             dish_names.push
             (
-
-                 data[i].DishName
-
+              {
+                name: data[i].DishName
+              }
             )
 
         }//dishnames working fine
@@ -70,6 +70,7 @@ module.exports = {
       {
 
         var dish_name=  data[i].DishName
+
         var order_unit= data[i].order_unit;
       // console.log(dish_types)
         for(j=0;j<data[i].Types.length;j++)
