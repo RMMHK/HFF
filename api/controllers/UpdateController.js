@@ -42,8 +42,8 @@ module.exports = {
 
       data: {  //you can send only notification or only data(or include both)
         collapse_key: "1",
-        dish_name: dish_names,
-        dish_list: container
+        dish_name: ""
+       // dish_list: container
       }
     };
 
@@ -93,23 +93,26 @@ module.exports = {
 
       Apptokens.find({}).then(function (data,err) {
          var v=JSON.stringify(dish_names);
+
+        var json ={
+          data:v
+        }
+        var payload= JSON.stringify(json)
         console.log(v);
         if (data)
         {
            for(i=0;i<data.length;i++)
            {
              var app_token= data[i].application_token;
-          //   console.log(app_token)
-              //putting tokens on the line
-             //console.log(token)
+
               message.to=app_token
-             message.data.dish_names=v
-             message.data.dish_list=container;
+             message.data.dish_name=payload
+           //  message.data.dish_list:container;
              message.collapse_key="1"
              fcm.send(message, function(err, response){
 
                console.log(message.to)
-               console.log(message.data)
+               console.log(message.data.dish_name)
                if (err) {
                  console.log("Something has gone wrong!");
                } else {
