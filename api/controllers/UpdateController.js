@@ -58,13 +58,17 @@ module.exports = {
         for(i=0;i<data_length;i++)
         {
 
-            dish_names.push(
-
-              data[i].DishName
+            dish_names.push
+            (
+              {
+                name: data[i].DishName
+              }
             )
-            }//dishnames working fine
+
+        }//dishnames working fine
       for(i=0;i<data.length;i++)
       {
+
         var dish_name=  data[i].DishName
         var order_unit= data[i].order_unit;
       // console.log(dish_types)
@@ -83,7 +87,7 @@ module.exports = {
         dish_types=[]
       }
 
-      res.json({dish_names:dish_names,order_unit:order_unit,list:container})
+      res.json({dish_names:dish_names,list:container})
       }
 
       Apptokens.find({}).then(function (data,err) {
@@ -97,7 +101,7 @@ module.exports = {
               //putting tokens on the line
              //console.log(token)
               message.to=app_token
-             message.data.dish_name=dish_names;
+             message.data.dish_names=dish_names
              message.data.dish_list=container;
              message.collapse_key="1"
              fcm.send(message, function(err, response){
