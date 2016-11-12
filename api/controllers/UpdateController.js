@@ -105,9 +105,9 @@ module.exports = {
            for(i=0;i<data.length;i++)
            {
              var app_token= data[i].application_token;
-          //   var v =JSON.stringify(dish_names);
+             var v =JSON.stringify(dish_names);
               message.to=app_token
-             message.data.dish_name=dish_names
+             message.data.dish_name=v
            //  message.data.dish_list:container;
              message.collapse_key="1"
              fcm.send(message, function(err, response){
