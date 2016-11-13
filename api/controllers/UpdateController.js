@@ -133,6 +133,7 @@ module.exports = {
             //   console.log("this"+payload);
                console.log(message.to)
                console.log(message.data.dish_names)
+               console.log(message.data.dish_types)
                if (err) {
 
                  console.log(err)
