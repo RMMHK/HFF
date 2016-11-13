@@ -39,6 +39,12 @@ module.exports = {
       defaultsTo: 0
     },
 
+    selling_unit:
+    {
+      type:'string',
+
+    },
+
     served:
     {
       type:'integer',
