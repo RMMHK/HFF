@@ -103,15 +103,15 @@ module.exports = {
 
         }
 
-        var types = JSON.stringify(dish_types)
+       // var types = JSON.stringify(dish_types)
         container.push({
 
-          dish_name:dish_name,order_unit:order,dishType:types
+          dish_name:dish_name,order_unit:order,dishType:dish_types
         })
         dish_types=[]
       }
 
-      res.json({dish_names:dish_names,list:JSON.stringify(container)})
+      res.json({dish_names:dish_names,list:container})
       }
 
       Apptokens.find({}).then(function (data,err) {
