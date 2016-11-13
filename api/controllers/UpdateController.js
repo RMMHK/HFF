@@ -42,7 +42,7 @@ module.exports = {
 
       data: {  //you can send only notification or only data(or include both)
         collapse_key: "1",
-        dish_name: ""
+        dish_names: ""
        // dish_list: container
       }
     };
@@ -107,13 +107,13 @@ module.exports = {
              var app_token= data[i].application_token;
              var v =JSON.stringify(dish_names);
               message.to=app_token
-             message.data.dish_name=v
+             message.data.dish_names=v
            //  message.data.dish_list:container;
              message.collapse_key="1"
              fcm.send(message, function(err, response){
             //   console.log("this"+payload);
                console.log(message.to)
-               console.log(message.data.dish_name)
+               console.log(message.data.dish_names)
                if (err) {
                  console.log("Something has gone wrong!");
                } else {
