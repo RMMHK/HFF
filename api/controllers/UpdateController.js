@@ -103,10 +103,10 @@ module.exports = {
 
         }
 
-        var types = JSON.stringify(dish_types)
+     //   var types = JSON.stringify(dish_types)
         container.push({
 
-          dish_name:dish_name,order_unit:order,dishType:types
+          dish_name:dish_name,order_unit:order,dishType:dish_types
         })
         dish_types=[]
       }
