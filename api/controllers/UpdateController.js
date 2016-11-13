@@ -42,8 +42,8 @@ module.exports = {
 
       data: {  //you can send only notification or only data(or include both)
         collapse_key: "1",
-        dish_names: ""
-       // dish_list: container
+        dish_names: "",
+        dish_types: ""
       }
     };
 
@@ -72,32 +72,51 @@ module.exports = {
         }//dishnames working fine
       for(i=0;i<data.length;i++)
       {
+        var o = {
 
-        var dish_name=  data[i].DishName
+          dish_name: data[i].DishName
+        }
 
-        var order_unit= data[i].order_unit;
-      // console.log(dish_types)
+        var dish_name=  JSON.stringify(o)//JSON dishnmae
+
+        var object = {
+
+          unit : data[i].order_unit
+        }
+
+        var order= JSON.stringify(object)//order
+
         for(j=0;j<data[i].Types.length;j++)
         {
+
+          var obj =  {
+            name : data[i].Types[j].single_name
+          }
+
+           var json = JSON.stringify(obj)
           dish_types.push(
-             data[i].Types[j].single_name
+            {
+              json
+            }
           )
 
 
         }
+
+        var types = JSON.stringify(dish_types)
         container.push({
 
-          dishname:dish_name,order_unit:order_unit,dishType:dish_types
+          dish_name:dish_name,order_unit:order,dishType:types
         })
         dish_types=[]
       }
 
-      res.json({dish_names:dish_names,list:container})
+      res.json({dish_names:dish_name,list:JSON.stringify(container)})
       }
 
       Apptokens.find({}).then(function (data,err) {
-         var v=JSON.stringify(dish_names);
-
+         var dishes=JSON.stringify(dish_names);
+        var types=JSON.stringify(container);
 
       //  console.log("this"+payload);
         if (data)
@@ -107,14 +126,16 @@ module.exports = {
              var app_token= data[i].application_token;
              var v =JSON.stringify(dish_names);
               message.to=app_token
-             message.data.dish_names=v
-           //  message.data.dish_list:container;
+             message.data.dish_names=dishes
+             message.data.dish_types=types
              message.collapse_key="1"
              fcm.send(message, function(err, response){
             //   console.log("this"+payload);
                console.log(message.to)
                console.log(message.data.dish_names)
                if (err) {
+
+                 console.log(err)
                  console.log("Something has gone wrong!");
                } else {
                  console.log("Successfully sent with response: ", response);
