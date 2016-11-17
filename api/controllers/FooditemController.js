@@ -148,13 +148,14 @@ module.exports = {
     console.log(params)
      var result=[]
      var items={}
+
       Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items_array,err) {
 
 
         if (items_array.length!=0)
         {
 
-          for(var i = 0; i < items_array.length; i++)
+          for(i = 0; i < items_array.length; i++)
           {
 
             EShop.findOne({id:items_array[i].eshop_id}).then(function (eshop,err)
