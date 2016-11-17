@@ -145,25 +145,55 @@ search:function (req,res,next) {
 
     var params = req.body
      var result = []
+  var eshop=[]
   var obj;
 
 
   Fooditem.find({type_of_food:params.foodTypeName,status:true}).populate('eshop').then(function (items,err) {
     if(items)
     {
-      for(i=0;i<items.length;i++)
+      for(index=0;index<items.length;index++)
       {
-        var index = i;
-
-            if (items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false)
+              if (items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false)
             {
-                   console.log(index)
 
-             result.push(items[index])
+              var obj =
+              {
+                name: items[index].name,
+                description: items[index].description,
+                price: items[index].price.toString(),
+                location: items[index].eshop.ES_LOCATION,
+                taste: items[index].taste_meter.toString(),
+                quality: items[index].quality_meter.toString(),
+                served: items[index].served.toString(),
+                least_order: items[index].least_order.toString(),
+                selling_unit: items[index].selling_unit,
+                status: "available"
+              }
+              if(items[index].served.toString()<"20")
+              {
+                result.push({
+                  tag:"new",
+                  item:obj
+                })
+              }
+              else
+              {
+                result.push({
+                  tag:"rated",
+                  item:obj
+                })
+
+              }
+              eshop.push({
+                shop_id:items[index].eshop_id
+              })
+
 
             }
       }
-      res.json({res:result})
+
+      res.json({items:result,shops:eshop})
     }
 
   })
