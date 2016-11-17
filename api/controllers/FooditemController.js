@@ -167,16 +167,15 @@ module.exports = {
 
                             result.push(
                               {
-                               "name": items_array[i].name,
-                               "description": items_array.description,
-            "price": items_array.price,
-            "location": items_array.eshop.ES_LOCATION,
-            "taste": items_array.taste_meter,
-            "quality": items_array.quality_meter,
-            "served": items_array.served,
-            "status": "available"
-          }
-        )
+                                "name": items_array[i].name,
+                                "description": items_array[i].description,
+                                "price": items_array[i].price,
+                                "location": items_array[i].eshop.ES_LOCATION,
+                                "taste": items_array[i].taste_meter,
+                                "quality": items_array[i].quality_meter,
+                                "served": items_array[i].served,
+                                "status": "available"
+                              })
         console.log(result)
       }
 
