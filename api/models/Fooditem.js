@@ -28,7 +28,7 @@ module.exports = {
     },
     type_of_food:
     {
-      type:'integer'
+      type:'string'
     },
     quality_meter:
     {
