@@ -163,15 +163,7 @@ search:function (req,res,next) {
             {
                    console.log(index)
 
-                if(items[index].served<20)
-                {
-
-                  result.append({
-                    tag:"new",
-                    result:items[index]
-
-                  })
-                }
+              res.json({item:items[index]})
 
 
 
@@ -182,9 +174,8 @@ search:function (req,res,next) {
               }
 
         })
-console.log(result)
       }
-res.json({res:result})
+
     }
 
   })
