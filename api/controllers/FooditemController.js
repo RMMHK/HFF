@@ -148,31 +148,33 @@ module.exports = {
     console.log(params)
     var result=[]
     var items={}
-      Fooditem.find({type_of_food:params.foodTypeName,status:true}).populate('eshop').then(function (data,err) {
-        if (data) {
-          console.log(data)
-          for(var i = 0; i < data.length; i++) {
+      Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items_array,err) {
+        if (items_array.length!=0) {
+         // console.log(data)
+          for(var i = 0; i < items_array.length; i++) {
 
-            console.log(data[i])
-            console.log(data[i].eshop.ES_STATUS)
+         EShop.findOne({id:items_array[i].eshop_id}).then(function (eshop,err) {
 
-             if(data[i].eshop.ES_STATUS ==true && data[i].eshop.ES_BLOCK == false) {
+           if(eshop)
+       {
+         if(eshop.ES_STATUS ==true && eshop.ES_BLOCK == false) {
 
-               result.push(
-                 {
-                   "name": data[i].name,
-                   "description": data[i].description,
-                   "price": data[i].price,
-                   "location": data[i].eshop.ES_LOCATION,
-                   "taste": data[i].taste_meter,
-                   "quality": data[i].quality_meter,
-                   "served": data[i].served,
-                   "status": "available"
-                 }
-               )
-               console.log(result)
-             }
+           result.push(
+          {
+            "name": items_array[i].name,
+            "description": items_array.description,
+            "price": items_array.price,
+            "location": items_array.eshop.ES_LOCATION,
+            "taste": items_array.taste_meter,
+            "quality": items_array.quality_meter,
+            "served": items_array.served,
+            "status": "available"
+          }
+        )
+        console.log(result)
+      }
 
+    }})
           }
           if (result.length!=0)
             res.json({result:result});
@@ -187,13 +189,11 @@ module.exports = {
       })
   },
 
-
-
 };
 /*
 HashTable.findOne({foodTypeName:params.foodTypeName}).then(function(data,err)
 {
-  Dishtype.find({id:data.foodTypeId}).populate('fooditems').then(function (data,err) {
+  Dishtype.find({id:data.foodTypeId}).populate('fooditems').then(function (data,giterr) {
 
     if (data)
     {
