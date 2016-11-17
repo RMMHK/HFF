@@ -149,20 +149,26 @@ module.exports = {
     var result=[]
     var items={}
       Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items_array,err) {
-        if (items_array.length!=0) {
-         // console.log(data)
-          for(var i = 0; i < items_array.length; i++) {
 
-         EShop.findOne({id:items_array[i].eshop_id}).then(function (eshop,err) {
+        console.log(items_array)
 
-           if(eshop)
-       {
-         if(eshop.ES_STATUS ==true && eshop.ES_BLOCK == false) {
+        if (items_array.length!=0)
+        {
+          console.log(items_array)
 
-           result.push(
+
+          for(var i = 0; i < items_array.length; i++)
           {
-            "name": items_array[i].name,
-            "description": items_array.description,
+            EShop.findOne({id:items_array[i].eshop_id}).then(function (eshop,err)
+            {
+              if(eshop)
+                        {
+                          if(eshop.ES_STATUS ==true && eshop.ES_BLOCK == false) {
+
+                            result.push(
+                              {
+                               "name": items_array[i].name,
+                               "description": items_array.description,
             "price": items_array.price,
             "location": items_array.eshop.ES_LOCATION,
             "taste": items_array.taste_meter,
