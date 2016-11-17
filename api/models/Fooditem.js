@@ -26,7 +26,7 @@ module.exports = {
     {
       type:'integer'
     },
-    type:
+    type_of_food:
     {
       type:'integer'
     },
