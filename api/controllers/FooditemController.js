@@ -150,7 +150,6 @@ module.exports = {
      var items={}
       Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items_array,err) {
 
-        console.log(items_array)
 
         if (items_array.length!=0)
         {
@@ -163,14 +162,15 @@ module.exports = {
               if(eshop)
                         {
 
-                          console.log(items_array[i].description)
-                          console.log(eshop)
+
 
                           if(eshop.ES_STATUS ==true && eshop.ES_BLOCK == false)
 
                           {
 
                             console.log(items_array[i])
+                            console.log(items_array[i].description)
+                            console.log(eshop)
                             result.push(
                               {
                                 "name": items_array[i].name.toString(),
