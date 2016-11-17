@@ -155,19 +155,19 @@ module.exports = {
         if (items_array.length!=0)
         {
 
-          for(i=0;i<items_array.length;i++)
+          for(var index=0;index<items_array.length;index++)
           {
 
-            EShop.findOne({id:items_array[i].eshop_id}).then(function (eshop,err)
+            EShop.findOne({id:items_array[index].eshop_id}).then(function (eshop,err)
             {
 
               if(eshop)
                         {
-                          var index=i-1;
+                       //   var index=i-1;
                        //   console.log(eshop)
                           if (eshop.ES_STATUS ==true && eshop.ES_BLOCK == false)
                           {
-                            console.log(i)
+                            console.log(index)
                             console.log(items_array[index].name)
                             console.log(items_array[index].description)
 
