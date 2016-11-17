@@ -154,23 +154,23 @@ module.exports = {
 
         if (items_array.length!=0)
         {
-          console.log(items_array)
-
-          var items = []
-          items=items_array
-
 
           for(var i = 0; i < items_array.length; i++)
           {
+
             EShop.findOne({id:items_array[i].eshop_id}).then(function (eshop,err)
             {
               if(eshop)
                         {
 
-                          console.log(items_array[i].name)
+                          console.log(items_array[i].description)
                           console.log(eshop)
 
-                          if(eshop.ES_STATUS ==true && eshop.ES_BLOCK == false) {
+                          if(eshop.ES_STATUS ==true && eshop.ES_BLOCK == false)
+
+                          {
+
+                            console.log(items_array[i])
                             result.push(
                               {
                                 "name": items_array[i].name.toString(),
@@ -182,10 +182,11 @@ module.exports = {
                                 "served": items_array[i].served,
                                 "status": "available"
                               })
-        console.log(result)
-      }
+                              console.log(result)
+                          }
 
-    }
+                        }
+
             if (err)
               console.log(err)
 
