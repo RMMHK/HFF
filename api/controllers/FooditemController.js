@@ -155,7 +155,7 @@ search:function (req,res,next) {
       {
         EShop.findOne({id:items[i].eshop_id}).then(function (shop,err) {
 
-          console.log(i);
+         
 
         })
 
