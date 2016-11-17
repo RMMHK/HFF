@@ -148,29 +148,20 @@ search:function (req,res,next) {
   var obj;
 
 
-  Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items,err) {
+  Fooditem.find({type_of_food:params.foodTypeName,status:true}).populate('eshop').then(function (items,err) {
     if(items)
     {
-
       for(i=0;i<items.length;i++)
       {
         var index = i;
-        EShop.findOne({id:items[index].eshop_id}).then(function (shop,err) {
 
-          if(shop)
-          {
-            if (shop.ES_STATUS == true && shop.ES_BLOCK == false)
+            if (items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false)
             {
                    console.log(index)
 
              result.push(items[index])
 
             }
-
-
-          }
-
-        })
       }
       res.json({res:result})
     }
