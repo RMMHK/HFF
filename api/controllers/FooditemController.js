@@ -153,6 +153,7 @@ search:function (req,res,next) {
 
       for(i=0;i<items.length;i++)
       {
+        console.log(i);
         EShop.findOne({id:items[i].eshop_id}).then(function (shop,err) {
 
           console.log(i);
