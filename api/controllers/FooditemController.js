@@ -149,7 +149,20 @@ search:function (req,res,next) {
 
   Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items,err) {
     if(items)
-      res.json({items:items})
+    {
+
+      for(i=0;i<items.length;i++)
+      {
+        EShop.findOne({id:items[i].eshop_id}).then(function (shop,err) {
+
+          console.log(i);
+
+        })
+
+      }
+
+
+    }
 
   })
 
