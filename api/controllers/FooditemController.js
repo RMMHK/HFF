@@ -164,10 +164,9 @@ module.exports = {
 
                           console.log(eshop)
 
-                          if(eshop.ES_STATUS ==true && eshop.ES_BLOCK == false)
-
+                          if (eshop.ES_STATUS ==true && eshop.ES_BLOCK == false)
                           {
-
+                            console.log(eshop)
                             console.log(items_array[i])
                             console.log(items_array[i].description)
 
