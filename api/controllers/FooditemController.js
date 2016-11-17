@@ -171,12 +171,12 @@ module.exports = {
                   {
                     name: items_array[index].name,
                     description: items_array[index].description,
-                    price: items_array[index].price,
+                    price: items_array[index].price.toString(),
                     location: items_array[index].eshop.ES_LOCATION,
-                    taste: items_array[index].taste_meter,
-                    quality: items_array[index].quality_meter,
-                    served: items_array[index].served,
-                    least_order: items_array[index].least_order,
+                    taste: items_array[index].taste_meter.toString(),
+                    quality: items_array[index].quality_meter.toString(),
+                    served: items_array[index].served.toString(),
+                    least_order: items_array[index].least_order.toString(),
                     selling_unit: items_array[index].selling_unit,
                     status: "available"
                   }
