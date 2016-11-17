@@ -141,15 +141,14 @@ module.exports = {
 
 search:function (req,res,next) {
 
-
-
     var params = req.body
-     var result = []
+   console.log(params)
+  var result = []
   var eshop=[]
   var obj;
 
 
-  Fooditem.find({type_of_food:params.foodTypeName,status:true}).populate('eshop').then(function (items,err) {
+  Fooditem.find({type_of_food:params.dish,status:true}).populate('eshop').then(function (items,err) {
     if(items)
     {
       for(index=0;index<items.length;index++)
