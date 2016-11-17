@@ -165,17 +165,14 @@ search:function (req,res,next) {
 
              result.push(items[index])
 
-res.json({res:result})
-
-
             }
 
 
-              }
+          }
 
         })
       }
-
+      res.json({res:result})
     }
 
   })
