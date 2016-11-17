@@ -139,6 +139,28 @@ module.exports = {
   },
 
 
+search:function (req,res,next) {
+
+
+
+    var params = req.body
+  var result = []
+
+
+  Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items,err) {
+    if(items)
+      res.json({items:items})
+
+  })
+
+},
+
+
+
+
+
+
+
 
 
 //FUNCTION OF SEARCHING
@@ -157,7 +179,6 @@ module.exports = {
           var result=[]
           for(index=0;index<items_array.length;index++)
           {
-            console.log(index)
             EShop.findOne({id:items_array[index].eshop_id}).then(function (eshop,err) {
 
               if (eshop) {
@@ -194,9 +215,10 @@ module.exports = {
 
 
             })}
-
-
           res.json({result:result});
+
+
+
 
 
         }
