@@ -163,9 +163,9 @@ search:function (req,res,next) {
             {
                    console.log(index)
 
-              res.json({item:items[index]})
+             result.push(items[index])
 
-
+res.json({res:result})
 
 
             }
