@@ -162,7 +162,7 @@ module.exports = {
               if(eshop)
                         {
 
-
+                          console.log(eshop)
 
                           if(eshop.ES_STATUS ==true && eshop.ES_BLOCK == false)
 
@@ -170,7 +170,7 @@ module.exports = {
 
                             console.log(items_array[i])
                             console.log(items_array[i].description)
-                            console.log(eshop)
+
                             result.push(
                               {
                                 "name": items_array[i].name.toString(),
