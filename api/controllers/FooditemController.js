@@ -144,7 +144,8 @@ search:function (req,res,next) {
 
 
     var params = req.body
-  var result = []
+     var result = []
+  var obj;
 
 
   Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items,err) {
@@ -156,13 +157,37 @@ search:function (req,res,next) {
         var index = i;
         EShop.findOne({id:items[index].eshop_id}).then(function (shop,err) {
 
-          console.log(index);
+          if(shop)
+          {
+            if (shop.ES_STATUS == true && shop.ES_BLOCK == false)
+            {
+                   console.log(index)
+
+              obj = {
+
+                name: items[index].name,
+                description: items[index].description,
+                price: items[index].price.toString(),
+                location: items[index].eshop.ES_LOCATION,
+                taste: items[index].taste_meter.toString(),
+                quality: items[index].quality_meter.toString(),
+                served: items[index].served.toString(),
+                least_order: items[index].least_order.toString(),
+                selling_unit: items[index].selling_unit,
+                status: "available"
+
+              }
+
+            }
+
+
+              }
 
         })
 
       }
 
-
+res.json({res:obj})
     }
 
   })
