@@ -163,7 +163,7 @@ module.exports = {
 
               if(eshop)
                         {
-                          var index=index-1;
+                           index=index-1;
                        //   console.log(eshop)
                           if (eshop.ES_STATUS ==true && eshop.ES_BLOCK == false)
                           {
