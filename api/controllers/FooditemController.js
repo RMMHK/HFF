@@ -148,16 +148,17 @@ module.exports = {
     console.log(params)
      var result=[]
      var items={}
-
+var index=0;
       Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items_array,err) {
 
 
         if (items_array.length!=0)
         {
 
-          for(var index=0;index<items_array.length;index++)
+          for(index=0;index<items_array.length;index++)
           {
-
+            console.log(index)
+            cons
             EShop.findOne({id:items_array[index].eshop_id}).then(function (eshop,err)
             {
 
