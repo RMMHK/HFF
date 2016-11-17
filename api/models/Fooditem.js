@@ -59,10 +59,15 @@ module.exports = {
       type:'integer',        /* needs to be setup in front end and back end also */
       defaultsTo:1
     },
+
+    eshop_id:
+    {
+      type:'string'
+    },
     max_order:
     {
       type:'integer',
-      defaultsTo:5
+      defaultsTo:10
     },
 
     typeOf:{

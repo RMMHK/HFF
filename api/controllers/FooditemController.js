@@ -17,7 +17,7 @@ module.exports = {
      //parameters NAME , DECRIPTION, PRICE , ESHOP ID...//food type
      HashTable.findOne({foodTypeName:params.foodTypeName}).then(function(data,err)
        {
-         Fooditem.create({name:params.name,description:params.description,price:params.price,type_of_food:params.foodTypeName,selling_unit:params.selling_unit,typeOf:data.foodTypeId,eshop:params.eshop_id}).then(function (data,err) {
+         Fooditem.create({name:params.name,description:params.description,price:params.price,type_of_food:params.foodTypeName,eshop_id:params.eshop_id,selling_unit:params.selling_unit,typeOf:data.foodTypeId,eshop:params.eshop_id}).then(function (data,err) {
 
            if (data)
            {
@@ -168,7 +168,6 @@ module.exports = {
                    "quality": data[i].quality_meter,
                    "served": data[i].served,
                    "status": "available"
-
                  }
                )
                console.log(result)
