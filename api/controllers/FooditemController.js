@@ -162,13 +162,13 @@ module.exports = {
               if(eshop)
                         {
 
-                          console.log(eshop)
+                       //   console.log(eshop)
 
                           if (eshop.ES_STATUS ==true && eshop.ES_BLOCK == false)
                           {
-                            console.log(eshop)
+                            console.log(i)
                             console.log(items_array[0])
-                            console.log(items_array[i].description)
+                        //    console.log(items_array[i].description)
 
                             result.push(
                               {
