@@ -58,7 +58,7 @@ module.exports = {
         type:'string',
         defaultsTo:'N/A'
       },
-    
+
   }
 };
 

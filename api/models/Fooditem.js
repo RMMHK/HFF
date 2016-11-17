@@ -26,7 +26,10 @@ module.exports = {
     {
       type:'integer'
     },
-
+    type:
+    {
+      type:'integer'
+    },
     quality_meter:
     {
       type:'integer',
