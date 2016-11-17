@@ -147,7 +147,7 @@ module.exports = {
     var params = req.body
     console.log(params)
      var result=[]
-     var items={}
+     var items=[]
       var index=0;
       Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items_array,err) {
 
@@ -183,7 +183,7 @@ module.exports = {
                                 status: "available"
                               })
                               console.log(result)
-                            result.apply()
+                            items.push(result)
                           }
 
                         }
@@ -196,7 +196,7 @@ module.exports = {
             })
           }
 
-            res.json({result:result});
+            res.json({result:items});
 
           //  res.json({result: 0})
         }
