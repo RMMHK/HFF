@@ -146,8 +146,8 @@ module.exports = {
   searchItem:function (req,res,next) {
     var params = req.body
     console.log(params)
-    var result=[]
-    var items={}
+     var result=[]
+     var items={}
       Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items_array,err) {
 
         console.log(items_array)
@@ -156,6 +156,9 @@ module.exports = {
         {
           console.log(items_array)
 
+          var items = []
+          items=items_array
+
 
           for(var i = 0; i < items_array.length; i++)
           {
@@ -163,8 +166,11 @@ module.exports = {
             {
               if(eshop)
                         {
-                          if(eshop.ES_STATUS ==true && eshop.ES_BLOCK == false) {
 
+                          console.log(items_array)
+                          console.log(eshop)
+
+                          if(eshop.ES_STATUS ==true && eshop.ES_BLOCK == false) {
                             result.push(
                               {
                                 "name": items_array[i].name,
@@ -179,7 +185,13 @@ module.exports = {
         console.log(result)
       }
 
-    }})
+    }
+            if (err)
+              console.log(err)
+
+
+
+            })
           }
           if (result.length!=0)
             res.json({result:result});
@@ -195,17 +207,4 @@ module.exports = {
   },
 
 };
-/*
-HashTable.findOne({foodTypeName:params.foodTypeName}).then(function(data,err)
-{
-  Dishtype.find({id:data.foodTypeId}).populate('fooditems').then(function (data,giterr) {
 
-    if (data)
-    {
-      res.json({item:data})
-    }
-    else
-    {
-      res.json({error:err})
-    }
-  })})*/
