@@ -163,20 +163,18 @@ search:function (req,res,next) {
             {
                    console.log(index)
 
-              obj = {
+                if(items[index].served<20)
+                {
 
-                name: items[index].name,
-                description: items[index].description,
-                price: items[index].price.toString(),
-                location: items[index].eshop.ES_LOCATION,
-                taste: items[index].taste_meter.toString(),
-                quality: items[index].quality_meter.toString(),
-                served: items[index].served.toString(),
-                least_order: items[index].least_order.toString(),
-                selling_unit: items[index].selling_unit,
-                status: "available"
+                  result.append({
+                    tag:"new",
+                    result:items[index]
 
-              }
+                  })
+                }
+
+
+
 
             }
 
@@ -184,10 +182,9 @@ search:function (req,res,next) {
               }
 
         })
-
+console.log(result)
       }
-
-res.json({res:obj})
+res.json({res:result})
     }
 
   })
