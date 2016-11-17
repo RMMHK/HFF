@@ -163,17 +163,17 @@ module.exports = {
 
               if(eshop)
                         {
-                          i=i-1;
+                          var index=i-1;
                        //   console.log(eshop)
                           if (eshop.ES_STATUS ==true && eshop.ES_BLOCK == false)
                           {
                             console.log(i)
-                            console.log(items_array[i])
-                        //    console.log(items_array[i].description)
+                            console.log(items_array[index].name)
+                            console.log(items_array[index].description)
 
                             result.push(
                               {
-                                "name": items_array[i].name.toString(),
+                                "name": items_array[index].name,
                                 "description": items_array[i].description,
                                 "price": items_array[i].price,
                                 "location": items_array[i].eshop.ES_LOCATION,
