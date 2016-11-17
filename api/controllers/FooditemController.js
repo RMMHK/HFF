@@ -148,7 +148,7 @@ module.exports = {
     console.log(params)
     var result=[]
     var items={}
-      Fooditem.find({name:params.foodTypeName,status:true}).populate('eshop').then(function (data,err) {
+      Fooditem.find({type_of_food:params.foodTypeName,status:true}).populate('eshop').then(function (data,err) {
         if (data) {
           console.log(data)
           for(var i = 0; i < data.length; i++) {
