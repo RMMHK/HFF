@@ -155,20 +155,20 @@ module.exports = {
         if (items_array.length!=0)
         {
 
-          for(i = 0; i < items_array.length; i++)
+          for(i=0;i<items_array.length;i++)
           {
 
             EShop.findOne({id:items_array[i].eshop_id}).then(function (eshop,err)
             {
+
               if(eshop)
                         {
-
+                          i=i-1;
                        //   console.log(eshop)
-
                           if (eshop.ES_STATUS ==true && eshop.ES_BLOCK == false)
                           {
                             console.log(i)
-                            console.log(items_array[0])
+                            console.log(items_array[i])
                         //    console.log(items_array[i].description)
 
                             result.push(
