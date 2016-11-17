@@ -146,7 +146,7 @@ module.exports = {
   searchItem:function (req,res,next) {
     var params = req.body
     console.log(params)
-     var result=[]
+
      var items=[]
       var index=0;
       Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items_array,err) {
@@ -154,58 +154,63 @@ module.exports = {
 
         if (items_array.length!=0)
         {
-
+          var result=[]
           for(index=0;index<items_array.length;index++)
           {
             console.log(index)
-            EShop.findOne({id:items_array[index].eshop_id}).then(function (eshop,err)
-            {
+            EShop.findOne({id:items_array[index].eshop_id}).then(function (eshop,err) {
 
-              if(eshop)
-                        {
-                           index=index-1;
-                          console.log(eshop)
-                          if (eshop.ES_STATUS ==true && eshop.ES_BLOCK == false)
-                          {
-                            console.log(index)
-                            console.log(items_array[index].name)
-                            console.log(items_array[index].description)
+              if (eshop) {
 
-                            result.push(
-                              {
-                                name: items_array[index].name,
-                                description: items_array[index].description,
-                                price: items_array[index].price,
-                                location: items_array[index].eshop.ES_LOCATION,
-                                taste: items_array[index].taste_meter,
-                                quality: items_array[index].quality_meter,
-                                served: items_array[index].served,
-                                status: "available"
-                              })
-                              console.log(result)
-                            items.push(result)
-                          }
+                index = index - 1;
+                console.log(eshop)
+                if (eshop.ES_STATUS == true && eshop.ES_BLOCK == false) {
+                  /*here gps coordinates will be compared*/
+                  var obj =
 
-                        }
+                  {
+                    name: items_array[index].name,
+                    description: items_array[index].description,
+                    price: items_array[index].price,
+                    location: items_array[index].eshop.ES_LOCATION,
+                    taste: items_array[index].taste_meter,
+                    quality: items_array[index].quality_meter,
+                    served: items_array[index].served,
+                    least_order: items_array[index].least_order,
+                    selling_unit: items_array[index].selling_unit,
+                    status: "available"
+                  }
+                  var item_json = JSON.stringify(obj)
 
-            if (err)
-              console.log(err)
+                  result.push({item_json})
+                  console.log(result)
+
+                }
+              }
 
 
+              if (err)
+                console.log(err)
 
-            })
-          }
 
-            res.json({result:items});
+            })}
 
-          //  res.json({result: 0})
+
+          res.json({result:result});
+
+
         }
+
         else
         {
           res.json({error:err})
-        }
-      })
-  },
+        }})},
+
+
+
+          //  res.json({result: 0})
+
+
 
 };
 
