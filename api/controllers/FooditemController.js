@@ -167,6 +167,7 @@ search:function (req,res,next) {
                 served: items[index].served.toString(),
                 least_order: items[index].least_order.toString(),
                 selling_unit: items[index].selling_unit,
+                id:items[index].id,
                 status: "available"
               }
               if(items[index].served.toString()<"20")
