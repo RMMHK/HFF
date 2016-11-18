@@ -192,7 +192,7 @@ search:function (req,res,next) {
             }
       }
 
-      res.json({items:result,shops:eshop})
+      res.json({items:JSON.stringify(result),shops:JSON.stringify(eshop)})
     }
 
   })
