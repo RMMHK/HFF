@@ -171,21 +171,42 @@ search:function (req,res,next) {
               }
               if(items[index].served.toString()<"20")
               {
-                result.push({
-                  tag:"new",
-                  item:JSON.stringify(obj)
-                })
+                if(item[index].eshop.ES_REAL=="true") {
+                  result.push({
+                    real:"true",
+                    tag: "new",
+                    item: JSON.stringify(obj)
+                  })
+                }
+                else
+                {
+                  result.push({
+                    real:"false",
+                    tag: "new",
+                    item: JSON.stringify(obj)
+                  })
+                }
               }
               else
               {
-                result.push({
-                  tag:"rated",
-                  item:JSON.stringify(obj)
-                })
-
+                if(item[index].eshop.ES_REAL=="true") {
+                  result.push({
+                    real:"true",
+                    tag: "rated",
+                    item: JSON.stringify(obj)
+                  })
+                }
+                else {
+                  result.push({
+                    real:"false",
+                    tag: "rated",
+                    item: JSON.stringify(obj)
+                  })
+                }
               }
               eshop.push({
-                shop_id:items[index].eshop_id
+                shop_id:items[index].eshop_id,
+                real:items[index].eshop.ES_REAL
               })
 
 
@@ -243,6 +264,7 @@ search:function (req,res,next) {
                     served: items_array[index].served.toString(),
                     least_order: items_array[index].least_order.toString(),
                     selling_unit: items_array[index].selling_unit,
+                    id: items_array[index].id,
                     status: "available"
                   }
                   var item_json = JSON.stringify(obj)

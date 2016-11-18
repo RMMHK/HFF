@@ -11,6 +11,12 @@ module.exports= {
 
     },
 
+    ES_REAL:
+    {
+      type:'string',
+      defaultsTo:'false'
+    },
+
     ES_STATUS: {
       type: 'boolean',
       defaultsTo: 'false'
@@ -26,6 +32,11 @@ module.exports= {
     ES_BLOCK: {
       type: 'boolean',
       defaultsTo: 'false'
+    },
+
+    ES_SUBSCRIBERS:{
+      type:'string',
+      defaultsTo:'N/A'
     },
 /*
    Owner: {
