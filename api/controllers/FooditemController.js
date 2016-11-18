@@ -171,7 +171,7 @@ search:function (req,res,next) {
               }
               if(items[index].served.toString()<"20")
               {
-                if(item[index].eshop.ES_REAL=="true") {
+                if(items[index].eshop.ES_REAL=="true") {
                   result.push({
                     real:"true",
                     tag: "new",
@@ -189,7 +189,7 @@ search:function (req,res,next) {
               }
               else
               {
-                if(item[index].eshop.ES_REAL=="true") {
+                if(items[index].eshop.ES_REAL=="true") {
                   result.push({
                     real:"true",
                     tag: "rated",
