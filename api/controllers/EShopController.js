@@ -40,7 +40,7 @@ getEShop:function (req,res,next) {
     catch (exception)
     {
 
-      EShop.create({ES_REG_DATE:new Date()}).then(function (shop,err) {
+      EShop.create({ES_REG_DATE:new Date(),ES_OWNER_REAL_ID:params.id}).then(function (shop,err) {
 
         if(err)
           res.json({status:0,tag:"CEShop"});

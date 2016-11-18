@@ -8,9 +8,12 @@ module.exports= {
 
     ES_NAME: {
       type: 'string',
-
+      defaultsTo:'Food Provider'
     },
-
+    ES_OWNER_REAL_ID:
+    {
+      type:'string'
+    },
     ES_REAL:
     {
       type:'string',
