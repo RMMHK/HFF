@@ -171,7 +171,7 @@ search:function (req,res,next) {
                 id:items[index].id,
                 status: "available"
               }
-              if(Integer.valueOf(items[index].served)<=20)
+              if((items[index].served)<=20)
               {
                 if(items[index].eshop.ES_REAL=="true") {
                   result.push({
