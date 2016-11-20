@@ -171,7 +171,7 @@ search:function (req,res,next) {
                 id:items[index].id,
                 status: "available"
               }
-              if(items[index].served.toString()<"20")
+              if(items[index].served.toString()<="20")
               {
                 if(items[index].eshop.ES_REAL=="true") {
                   result.push({
@@ -209,7 +209,7 @@ search:function (req,res,next) {
               eshop.push({
                 shop_id:items[index].eshop_id,
                 real:items[index].eshop.ES_REAL
-                
+
               })
 
 
