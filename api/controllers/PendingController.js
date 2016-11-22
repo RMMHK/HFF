@@ -14,9 +14,11 @@ module.exports = {
    */
   order: function (req, res) {
 
+    var delay = 10000
+
 hello();
-    setTimeout(hi,10000)
-    hey();
+    setTimeout(hi,delay)
+    setTimeout(hey,delay+1)
 
     }
 };
