@@ -147,7 +147,7 @@ verify:function (req,res,next){
 
   var params = req.body;
 
-    User.findOne({v_id:params.v_id}).then(function(data,err) {
+    User.findOne({v_id:params.v_id}).populate('EShop').then(function(data,err) {
 
       console.log(req.url);
       console.log(req.headers);

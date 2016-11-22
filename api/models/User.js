@@ -42,9 +42,10 @@ module.exports = {
      	type:'integer'
      },
 
-    current_location://location through GPS
+    shop_location://location through GPS
     {
-    	type:'string'
+    	type:'string',
+      defaultsTo:'null'
     },
 
     v_id:

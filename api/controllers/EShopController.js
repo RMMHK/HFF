@@ -48,7 +48,7 @@ getEShop:function (req,res,next) {
         else if(shop)
         console.log(shop)
         {
-          User.update({id:params.id},{EShop:shop.id,eshop_id:shop.id}).then(function (ok,err)
+          User.update({id:params.id},{EShop:shop.id,eshop_id:shop.id,shop_location:'N/A'}).then(function (ok,err)
           {
 
              if(ok)
@@ -105,5 +105,39 @@ getEShop:function (req,res,next) {
 
 
     },
+
+
+
+
+setLocation:function (req,res,next) {
+
+      //user real id
+  // eshop real id
+  //shop location
+      var params = req.body;
+
+    User.update({id:params.user_id},{shop_location:params.location}).then(function (updated,err){
+
+      if (updated[0]) {
+
+        EShop.update({id:params.shop_id},{ES_LOCATION:params.location}).then(function(data,err){
+
+          if (err)
+          {
+            res.json({status: 0});
+            // console.log("err"+o);
+          }
+          else if (data==""||!data)
+          {res.json({status: 0});}
+
+          else if (data)
+          {  res.json({status:1,user:updated[0]})
+          }
+        })
+      }
+
+    });
+  },
+
 
 };
