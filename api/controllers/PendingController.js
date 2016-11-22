@@ -14,6 +14,19 @@ module.exports = {
    */
   order: function (req, res) {
 
+var geo_coder= require("geocoder");
+
+    geo_coder.reverseGeocode(33.7120818,73.070842,function (err,data) {
+      if(data)
+      {
+        console.log(data)
+      }
+      else
+        console.log(err)
+    }
+
+
+
     var delay = 10000
 
 hello();
