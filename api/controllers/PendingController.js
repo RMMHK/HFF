@@ -15,7 +15,7 @@ module.exports = {
   order: function (req, res) {
 
 hello();
-    setTimeout(hi,5000)
+    setTimeout(hi,10000)
 
     }
 };
