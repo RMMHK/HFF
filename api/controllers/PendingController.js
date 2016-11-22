@@ -23,7 +23,7 @@ var geo_coder= require("geocoder");
       }
       else
         console.log(err)
-    }
+    })
 
 
 
