@@ -16,6 +16,7 @@ module.exports = {
 
 hello();
     setTimeout(hi,10000)
+    hey();
 
     }
 };
@@ -24,6 +25,11 @@ hello();
 function hello () {
   console.log("hi i am executed");}
 
+
 function  hi() {
   console.log("hi i am executed now")
+}
+
+function  hey() {
+  console.log("ITNI BADBOOO")
 }
