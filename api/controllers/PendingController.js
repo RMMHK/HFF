@@ -28,6 +28,19 @@ module.exports = {
     console.log(params)
     //check status of the shop and item
     //make request to provider and wait
+    var geo_coder= require("geocoder");
+
+    geo_coder.reverseGeocode(33.7120818,73.070842,function (err,location) {
+      if(location)
+      {
+        for(i=0;i<2;i++)
+        {
+
+           var first = location[i]
+          var json = JSON.stringify(first)
+           console.log(json)
+        }
+
 
     Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
     {
@@ -40,16 +53,6 @@ module.exports = {
     }
 
     })
-
-
-
-
-var geo_coder= require("geocoder");
-
-    geo_coder.reverseGeocode(33.7120818,73.070842,function (err,data) {
-      if(data)
-      {
-        console.log(data)
       }
       else
         console.log(err)
@@ -68,7 +71,8 @@ hello();
 
 
 function hello () {
-  console.log("hi i am executed");}
+  console.log("hi i am executed");
+return ;}
 
 
 function  hi() {
