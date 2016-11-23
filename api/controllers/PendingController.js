@@ -39,7 +39,7 @@ module.exports = {
 
         results=location.results;
 
-        for(i=0;i<1;i++)
+        for(i=0;i<2;i++)
         {
           var obj = results[i];
            if(i==0)
@@ -48,6 +48,7 @@ module.exports = {
              console.log(street);
            }
 
+          
            sector=obj
         }
         res.json({sector})
