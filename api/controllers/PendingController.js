@@ -49,7 +49,7 @@ module.exports = {
       }
         else if (err)
       {
-        res.json({status:-1})
+        res.json({status:-2})
       }
     })
 
