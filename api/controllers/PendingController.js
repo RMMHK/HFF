@@ -53,7 +53,7 @@ module.exports = {
                 sector= sector_array[0].long_name
              }
         }
-        var address = sector+street;
+        var address = sector+","+street;
         res.json({address})
         /*  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
          {
