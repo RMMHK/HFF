@@ -37,6 +37,7 @@ module.exports = {
 
         console.log(location.result)
         var obj =location.result
+        console.log(obj)
     Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
     {
 
