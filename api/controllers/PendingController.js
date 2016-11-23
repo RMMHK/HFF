@@ -28,7 +28,7 @@ module.exports = {
     console.log(params)
     //check status of the shop and item
     //make request to provider and wait
-    var geo_coder= require("geocoder");
+
     var sector_array =[]
     var results =[]
     var street;
@@ -47,7 +47,7 @@ module.exports = {
 
 
 
-           
+
          }
 
          else
@@ -114,7 +114,7 @@ module.exports = {
 
 function get_customer_location (lat,long) {
 
-
+  var geo_coder= require("geocoder");
   geo_coder.reverseGeocode(lat,long,function (err,location) {
 
     if(location) {
