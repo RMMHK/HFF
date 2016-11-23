@@ -28,9 +28,9 @@ module.exports = {
     console.log(params)
     //check status of the shop and item
     //make request to provider and wait
-    var geo_coder= require("geocoder");
+    var geo_coder= require("reverse-geocode");
 
-    geo_coder.reverseGeocode(33.7120818,73.070842,function (err,location) {
+    geo_coder.lookup(33.7120818,73.070842,function (err,location) {
       if(location) {
 
 
