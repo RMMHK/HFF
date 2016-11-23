@@ -16,16 +16,15 @@ module.exports = {
 
     var params = req.body;
 
-
-    var cus_lat= body.lat;
-    var cus_long= body.long;
-    var ordered_dish= body.ordered_dish;
-    var cus_token= body.cus_token;
-    var provider_id = body.ordered_provider;
-    var item_id = body.ordered_item_id;
-    var ordered_bill = body.ordered_price;
-    var ordered_quantity= body.ordered_quantity
-    var ordered_unit=body.ordered_unit
+    var cus_lat= params.lat;
+    var cus_long= params.long;
+    var ordered_dish= params.ordered_dish;
+    var cus_token= params.cus_token;
+    var provider_id = params.ordered_provider;
+    var item_id = params.ordered_item_id;
+    var ordered_bill = params.ordered_price;
+    var ordered_quantity= params.ordered_quantity
+    var ordered_unit=params.ordered_unit
 
     //check status of the shop and item
     //make request to provider and wait
