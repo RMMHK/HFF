@@ -46,7 +46,7 @@ module.exports = {
 
                 if(location)
                 {
-
+                   res.json({location:location})
 
                 }
 
