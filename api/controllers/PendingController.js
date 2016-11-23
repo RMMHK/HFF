@@ -133,7 +133,7 @@ function get_customer_location (lat,long) {
         }
       }
       var location = sector+","+street;
-      console.log(location)
+      console.log(location+"")
         return location;
 
     }})}
