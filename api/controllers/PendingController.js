@@ -40,7 +40,7 @@ module.exports = {
         for(i=0;i<1;i++)
         {
           var obj = results[i];
-          res.json(obj)
+          res.json(obj.formatted_address.toString())
         }
         /*  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
          {
