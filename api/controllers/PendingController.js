@@ -12,7 +12,7 @@ module.exports = {
   /**
    * `PendingController.order()`
    */
-  temp_order: function (req, res) {
+  order: function (req, res) {
 
     var params = req.body;
 
