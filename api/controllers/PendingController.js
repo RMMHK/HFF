@@ -46,7 +46,16 @@ module.exports = {
 
                 if(location)
                 {
-                   res.json({location:location})
+                  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit,customer_location:location}).then(function (tempOrder,err)
+                  {
+                    if(tempOrder)
+                    {
+                      //PUSH to provider
+
+                      console.log(tempOrder);
+                    }
+
+                  })
 
                 }
 
