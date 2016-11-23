@@ -113,6 +113,7 @@ module.exports = {
 
 
 function get_customer_location (lat,long) {
+  var address
  console.log(lat)
   console.log(long)
   var geo_coder= require("geocoder");
@@ -133,8 +134,10 @@ function get_customer_location (lat,long) {
           sector = sector_array[0].long_name
         }
       }
-      var location = sector+","+street;
-      console.log(location+"")
-        return location;
+       address = sector+","+street;
+      console.log(address+"")
+      
 
-    }})}
+    }})
+  return address;
+}
