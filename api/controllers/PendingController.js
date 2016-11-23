@@ -132,6 +132,8 @@ function get_customer_location (lat,long) {
           sector = sector_array[0].long_name
         }
       }
-        return sector+","+street;
+      var location = sector+","+street;
+      console.log(location)
+        return location;
 
     }})}
