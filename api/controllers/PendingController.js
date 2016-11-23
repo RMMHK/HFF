@@ -42,9 +42,9 @@ module.exports = {
         for(i=0;i<1;i++)
         {
           var obj = results[i];
-           if(i=0)
+           if(i==0)
            {
-             street = obj.formatted_address.toString();
+             street = obj.formatted_address
              console.log(street);
            }
 
