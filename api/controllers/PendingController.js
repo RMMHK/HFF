@@ -39,7 +39,21 @@ module.exports = {
 
       if(data!=""&&data!=undefined&&data!=null)
       {
-         res.json({data})
+         if(data.status!=false&&data.eshop.ES_STATUS!=false)
+         {
+
+             var customer_location = get_customer_location(parseInt(cus_lat),parseInt(cus_long));
+               res.json({location:customer_location})
+
+
+
+           
+         }
+
+         else
+         {
+           res.json({online:-1})
+         }
 
       }
 
@@ -49,7 +63,7 @@ module.exports = {
       }
         else if (err)
       {
-        res.json({status:-2})
+        res.json({status:-1})
       }
     })
 
@@ -98,15 +112,26 @@ module.exports = {
 };
 
 
-function hello () {
-  console.log("hi i am executed");
-return ;}
+function get_customer_location (lat,long) {
 
 
-function  hi() {
-  console.log("hi i am executed now")
-}
+  geo_coder.reverseGeocode(lat,long,function (err,location) {
 
-function  hey() {
-  console.log("ITNI BADBOOO")
-}
+    if(location) {
+
+      results = location.results;
+
+      for (i = 0; i < 2; i++) {
+        var obj = results[i];
+        if (i == 0) {
+          street = obj.formatted_address
+
+        }
+        if (i == 1) {
+          sector_array = obj.address_components
+          sector = sector_array[0].long_name
+        }
+      }
+        return sector+","+street;
+
+    }})}
