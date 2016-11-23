@@ -152,7 +152,7 @@ function get_customer_location (lat,long,callback) {
        address = sector+","+street;
       console.log(address+"")
 
-      return callback(address);
+      return callback(address,"");
     }
 
   if (err)
