@@ -37,8 +37,13 @@ module.exports = {
 
     Fooditem.findOne({id:item_id}).populate('eshop').then(function (data,err) {
 
-      res.json({data})
+      if(data!=""&&data!=undefined&&data!=null)
+      {
+         res.json({data})
 
+      }
+        else if (err)
+      {}
     })
 
 /*
