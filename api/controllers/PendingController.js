@@ -42,7 +42,7 @@ module.exports = {
          if(data.status!=false&&data.eshop.ES_STATUS!=false)
          {
 
-             var customer_location = get_customer_location(parseInt(cus_lat),parseInt(cus_long));
+             var customer_location = get_customer_location(parseFloat(cus_lat),parseFloat(cus_long));
                res.json({location:customer_location})
 
 
