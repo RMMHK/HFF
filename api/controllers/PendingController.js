@@ -29,12 +29,12 @@ module.exports = {
     //check status of the shop and item
     //make request to provider and wait
     var geo_coder= require("geocoder");
-
+    var array =[]
     geo_coder.reverseGeocode(33.7120818,73.070842,function (err,location) {
       if(location) {
 
-
-        res.json(location);
+       array = location;
+        res.json(array);
         /*  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
          {
 
