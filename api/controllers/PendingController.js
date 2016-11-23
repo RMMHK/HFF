@@ -33,16 +33,9 @@ module.exports = {
     geo_coder.reverseGeocode(33.7120818,73.070842,function (err,location) {
       if(location)
       {
-        for(i=0;i<2;i++)
-        {
-          console.log(location)
-          var array = JSON.parse(location)
-          console.log(array)
 
-
-        }
-
-
+        var array = JSON.parse(location)
+        console.log(array.result)
     Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
     {
 
