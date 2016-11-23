@@ -34,9 +34,7 @@ module.exports = {
     geo_coder.reverseGeocode(33.7120818,73.070842,function (err,location) {
       if(location) {
 
-       raw_location = location;
-        results=array.results;
-
+        results=location.results;
 
 
         for(i=0;i<1;i++)
