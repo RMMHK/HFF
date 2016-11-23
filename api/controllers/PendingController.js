@@ -31,38 +31,37 @@ module.exports = {
     var geo_coder= require("geocoder");
 
     geo_coder.reverseGeocode(33.7120818,73.070842,function (err,location) {
-      if(location)
-      {
+      if(location) {
 
 
-        console.log(location.result)
-        var obj =location.result
-        console.log(obj)
-    Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
-    {
+        res.json(location);
+        /*  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
+         {
 
-    if(tempOrder)
-    {
-      //PUSH to provider
+         if(tempOrder)
+         {
+         //PUSH to provider
 
-      console.log(tempOrder);
-    }
+         console.log(tempOrder);
+         }
 
-    })
-      }
-      else
-        console.log(err)
-    })
+         })
+         }
+         else
+         console.log(err)
+         })
 
 
 
-    var delay = 10000
+         var delay = 10000
 
-hello();
-    setTimeout(hi,delay)
-    setTimeout(hey,delay+1)
+         hello();
+         setTimeout(hi,delay)
+         setTimeout(hey,delay+1)
 
-    }
+         }
+         */
+      }})}
 };
 
 
