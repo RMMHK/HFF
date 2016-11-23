@@ -41,12 +41,24 @@ module.exports = {
       {
          if(data.status!=false&&data.eshop.ES_STATUS!=false)
          {
+            try {
+              get_customer_location(parseFloat(cus_lat), parseFloat(cus_long), function (location, error) {
 
-             get_customer_location(parseFloat(cus_lat),parseFloat(cus_long),function (location) {
+                if(location)
+                {
 
-               res.json({location:location})
-             });
 
+                }
+
+                else if (error)
+                {
+                  //response here
+                }
+
+              });
+            }catch (exception){
+              //response here
+            }
 
 
 
@@ -117,11 +129,13 @@ module.exports = {
 
 function get_customer_location (lat,long,callback) {
   var address
+  var error= "N/A"
   var geo_coder= require("geocoder");
+
   geo_coder.reverseGeocode(lat,long,function (err,location) {
 
     if(location) {
-
+    console.log(location)
       results = location.results;
 
       for (i = 0; i < 2; i++) {
@@ -139,6 +153,12 @@ function get_customer_location (lat,long,callback) {
       console.log(address+"")
 
       return callback(address);
-    }})
+    }
+
+  if (err)
+  {
+    return callback(address,error)
+  }
+  })
 
 }
