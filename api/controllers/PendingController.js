@@ -25,7 +25,7 @@ module.exports = {
     var ordered_bill = params.ordered_price;
     var ordered_quantity= params.ordered_quantity
     var ordered_unit=params.ordered_unit
-
+    console.log(params)
     //check status of the shop and item
     //make request to provider and wait
 
