@@ -29,7 +29,7 @@ module.exports = {
     //check status of the shop and item
     //make request to provider and wait
     var geo_coder= require("geocoder");
-    var raw_location =[]
+    var sector_array =[]
     var results =[]
     var street;
     var sector;
@@ -45,13 +45,16 @@ module.exports = {
            if(i==0)
            {
              street = obj.formatted_address
-             console.log(street);
+
            }
 
-          
-           sector=obj
+             if(i==1) {
+               sector_array = obj.address_components
+                sector= sector_array[0].long_name
+             }
         }
-        res.json({sector})
+        var address = sector+street;
+        res.json({address})
         /*  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
          {
 
