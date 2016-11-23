@@ -33,6 +33,15 @@ module.exports = {
     var results =[]
     var street;
     var sector;
+
+
+    Fooditem.findOne({id:item_id}.populate('eshop')).then(function (data,err) {
+
+      res.json({data})
+
+    })
+
+/*
     geo_coder.reverseGeocode(33.7120818,73.070842,function (err,location) {
 
       if(location) {
@@ -53,9 +62,8 @@ module.exports = {
                 sector= sector_array[0].long_name
              }
         }
-        var address = sector+","+street;
-        res.json({address})
-        /*  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
+           var customer_location = sector+","+street;
+          Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit,customer_location:customer_address}).then(function (tempOrder,err)
          {
 
          if(tempOrder)
@@ -71,17 +79,10 @@ module.exports = {
          console.log(err)
          })
 
-
-
-         var delay = 10000
-
-         hello();
-         setTimeout(hi,delay)
-         setTimeout(hey,delay+1)
-
+        hello();
+      //   setTimeout(hi,delay)
+*/
          }
-         */
-      }})}
 };
 
 
