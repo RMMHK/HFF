@@ -35,7 +35,8 @@ module.exports = {
       {
         for(i=0;i<2;i++)
         {
-
+          console.log(location.length)
+          
            var first = location[i]
           var json = JSON.stringify(first)
            console.log(json)
