@@ -42,8 +42,11 @@ module.exports = {
          if(data.status!=false&&data.eshop.ES_STATUS!=false)
          {
 
-             var customer_location = get_customer_location(parseFloat(cus_lat),parseFloat(cus_long));
-               res.json({location:customer_location})
+             get_customer_location(parseFloat(cus_lat),parseFloat(cus_long),function (location) {
+
+               res.json({location:location})
+             });
+
 
 
 
@@ -112,10 +115,8 @@ module.exports = {
 };
 
 
-function get_customer_location (lat,long) {
+function get_customer_location (lat,long,callback) {
   var address
- console.log(lat)
-  console.log(long)
   var geo_coder= require("geocoder");
   geo_coder.reverseGeocode(lat,long,function (err,location) {
 
@@ -136,8 +137,8 @@ function get_customer_location (lat,long) {
       }
        address = sector+","+street;
       console.log(address+"")
-      
+
 
     }})
-  return address;
+  return callback(address)
 }
