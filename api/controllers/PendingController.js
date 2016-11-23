@@ -35,7 +35,7 @@ module.exports = {
     var sector;
 
 
-    Fooditem.findOne({id:item_id}.populate('eshop')).then(function (data,err) {
+    Fooditem.findOne({id:item_id}).populate('eshop').then(function (data,err) {
 
       res.json({data})
 
