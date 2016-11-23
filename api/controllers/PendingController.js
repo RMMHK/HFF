@@ -16,50 +16,52 @@ module.exports = {
 
     var params = req.body;
 
-    var cus_lat = params.lat;
-    var cus_long = params.long;
-    var ordered_dish = params.ordered_dish;
-    var cus_token = params.cus_token;
+    var cus_lat= params.lat;
+    var cus_long= params.long;
+    var ordered_dish= params.ordered_dish;
+    var cus_token= params.cus_token;
     var provider_id = params.ordered_provider;
     var item_id = params.ordered_item_id;
     var ordered_bill = params.ordered_price;
-    var ordered_quantity = params.ordered_quantity
-    var ordered_unit = params.ordered_unit
+    var ordered_quantity= params.ordered_quantity
+    var ordered_unit=params.ordered_unit
     console.log(params)
     //check status of the shop and item
     //make request to provider and wait
-    var geo_coder = require("reverse-geocode");
+    var geo_coder= require("geocoder");
 
-    res.json(geo_coder.lookup(33.7120818, 73.070842))
-
-
-    /*  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
-     {
-
-     if(tempOrder)
-     {
-     //PUSH to provider
-
-     console.log(tempOrder);
-     }
-
-     })
-     }
-     else
-     console.log(err)
-     })
+    geo_coder.reverseGeocode(33.7120818,73.070842,function (err,location) {
+      if(location) {
 
 
+        res.json(location);
+        /*  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
+         {
 
-     var delay = 10000
+         if(tempOrder)
+         {
+         //PUSH to provider
 
-     hello();
-     setTimeout(hi,delay)
-     setTimeout(hey,delay+1)
+         console.log(tempOrder);
+         }
 
-     }
-     */
-  }
+         })
+         }
+         else
+         console.log(err)
+         })
+
+
+
+         var delay = 10000
+
+         hello();
+         setTimeout(hi,delay)
+         setTimeout(hey,delay+1)
+
+         }
+         */
+      }})}
 };
 
 
