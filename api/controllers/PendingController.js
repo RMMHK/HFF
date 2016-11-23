@@ -36,7 +36,7 @@ module.exports = {
         for(i=0;i<2;i++)
         {
           console.log(location)
-          var array = JSON.parse(location.result)
+          var array = JSON.parse(location)
           console.log(array)
 
 
