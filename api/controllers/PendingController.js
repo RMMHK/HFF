@@ -36,10 +36,8 @@ module.exports = {
         for(i=0;i<2;i++)
         {
           console.log(location)
-          var array = location.result
+          var array = JSON.parse(location.result)
           console.log(array)
-          var jsonArray = JSON.stringify(array)
-          console.log(jsonArray.length)
 
 
         }
