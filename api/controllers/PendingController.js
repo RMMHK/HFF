@@ -31,16 +31,25 @@ module.exports = {
     var geo_coder= require("geocoder");
     var raw_location =[]
     var results =[]
+    var street;
+    var sector;
     geo_coder.reverseGeocode(33.7120818,73.070842,function (err,location) {
+
       if(location) {
 
         results=location.results;
 
 
-        for(i=0;i<1;i++)
+        for(i=0;i<2;i++)
         {
           var obj = results[i];
-          res.json(obj.formatted_address.toString())
+           if(i=0)
+           {
+             street = obj.formatted_address.toString();
+             console.log(street);
+           }
+
+           res.json({obj})
         }
         /*  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit}).then(function (tempOrder,err)
          {
