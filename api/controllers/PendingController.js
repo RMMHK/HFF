@@ -42,8 +42,15 @@ module.exports = {
          res.json({data})
 
       }
+
+      else if(data==""||data==undefined||data==null)
+      {
+        res.json({status:0})
+      }
         else if (err)
-      {}
+      {
+        res.json({status:-1})
+      }
     })
 
 /*
