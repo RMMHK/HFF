@@ -113,7 +113,8 @@ module.exports = {
 
 
 function get_customer_location (lat,long) {
-
+ console.log(lat)
+  console.log(long)
   var geo_coder= require("geocoder");
   geo_coder.reverseGeocode(lat,long,function (err,location) {
 
