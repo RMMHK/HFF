@@ -39,8 +39,7 @@ module.exports = {
 
         results=location.results;
 
-
-        for(i=0;i<2;i++)
+        for(i=0;i<1;i++)
         {
           var obj = results[i];
            if(i=0)
