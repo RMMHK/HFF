@@ -50,9 +50,17 @@ module.exports = {
                   {
                     if(tempOrder)
                     {
-                      //PUSH to provider
 
-                      console.log(tempOrder);
+
+                      User.findOne({id:provider_id}).then(function (provider,err) {
+
+                        console.log(provider)
+                        
+                      })
+
+
+
+
                     }
 
                   })
