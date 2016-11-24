@@ -60,6 +60,9 @@ module.exports = {
 
                             if(initiated)
                               res.json({initiated})
+                            else if(err)
+                              res.json({err})
+
 
                           })
                           //function to provider having arguments of token of provider and id of the temp order
@@ -213,7 +216,44 @@ function get_customer_location (lat,long,callback) {
 
 function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,unit,bill,callback) {
   //notification system to send provider
+  var FCM = require('fcm-node');
+  var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+  var fcm = new FCM(serverKey);
+  var token = provider_token
+
+  var ordered_dish_name;
+  var ordered_dish_type;
+  var ordered_dish_quantity;
+  var ordered_dish_unit;
+  var ordered_dish_bill;
+  var ordered_order_id;
+
+  var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+    to: token,
 
 
+    notification: {
+      title: "Order of " + ordered_dish_name,
+      body: ordered_dish_quantity+" "+ordered_dish_unit
+
+    },
+
+    data: {  //you can send only notification or only data(or include both)
+      collapse_key: " ",
+      temp_order_id: ordered_order_id,
+    }};
+
+
+    fcm.send(message, function(err, response){
+    if (err) {
+
+      console.log(err)
+      console.log("Something has gone wrong!");
+      return callback("",-1)
+    } else if(response)
+    {
+        return callback(1,"")
+    }
+  });
 
 }
