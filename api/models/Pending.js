@@ -24,6 +24,11 @@ module.exports = {
 
     },
 
+    ordered_dish_type:
+    {
+      type:'string',
+      defaultsTo:"no type yet"
+    },
     ordered_dish: {
       type: 'string',
       defaultsTo:"no dish"

@@ -46,7 +46,7 @@ module.exports = {
 
                 if(location)
                 {
-                  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit,customer_location:location}).then(function (tempOrder,o_err)
+                  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish_type:data.type_of_food,ordered_dish:data.name,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:data.selling_unit,customer_location:location}).then(function (tempOrder,o_err)
                   {
                     if(tempOrder)
                     {
@@ -91,7 +91,7 @@ module.exports = {
 
                     else if (o_err)
                     {
-
+                        res.json({order_creation:-1})
                     }
 
                   })
@@ -100,12 +100,14 @@ module.exports = {
 
                 else if (l_error)
                 {
-                  //response here
+                  res.json({location:-1})
                 }
 
               });
             }catch (exception){
               //response here
+              res.json({location:-1})
+
             }
 
 
@@ -115,14 +117,14 @@ module.exports = {
 
          else
          {
-           res.json({online:-1})
+           res.json({item_online:-1})
          }
 
       }
 
       else if(data==""||data==undefined||data==null)
       {
-        res.json({status:0})
+        res.json({item_exists:-1})
       }
         else if (f_err)
       {
