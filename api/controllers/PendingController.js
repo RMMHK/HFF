@@ -22,7 +22,7 @@ module.exports = {
     var provider_id = params.ordered_provider;
     var item_id = params.ordered_item_id;
     var ordered_bill = params.ordered_price;
-    var ordered_quantity= params.ordered_quantity
+    var ordered_quantity= params.quantity
     console.log(params)
     //check status of the shop and item
     //make request to provider and wait
