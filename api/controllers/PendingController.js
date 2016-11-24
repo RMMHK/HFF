@@ -174,7 +174,30 @@ module.exports = {
         hello();
       //   setTimeout(hi,delay)
 */
-         }
+         },
+
+
+      acceptOrder:function (req,res) {
+
+        var params = req.body;
+        var order_id= params.order_id;
+        Pending.update({id:order_id},{provider_response:1}).then(function (accepted,err) {
+        if(accepted[0])
+        {
+          res.json({order:1})
+        }
+        else if(err)
+        {
+          res.json({order:-1})
+        }
+
+        })
+
+
+      }
+
+
+
 };
 
 
