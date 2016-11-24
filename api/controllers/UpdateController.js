@@ -8,7 +8,7 @@
 module.exports = {
 
 
-  send:function (req,res,next) {
+ /* send:function (req,res,next) {
     var FCM = require('fcm-node');
 
     var params= req.body;
@@ -19,7 +19,7 @@ module.exports = {
     var token = params.token;
 
   },
-
+*/
 
   send:function (req,res,next) {
     var dish_names=[]

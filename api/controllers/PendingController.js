@@ -18,13 +18,11 @@ module.exports = {
 
     var cus_lat= params.lat;
     var cus_long= params.long;
-    var ordered_dish= params.ordered_dish;
     var cus_token= params.cus_token;
     var provider_id = params.ordered_provider;
     var item_id = params.ordered_item_id;
     var ordered_bill = params.ordered_price;
     var ordered_quantity= params.ordered_quantity
-    var ordered_unit=params.ordered_unit
     console.log(params)
     //check status of the shop and item
     //make request to provider and wait
@@ -58,7 +56,7 @@ module.exports = {
                         {
 
 
-                          initiate_order_request(provider.token,tempOrder.id, tempOrder.ordered_dish,tempOrder.ordered_quantity,tempOrder.order_unit,tempOrder.ordered_bill, function (initiated,err) {
+                          initiate_order_request(provider.token,tempOrder.id, tempOrder.ordered_dish,tempOrder.ordered_dish_type,tempOrder.ordered_quantity,tempOrder.order_unit,tempOrder.ordered_bill, function (initiated,err) {
 
                             if(initiated)
                               res.json({initiated})
@@ -213,10 +211,9 @@ function get_customer_location (lat,long,callback) {
 
 }
 
-function initiate_order_request(provider_token,temp_order_id,dish,quantity,unit,bill,callback) {
+function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,unit,bill,callback) {
   //notification system to send provider
 
-  var dish= dish;
-  return callback(dish);
+
 
 }
