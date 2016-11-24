@@ -239,7 +239,7 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
     },
 
     data: {  //you can send only notification or only data(or include both)
-      collapse_key: " ",
+      collapse_key: "1",
       temp_order_id: ordered_order_id,
       type:"order"
     }};
