@@ -221,10 +221,10 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
   var fcm = new FCM(serverKey);
   var token = provider_token
 
-  var ordered_dish_name;
+  var ordered_dish_name = dish;
   var ordered_dish_type;
-  var ordered_dish_quantity;
-  var ordered_dish_unit;
+  var ordered_dish_quantity=quantity;
+  var ordered_dish_unit=unit;
   var ordered_dish_bill;
   var ordered_order_id;
 
