@@ -59,7 +59,16 @@ module.exports = {
                           initiate_order_request(provider.token,tempOrder.id, tempOrder.ordered_dish,tempOrder.ordered_dish_type,tempOrder.ordered_quantity,tempOrder.order_unit,tempOrder.ordered_bill, function (initiated,err) {
 
                             if(initiated)
-                              res.json({initiated})
+
+                            {
+
+                              //execute request responder
+                              setTimeout(decider(function (provider_response) {
+
+                              }),8000)
+                            }
+
+
                             else if(err)
                               res.json({err})
 
@@ -282,5 +291,11 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
         return callback(1,"")
     }
   });
+
+}
+
+function decider(callback) {
+
+  console.log("hi im executed now")
 
 }
