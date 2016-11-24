@@ -65,6 +65,7 @@ module.exports = {
                               //execute request responder
                               setTimeout(decider(function (provider_response) {
 
+                                console.log(provider_response)
                               }),8000)
                             }
 
@@ -296,6 +297,6 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
 
 function decider(callback) {
 
-  console.log("hi im executed now")
+  return callback("hi")
 
 }
