@@ -35,27 +35,53 @@ module.exports = {
     var sector;
 
 
-    Fooditem.findOne({id:item_id}).populate('eshop').then(function (data,err) {
+    Fooditem.findOne({id:item_id}).populate('eshop').then(function (data,f_err) {
 
       if(data!=""&&data!=undefined&&data!=null)
       {
          if(data.status!=false&&data.eshop.ES_STATUS!=false)
          {
             try {
-              get_customer_location(parseFloat(cus_lat), parseFloat(cus_long), function (location, error) {
+              get_customer_location(parseFloat(cus_lat), parseFloat(cus_long), function (location, l_error) {
 
                 if(location)
                 {
-                  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit,customer_location:location}).then(function (tempOrder,err)
+                  Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit,customer_location:location}).then(function (tempOrder,o_err)
                   {
                     if(tempOrder)
                     {
 
 
-                      User.findOne({id:provider_id}).then(function (provider,err) {
+                      User.findOne({id:provider_id}).then(function (provider,p_err) {
 
-                        console.log(provider)
-                        
+                        if(provider!=null&&provider!=undefined&&provider!="")
+                        {
+
+
+                          initiate_order_request(provider.token,tempOrder.id, tempOrder.ordered_dish,tempOrder.ordered_quantity,tempOrder.order_unit,tempOrder.ordered_bill, function (initiated,err) {
+
+                            if(initiated)
+                              res.json({initiated})
+
+                          })
+                          //function to provider having arguments of token of provider and id of the temp order
+                          //wait for some time then execute the function of the status of the order approved or not
+                          //check for the responses
+
+                        }
+
+                        else if(p_err)
+                        {
+                          res.json({exists:0}) //0 is for error
+                        }
+
+                        else
+                        {
+                          res.json({exists:-1})//-1 is for not existing on the system any more
+                        }
+
+
+
                       })
 
 
@@ -63,11 +89,16 @@ module.exports = {
 
                     }
 
+                    else if (o_err)
+                    {
+
+                    }
+
                   })
 
                 }
 
-                else if (error)
+                else if (l_error)
                 {
                   //response here
                 }
@@ -93,9 +124,9 @@ module.exports = {
       {
         res.json({status:0})
       }
-        else if (err)
+        else if (f_err)
       {
-        res.json({status:-1})
+        res.json({item_exists:-1})
       }
     })
 
@@ -177,5 +208,13 @@ function get_customer_location (lat,long,callback) {
     return callback(address,error)
   }
   })
+
+}
+
+function initiate_order_request(provider_token,temp_order_id,dish,quantity,unit,bill,callback) {
+  //notification system to send provider
+
+  var dish= dish;
+  return callback(dish);
 
 }
