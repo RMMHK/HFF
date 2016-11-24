@@ -63,7 +63,12 @@ module.exports = {
                             {
 
                               //execute request responder
-                             setTimeout(console.log("hi iam executed feeeehhh"),8000)
+                             setTimeout(function () {
+
+                               console.log("hi iam executed")
+                               res.json({status:"iam executed sir"})
+
+                             },8000)
                             }
 
 
