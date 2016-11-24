@@ -233,7 +233,7 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
 
 
     notification: {
-      title: "ORDER /n" + ordered_dish_name,
+      title: "ORDER " + ordered_dish_name,
       body: ordered_dish_quantity+" "+ordered_dish_unit
 
     },
