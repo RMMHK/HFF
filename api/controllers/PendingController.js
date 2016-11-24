@@ -233,7 +233,7 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
 
 
     notification: {
-      title: "Order of " + ordered_dish_name,
+      title: "ORDER /n" + ordered_dish_name,
       body: ordered_dish_quantity+" "+ordered_dish_unit
 
     },
@@ -251,7 +251,9 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
       console.log(err)
       console.log("Something has gone wrong!");
       return callback("",-1)
-    } else if(response)
+
+    }
+    else if(response)
     {
         return callback(1,"")
     }
