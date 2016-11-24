@@ -226,7 +226,7 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
   var ordered_dish_quantity=quantity;
   var ordered_dish_unit=unit;
   var ordered_dish_bill;
-  var ordered_order_id;
+  var ordered_order_id=temp_order_id;
 
   var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
     to: token,
@@ -239,7 +239,7 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
     },
 
     data: {  //you can send only notification or only data(or include both)
-     
+
       temp_order_id: ordered_order_id,
       type:"order"
     }};
