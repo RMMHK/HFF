@@ -181,6 +181,7 @@ module.exports = {
 
         var params = req.body;
         var order_id= params.order_id;
+        console.log(params);
         Pending.update({id:order_id},{provider_response:1}).then(function (accepted,err) {
         if(accepted[0])
         {
