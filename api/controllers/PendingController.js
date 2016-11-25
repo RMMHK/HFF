@@ -289,7 +289,7 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
 
     notification: {
       title: "ORDER " + ordered_dish_name,
-      body: ordered_dish_quantity+" "+ordered_dish_unit
+      body: ordered_dish_quantity+" "+ordered_dish_unit +"\n"+"tap to accept"
 
     },
 
