@@ -75,7 +75,7 @@ module.exports = {
                                   res.json({status:"Provider not responding"})
                               })
 
-                             },8000)
+                             },10000)
                             }
 
 
