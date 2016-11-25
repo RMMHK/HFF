@@ -69,13 +69,14 @@ module.exports = {
 
                                 if(order[0].provider_response==1)
                                 {
-                                  res.json({status:"Order accepted"})
+                                  res.json({status:"+1"})
                                 }
                                 else
-                                  res.json({status:"Provider not responding"})
+                                  res.json({status:"-1"})
                               })
 
                              },10000)
+
                             }
 
 
@@ -241,7 +242,7 @@ function get_customer_location (lat,long,callback) {
   geo_coder.reverseGeocode(lat,long,function (err,location) {
 
     if(location) {
-    console.log(location)
+ 
       results = location.results;
 
       for (i = 0; i < 2; i++) {
