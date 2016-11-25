@@ -67,7 +67,7 @@ module.exports = {
 
                               Pending.update({id:tempOrder.id},{lock:false}).then(function (order,err) {
 
-                                if(order.provider_response==1)
+                                if(order[0].provider_response==1)
                                 {
                                   res.json({status:"Order accepted"})
                                 }
