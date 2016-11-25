@@ -43,7 +43,8 @@ module.exports = {
       data: {  //you can send only notification or only data(or include both)
         collapse_key: "1",
         dish_names: "",
-        dish_types: ""
+        dish_types: "",
+        type:"update"
       }
     };
 
