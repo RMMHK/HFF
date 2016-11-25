@@ -75,7 +75,7 @@ module.exports = {
                                   res.json({status:"-1"})
                               })
 
-                             },10000)
+                             },15000)
 
                             }
 
@@ -242,7 +242,7 @@ function get_customer_location (lat,long,callback) {
   geo_coder.reverseGeocode(lat,long,function (err,location) {
 
     if(location) {
- 
+
       results = location.results;
 
       for (i = 0; i < 2; i++) {
