@@ -69,6 +69,10 @@ module.exports = {
       defaultsTo: 'not status yet'
     },
 
+    lock:{
+      type:'Boolean',
+      defaultsTo:true
+    }
   }
 
 };

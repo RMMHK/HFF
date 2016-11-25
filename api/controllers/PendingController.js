@@ -65,8 +65,15 @@ module.exports = {
                               //execute request responder
                              setTimeout(function () {
 
-                               console.log("hi iam executedddddddddddddddddddddddddd")
-                               res.json({status:"iam executed sir"})
+                              Pending.update({id:tempOrder.id},{lock:false}).then(function (order,err) {
+
+                                if(order.provider_response==1)
+                                {
+                                  res.json({status:"Order accepted"})
+                                }
+                                else
+                                  res.json({status:"Provider not responding"})
+                              })
 
                              },8000)
                             }
@@ -194,23 +201,35 @@ module.exports = {
         var params = req.body;
         var order_id= params.order_id;
         console.log(params);
-        Pending.update({id:order_id},{provider_response:1}).then(function (accepted,err) {
-        if(accepted[0])
-        {
-          res.json({order:1})
-        }
-        else if(err)
-        {
-          res.json({order:-1})
-        }
 
+        Pending.findOne({id:order_id}).then(function (order,err) {
+          if(order.lock==true)
+          {
+
+            Pending.update({id:order_id},{provider_response:1}).then(function (accepted,err) {
+              if(accepted[0])
+              {
+                res.json({order:1})
+              }
+              else if(err)
+              {
+                res.json({order:-1})
+              }
+
+            })
+          }
+
+          else if (order.lock==false)
+           {
+            res.json({order:0})
+          }
+
+          else if(err)
+          {
+            res.json({order:-1})
+          }
         })
-
-
       }
-
-
-
 };
 
 
@@ -297,6 +316,3 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
 
 }
 
-function decider() {
-  console.log("HI IAM EXECUTED ")
-}
