@@ -29,6 +29,7 @@ module.exports = {
     provider_location:
     {
       type:'string',
+      defaultsTo:"null"
     },
 
     ordered_dish_type:
