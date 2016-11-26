@@ -53,6 +53,11 @@ module.exports = {
       defaultsTo:true
     },
 
+    in_order:
+    {
+      type:'Boolean',
+      defaultsTo:false
+    },
 
     location:
     {
