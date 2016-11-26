@@ -60,6 +60,11 @@ module.exports = {
       defaultsTo:'no location right now'
     },
 
+    applied:
+    {
+     type:'Boolean',
+      defaultsTo:false
+    },
 
     assigned_order:
     {
