@@ -44,7 +44,7 @@ module.exports = {
 
                 if(location)
                 {
-                  Pending.create({customer_token:cus_token,provider_id:provider_id,provider_location:data.eshop.ES_LOCATION,ordered_dish_type:data.type_of_food,ordered_dish:data.name,ordered_quantity:params.quantity,ordered_bill:params.price,order_unit:data.selling_unit,customer_location:location}).then(function (tempOrder,o_err)
+                  Pending.create({customer_token:cus_token,provider_id:provider_id,provider_location:data.eshop.ES_LOCATION,ordered_dish_type:data.type_of_food,ordered_dish:data.name,ordered_quantity:params.quantity,ordered_bill:params.ordered_price,ordered_unit:data.selling_unit,customer_location:location}).then(function (tempOrder,o_err)
                   {
                     if(tempOrder)
                     {
