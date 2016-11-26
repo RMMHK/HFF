@@ -66,6 +66,12 @@ module.exports = {
       defaultsTo:false
     },
 
+    account_secret:
+    {
+      type:'string',
+      defaultsTo:'homefoodiesdgac'
+    },
+
     assigned_order:
     {
       type:'string', //id of the pending order who's job has beeen accepted by this guy
