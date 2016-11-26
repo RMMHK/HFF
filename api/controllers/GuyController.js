@@ -153,7 +153,7 @@ module.exports = {
       var params = req.body;
       console.log(params.v_id);
       console.log(params.token);
-
+       console.log(data)
       if (err) {
         res.json({exists: false});
       }
