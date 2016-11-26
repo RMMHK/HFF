@@ -38,41 +38,18 @@ module.exports = {
 
         else if (mail==""||!mail)
         {Guy.create({v_id: params.v_id, name: params.name, email: params.email,cell: params.cell, cnic: null, f_status: false,location: null,token:params.token}).populate('completed_orders').then(function (user, err) {
-          if (user)
+          if (user!=null&&user!=undefined&&user!="")
           {
-            Apptokens.findOne({application_token:params.token}).then(function (data,err) {
 
-              if(!data||data==""||data.undefined)
-              {
-                Apptokens.create({application_token:params.token}).then(function (data,err) {
-                  if (data)
-                  {
-                    res.json({status:true,user:user,orders:user.completed_orders});//response
-                  }
+            res.json({status:true,user:user,orders:user.completed_orders});//response
+          }
 
-                  else if (err)
-                    (res.json({status:false}));
-
-
-                })
-              }
-
-              else if(data)
-              {
-                res.json({status:true,user:user})
-              }
-              else if (err)
-              {(res.json({status:false}));}
-
-            })
-
-
-
-
-
+          else if(user==null||user==undefined||user==" ")
+          {
+            (res.json({status:false}))
           }
           else if(err) {
-            (res.json({status:false}));
+            (res.json({status:false}))
           }
         })
         }
