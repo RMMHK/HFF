@@ -26,9 +26,10 @@ module.exports = {
       required: true,
       unique: true
     },
-    cnic://ID card
+    cnic:
     {
-      type: 'integer'
+      type: 'integer',
+       defaultsTo:'null'
     },
 
     v_id: {
@@ -36,6 +37,11 @@ module.exports = {
       unique: true
     },
 
+    f_status:
+    {
+      type:'Boolean',
+      defaultsTo:false
+    },
     token: {
       type: 'string',
       defaultsTo: 'N/A'

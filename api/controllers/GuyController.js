@@ -37,7 +37,7 @@ module.exports = {
         if (mail!="") {res.json({status: "duplicate"})}
 
         else if (mail==""||!mail)
-        {Guy.create({v_id: params.v_id, name: params.name, email: params.email,account_secret:params.account_secret, cell: params.cell, cnic: null, f_status: false, f_warnings: 0, current_location: null,token:params.token}).then(function (user, err) {
+        {Guy.create({v_id: params.v_id, name: params.name, email: params.email,cell: params.cell, cnic: null, f_status: false,location: null,token:params.token}).then(function (user, err) {
           if (user)
           {
             Apptokens.findOne({application_token:params.token}).then(function (data,err) {
@@ -147,24 +147,21 @@ module.exports = {
 
     var params = req.body;
 
-    Guy.findOne({v_id:params.v_id}).populate('EShop').then(function(data,err) {
+    Guy.findOne({v_id:params.v_id}).populate('completed_orders').then(function(data,err) {
 
-      console.log(req.url);
-      console.log(req.headers);
+
       var params = req.body;
       console.log(params.v_id);
       console.log(params.token);
 
       if (err) {
         res.json({exists: false});
-        // console.log("err"+o);
       }
       else if (data == "" || !data) {
         res.json({exists: false});
       }
 
       else if (data) {
-        //response
 
         Guy.update({v_id: params.v_id}, {token: params.token}).then(function (user, err) {
 
@@ -237,16 +234,6 @@ module.exports = {
     )},
 
 
-  edit:function (req,res,next){
-
-    Guy.update({id:req.param('id')},{name:'Bhaluooo'}).then(function afterwards(err, updated){
-
-      if (err) {
-        return err;
-      }
-      res.json(updated);
-    });
-  },
 
   verify_phone:function (req,res,next){
 
