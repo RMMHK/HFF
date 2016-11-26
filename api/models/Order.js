@@ -9,6 +9,11 @@ module.exports = {
 
   attributes: {
 
+
+
+    guy:{
+      model:'Guy'
+    }
   }
 };
 

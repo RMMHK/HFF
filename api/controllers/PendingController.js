@@ -71,6 +71,12 @@ module.exports = {
                                 {
                                   res.json({status:"+1"})
 
+                                  //delivery guy selection system starts here,
+
+                                  //seletion
+                                  //notifying three parties having scheduler place in back end
+                                  //and stuf
+
                                 }
                                 else
                                   res.json({status:"-1"})
