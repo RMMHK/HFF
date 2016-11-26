@@ -47,7 +47,7 @@ module.exports = {
                 Apptokens.create({application_token:params.token}).then(function (data,err) {
                   if (data)
                   {
-                    res.json({status:true,user:user});//response
+                    res.json({status:true,user:user,orders:user.id.populate('completed_orders')});//response
                   }
 
                   else if (err)
@@ -165,32 +165,11 @@ module.exports = {
 
         Guy.update({v_id: params.v_id}, {token: params.token}).then(function (user, err) {
 
-          if (user[0]) {
-
-            Apptokens.findOne({application_token: params.token}).then(function (data, err) {
-
-              if (!data || data == "" || data.undefined) {
-                Apptokens.create({application_token: params.token}).then(function (data, err) {
-                  if (data) {
-                    res.json({exists: true, user: user[0]})//response
-                  }
-
-                  else if (err) {
-                    res.json({exists: false})
-                  }
-                })
-              }
-
-              else if (data) {
-                res.json({exists: true, user: user[0]})
-              }
-
-              else if (err) {
-                res.json({exists: false})
-              }
-            })
+          if (user[0]!=null&&user[0]!=undefined&&user[0]!="")
+          {
+            res.json({exists:true,user:user[0],orders:user[0].completed_orders})
           }
-          if (err) {
+         else if (err) {
             res.json({exists: false})
           }
         })
