@@ -9,6 +9,8 @@ module.exports = {
 
   attributes: {
 
+
+
     customer_token: {
       type: 'string'
     },
@@ -22,6 +24,12 @@ module.exports = {
       type: 'string',
       defaultsTo:"null"
 
+    },
+
+    provider_location:
+    {
+      type:'string',
+      defaultsTO:'null'
     },
 
     ordered_dish_type:
@@ -64,7 +72,8 @@ module.exports = {
     },
 
 
-    guy_status: {
+    guy_marked_status:
+    {
       type: 'string',
       defaultsTo: 'not status yet'
     },
