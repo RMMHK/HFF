@@ -37,7 +37,7 @@ module.exports = {
         if (mail!="") {res.json({status: "duplicate"})}
 
         else if (mail==""||!mail)
-        {Guy.create({v_id: params.v_id, name: params.name, email: params.email,cell: params.cell, cnic: null, f_status: false,location: null,token:params.token}).then(function (user, err) {
+        {Guy.create({v_id: params.v_id, name: params.name, email: params.email,cell: params.cell, cnic: null, f_status: false,location: null,token:params.token}).populate('completed_orders').then(function (user, err) {
           if (user)
           {
             Apptokens.findOne({application_token:params.token}).then(function (data,err) {
@@ -47,7 +47,7 @@ module.exports = {
                 Apptokens.create({application_token:params.token}).then(function (data,err) {
                   if (data)
                   {
-                    res.json({status:true,user:user,orders:user.id.populate('completed_orders')});//response
+                    res.json({status:true,user:user,orders:user.completed_orders});//response
                   }
 
                   else if (err)
