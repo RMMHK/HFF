@@ -104,7 +104,6 @@ module.exports = {
 
                                                 Pending.update({id:tempOrder.id},{apply_to:false}).then(function (timeOut,err) {
 
-                                                  console.log(timeOut)
                                                   if(timeOut)
                                                   {
 
@@ -113,7 +112,7 @@ module.exports = {
                                                       if(results)
                                                       {
                                                         console.log("success")
-                                                        console.log(results.applicants);
+                                                        console.log(results.applicants[0]);
                                                       }
                                                       else
 
