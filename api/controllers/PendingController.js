@@ -95,6 +95,33 @@ module.exports = {
 
                                                 initiate_job_request(tempOrder.id, guys[i].token, tempOrder.provider_location, tempOrder.customer_location, function (initiate, err) {
 
+                                              setTimeout(function () {
+
+                                                Pending.update({id:tempOrder.id},{apply_to:false}).then(function (timeOut,err) {
+                                                  if(timeOut[0])
+                                                  {
+
+                                                   Pending.findOne({id:tempOrder}).populate('applicants').then(function (applicants,err) {
+
+                                                  if(applicants)
+                                                  {
+                                                    console.log(applicants.applicants);
+                                                  }
+                                                     
+                                                   })
+                                                  }
+                                                    else if(err)
+                                                  {
+
+
+                                                  }
+                                                })
+
+
+                                              },15000)
+
+
+
                                                 })
                                                 //send job notification to guys
 
@@ -291,7 +318,7 @@ module.exports = {
         })
       }
 
-      else if (order.lock == false) {
+      else if (order.apply_to == false) {
         res.json({order: 0})
       }
 
