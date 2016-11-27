@@ -95,37 +95,35 @@ module.exports = {
 
                                                 initiate_job_request(tempOrder.id, guys[i].token, tempOrder.provider_location, tempOrder.customer_location, function (initiate, err) {
 
+                                                })
+                                                //send job notification to guys
+
+                                              }
+
                                               setTimeout(function () {
 
                                                 Pending.update({id:tempOrder.id},{apply_to:false}).then(function (timeOut,err) {
                                                   if(timeOut[0])
                                                   {
 
-                                                   Pending.findOne({id:tempOrder}).populate('applicants').then(function (applicants,err) {
+                                                    Pending.findOne({id:tempOrder}).populate('applicants').then(function (applicants,err) {
 
-                                                  if(applicants)
-                                                  {
-                                                    console.log(applicants.applicants);
-                                                  }
-                                                     
-                                                   })
-                                                  }
-                                                    else if(err)
-                                                  {
+                                                      if(applicants)
+                                                      {
+                                                        console.log(applicants.applicants);
+                                                      }
+                                                      else
+                                                      {console.log(err)}
 
+                                                    })
+                                                  }
+                                                  else if(err)
+                                                  {
+                                                   console.log(err)
 
                                                   }
                                                 })
-
-
                                               },15000)
-
-
-
-                                                })
-                                                //send job notification to guys
-
-                                              }
 
 
                                             }
