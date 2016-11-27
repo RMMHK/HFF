@@ -88,12 +88,12 @@ module.exports = {
                                         {
 
 
-                                          Guy.find({}).then(function (guys,err) {
+                                          Guy.find({},{available:true,applied:false,in_order:false}).then(function (guys,err) {
 
                                             if(guys)
                                             {
                                               console.log(guys)
-                                              
+
 
                                             }
 

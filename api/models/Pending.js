@@ -118,6 +118,12 @@ module.exports = {
       defaultsTo:true
     },
 
+    scheduler_allowed:
+    {
+      type:'Boolean',
+      defaultsTo:false
+    },
+
     applicants:
     {
       collection:'jobcandidates',
