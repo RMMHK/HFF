@@ -118,7 +118,7 @@ module.exports = {
       defaultsTo:true
     },
 
-    candidates:
+    applicants:
     {
       collection:'Jobcandidates',
       via:'candidates'
