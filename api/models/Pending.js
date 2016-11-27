@@ -11,13 +11,24 @@ module.exports = {
 
 
 
-    customer_token: {
+    customer_id: {
       type: 'string'
     },
 
     provider_id: {
       type: 'string'
+    },
 
+    customer_cell:
+    {
+      type:'string',
+      defaultsTo:"null"
+    },
+
+    provider_cell:
+    {
+      type:'string',
+      defaultsTo:"null"
     },
 
     customer_location: {
@@ -78,6 +89,29 @@ module.exports = {
       defaultsTo: 'not status yet'
     },
 
+    guy_depart_status:
+    {
+      type:'string',
+      defaultsTO:'at station'
+    },
+
+    acked_by_customer:
+    {
+      type:'Boolean',
+      defaultsTo:false
+    },
+
+    acked_by_provider:
+    {
+      type:'Boolean',
+      defaultsTo:false
+    },
+
+    acked_by_guy:
+    {
+      type:'Boolean',
+      defaultsTo:false
+    },
 
     lock:{
       type:'Boolean',

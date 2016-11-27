@@ -23,6 +23,7 @@ module.exports = {
     var item_id = params.ordered_item_id;
     var ordered_bill = params.ordered_price;
     var ordered_quantity= params.quantity
+    var customer_id= params.cus_id
     console.log(params)
     //check status of the shop and item
     //make request to provider and wait
@@ -44,7 +45,7 @@ module.exports = {
 
                 if(location)
                 {
-                  Pending.create({customer_token:cus_token,provider_id:provider_id,provider_location:data.eshop.ES_LOCATION,ordered_dish_type:data.type_of_food,ordered_dish:data.name,ordered_quantity:params.quantity,ordered_bill:params.ordered_price,ordered_unit:data.selling_unit,customer_location:location}).then(function (tempOrder,o_err)
+                  Pending.create({customer_id:customer_id,provider_id:provider_id,provider_location:data.eshop.ES_LOCATION,ordered_dish_type:data.type_of_food,ordered_dish:data.name,ordered_quantity:params.quantity,ordered_bill:params.ordered_price,ordered_unit:data.selling_unit,customer_location:location}).then(function (tempOrder,o_err)
                   {
                     if(tempOrder)
                     {
@@ -54,6 +55,10 @@ module.exports = {
 
                         if(provider!=null&&provider!=undefined&&provider!="")
                         {
+
+
+                          Pending.update({})
+
 
 
                           initiate_order_request(provider.token,tempOrder.id, tempOrder.ordered_dish,tempOrder.ordered_dish_type,tempOrder.ordered_quantity,tempOrder.order_unit,tempOrder.ordered_bill, function (initiated,err) {
@@ -82,7 +87,7 @@ module.exports = {
                                   res.json({status:"-1"})
                               })
 
-                             },15000)
+                             },20000)
 
                             }
 
