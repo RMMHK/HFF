@@ -103,7 +103,9 @@ module.exports = {
                                               setTimeout(function () {
 
                                                 Pending.update({id:tempOrder.id},{apply_to:false}).then(function (timeOut,err) {
-                                                  if(timeOut[0].apply_to==false)
+
+                                                  console.log(timeOut)
+                                                  if(timeOut)
                                                   {
 
                                                     Pending.findOne({id:tempOrder}).populate('applicants').then(function (results,err)
