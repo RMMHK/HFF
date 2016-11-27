@@ -116,6 +116,17 @@ module.exports = {
     lock:{
       type:'Boolean',
       defaultsTo:true
+    },
+
+    candidates:
+    {
+      collection:'Jobcandidates',
+      via:'candidates'
+    },
+
+    assigned_guy:
+    {
+      model:'Assignedguy'
     }
   }
 
