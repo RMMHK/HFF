@@ -57,7 +57,7 @@ module.exports = {
                         {
 
 
-                          Pending.update({})
+
 
 
 
@@ -76,12 +76,36 @@ module.exports = {
                                 {
                                   res.json({status:"+1"})
 
+
+
+                                  Customer.findOne({id:tempOrder.customer_id}).then(function (cus,err) {
+
+                                    if(cus)
+                                    {
+                                      Pending.update({id:tempOrder.id},{customer_cell:cus.cell,provider_cell:provider.cell}).then(function (success,err) {
+
+                                        if(success[0])
+                                        {
+                                          console.log("we are done")
+                                        }
+                                        else if (err)
+                                        {
+                                          console.log("we are not done")
+                                        }
+                                      })
+                                    }
+                                else if (err)
+                                    {
+                                      console.log("no cus find")
+                                    }
+
+                                  })
+
                                   //delivery guy selection system starts here,
 
                                   //seletion
                                   //notifying three parties having scheduler place in back end
                                   //and stuf
-
                                 }
                                 else
                                   res.json({status:"-1"})
