@@ -117,10 +117,10 @@ module.exports = {
                                                         notify_parties(results.applicants[0],tempOrder.id,provider.token,cus.token,function (ok,err) {
 
                                                         })
-                                                        notify_guy(tempOrder,provider,cus,function (ok) {
+                                                      //  notify_guy(tempOrder,provider,cus,function (ok) {
 
-                                                        })
-                                                        release_locks
+                                                       // })
+                                                      //  release_locks
                                                         console.log(results.applicants[0]);
                                                       }
 
