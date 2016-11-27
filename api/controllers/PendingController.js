@@ -129,7 +129,7 @@ module.exports = {
                                                         //turn on the job assignment scheduler lock
                                                         //job asignment scheduler takes the pending order, broadcast details to guys
                                                         //the one which accept
-
+                                                        console.log("no guys")
                                                         //or notify both parties about non availablity of the guy and try some time later...
                                                       }
                                                       else
@@ -242,47 +242,6 @@ module.exports = {
       }
     })
 
-    /*
-     geo_coder.reverseGeocode(33.7120818,73.070842,function (err,location) {
-
-     if(location) {
-
-     results=location.results;
-
-     for(i=0;i<2;i++)
-     {
-     var obj = results[i];
-     if(i==0)
-     {
-     street = obj.formatted_address
-
-     }
-
-     if(i==1) {
-     sector_array = obj.address_components
-     sector= sector_array[0].long_name
-     }
-     }
-     var customer_location = sector+","+street;
-     Pending.create({customer_token:cus_token,provider_id:provider_id,ordered_dish:ordered_dish,ordered_quantity:ordered_quantity,ordered_bill:ordered_bill,order_unit:ordered_unit,customer_location:customer_address}).then(function (tempOrder,err)
-     {
-
-     if(tempOrder)
-     {
-     //PUSH to provider
-
-     console.log(tempOrder);
-     }
-
-     })
-     }
-     else
-     console.log(err)
-     })
-
-     hello();
-     //   setTimeout(hi,delay)
-     */
   },
 
 
