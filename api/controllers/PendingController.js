@@ -106,11 +106,11 @@ module.exports = {
                                                   if(timeOut[0])
                                                   {
 
-                                                    Pending.findOne({id:tempOrder}).populate('applicants').then(function (results,err) {
-
+                                                    Pending.findOne({id:tempOrder}).populate('applicants').then(function (results,err)
+                                                    {
                                                       if(results)
                                                       {
-                                                        console.log(results)
+                                                        console.log("success")
                                                         console.log(results.applicants);
                                                       }
                                                       else
