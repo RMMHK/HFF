@@ -84,7 +84,7 @@ module.exports = {
                                         if (success[0]) {
 
 
-                                          Guy.find({}, {
+                                           Guy.find({}, {
                                             available: true,
                                             applied: false,
                                             in_order: false
@@ -109,10 +109,28 @@ module.exports = {
 
                                                     Pending.findOne({id:tempOrder.id}).populate('applicants').then(function (results,err)
                                                     {
-                                                      if(results)
+                                                      if(results.applicants.length!=0)
                                                       {
-                                                        console.log("success")
+                                                       //notify the first andidate that he is selected for the job
+                                                        //update the order lock // turn the applied lock false
+                                                        //release applied lock of all other applications
+                                                        notify_parties(results.applicants[0],function (ok,err) {
+
+                                                        })
+                                                        notify_guy(tempOrder,function (ok) {
+
+                                                        })
+                                                        release_locks
                                                         console.log(results.applicants[0]);
+                                                      }
+
+                                                      else if(results.applicants.length==0)
+                                                      {
+                                                        //turn on the job assignment scheduler lock
+                                                        //job asignment scheduler takes the pending order, broadcast details to guys
+                                                        //the one which accept
+
+                                                        //or notify both parties about non availablity of the guy and try some time later...
                                                       }
                                                       else
 
@@ -304,32 +322,58 @@ module.exports = {
   apply: function (req,res) {
 
     var params = req.body;
+    var id = params.id;
     var order_id = params.order_id;
     var guy_token= params.guy_token;
     console.log(params)
-    Pending.findOne({id: order_id}).then(function (order, err) {
-      if (order.apply_to == true) {
 
-        Jobcandidates.create({guy_token: guy_token,pending_order_id:order_id,candidates:order_id}).then(function (done, err) {
-          if (done) {
-            res.json({order: 1})
+    Guy.update({id:id},{applied:true}).then(function (applied,err) {
+      if(applied) {
+        Pending.findOne({id: order_id}).then(function (order, err) {
+          if (order.apply_to == true) {
+
+            Jobcandidates.create({
+              guy_id:id,
+              guy_token: guy_token,
+              pending_order_id: order_id,
+              candidates: order_id
+            }).then(function (done, err) {
+              if (done) {
+                res.json({order: 1})
+              }
+              else if (err) {
+                res.json({order: -1})
+              }
+
+            })
           }
+
+          else if (order.apply_to == false) {
+            res.json({order: 0})
+          }
+
           else if (err) {
             res.json({order: -1})
           }
-
         })
+
       }
 
-      else if (order.apply_to == false) {
-        res.json({order: 0})
-      }
-
-      else if (err) {
+      else  if (err)
+      {
         res.json({order: -1})
       }
-    })
 
+
+
+
+
+
+
+
+
+
+    })
 
 
 
@@ -450,4 +494,10 @@ function initiate_job_request(order_id,guyToken,providerLocation,customerLocatio
 
 
   fcm.send(message, function(err, response){})
+}
+
+function  notify_parties(guy,callback) {
+
+  //get the details of the guy , and send it to  parties , release the lock for the notification sceduler
+
 }
