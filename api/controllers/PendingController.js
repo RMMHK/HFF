@@ -61,7 +61,7 @@ module.exports = {
 
 
 
-                          initiate_order_request(provider.token,tempOrder.id, tempOrder.ordered_dish,tempOrder.ordered_dish_type,tempOrder.ordered_quantity,tempOrder.order_unit,tempOrder.ordered_bill, function (initiated,err) {
+                          initiate_order_request(provider.token,tempOrder.id, tempOrder.ordered_dish,tempOrder.ordered_dish_type,tempOrder.ordered_quantity,tempOrder.ordered_unit,tempOrder.ordered_bill, function (initiated,err) {
 
                             if(initiated)
 
