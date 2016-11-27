@@ -11,6 +11,12 @@ module.exports = {
     type:'string',
     defaultsTo:'null'
   },
+
+  pending_order_id:
+  {
+    type:'string',
+    defaultsTo:'null'
+  },
   candidates:{
     model:'Pending'
   }
