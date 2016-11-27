@@ -452,7 +452,12 @@ function initiate_job_request(order_id,guyToken,providerLocation,customerLocatio
     }};
 
 
-  fcm.send(message, function(err, response){})
+  fcm.send(message, function(err, response){
+    if(response)
+    {console.log(response)}
+    else if(err)
+    {console.log(err)}
+  })
 }
 
 function  notify_parties(guy,order_id,provider,customer,callback) {
