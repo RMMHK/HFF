@@ -118,7 +118,7 @@ module.exports = {
       defaultsTo:true
     },
 
-    scheduler_allowed:
+   ack_scheduler_allowed:
     {
       type:'Boolean',
       defaultsTo:false
@@ -138,8 +138,21 @@ module.exports = {
     assigned_guy:
     {
       model:'Assignedguy'
+    },
+    provider:
+    {
+      model:'user'
+    },
+    customer:
+    {
+      model:'customer'
     }
+
   }
+
+
+
+
 
 };
 

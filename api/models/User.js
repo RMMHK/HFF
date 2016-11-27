@@ -65,6 +65,12 @@ module.exports = {
       defaultsTo:'null'
     },
 
+    fp_orders:
+    {
+      collection:'Pending',
+      via:'provider'
+    },
+
 
   /*  account_secret:
     {

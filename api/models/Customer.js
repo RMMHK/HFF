@@ -59,6 +59,13 @@ module.exports = {
         defaultsTo:'N/A'
       },
 
+    cus_orders:
+    {
+      collection:'Pending',
+      via:'customer'
+    }
+
+
   }
 };
 

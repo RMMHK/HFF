@@ -114,10 +114,10 @@ module.exports = {
                                                        //notify the first andidate that he is selected for the job
                                                         //update the order lock // turn the applied lock false
                                                         //release applied lock of all other applications
-                                                        notify_parties(results.applicants[0],function (ok,err) {
+                                                        notify_parties(results.applicants[0],tempOrder.id,provider.token,cus.token,function (ok,err) {
 
                                                         })
-                                                        notify_guy(tempOrder,function (ok) {
+                                                        notify_guy(tempOrder,provider,cus,function (ok) {
 
                                                         })
                                                         release_locks
@@ -496,8 +496,61 @@ function initiate_job_request(order_id,guyToken,providerLocation,customerLocatio
   fcm.send(message, function(err, response){})
 }
 
-function  notify_parties(guy,callback) {
+function  notify_parties(guy,order_id,provider,customer,callback) {
 
+
+  var provider_token = provider.token
+  var customer_token= customer.token
+  guy.findOne({id:guy.guy_id,}).then(function (guy,err) {
+    if(guy) {
+      Pending.update({id: order_id}, {guy_name: guy.name, guy_cell: guy.cell}).then(function (data, err) {
+        if(data)
+        { User.update({id:provider.id},{fp_orders:order_id}).then(function (prov,err) {})//updating provider field
+          Customer.update({id:customer.id},{cus_orders:order_id}).then(function () {})//updating customer order field
+
+          var guy_name = guy.name
+          var guy_cell = guy.cell
+          var token;
+          var FCM = require('fcm-node');
+          var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+          var fcm = new FCM(serverKey);
+          var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+            to: token,
+            notification: {
+              title: "Delivery Guy Details ",
+              body: guy_name + " "+"\n"+guy_cell+"\n"+"tap to acknowledge"},
+            data: {
+              type: "details"
+            }
+          };
+          for (i = 0; i < 2; i++) {
+
+            if(i==0)
+            {
+              message.to=provider_token
+            }
+            else if(i==1)
+            {
+              message.to=customer_token
+            }
+            fcm.send(message, function(err, response){});
+
+          }
+          Pending.update({id:order_id},{ack_scheduler_allowed:true}).then(function (req,res) {
+            //code for ack scheduler remaining
+          })
+
+        }
+
+      })
+
+
+
+    }
+
+
+
+  })
   //get the details of the guy , and send it to  parties , release the lock for the notification sceduler
 
 }
