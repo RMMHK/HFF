@@ -114,7 +114,9 @@ module.exports = {
                                                         console.log(results.applicants);
                                                       }
                                                       else
-                                                      {console.log(err)}
+
+                                                      {console.log(err)
+                                                        console.log("faaaill")}
 
                                                     })
                                                   }
