@@ -386,7 +386,7 @@ function initiate_job_request(order_id,guyToken,providerLocation,customerLocatio
 
     notification: {
       title: "JOB ",
-      body: "From" + providerLocation+" "+"\n"+"To"+" "+customerLocation
+      body: "From " + providerLocation+" "+"\n"+"To"+" "+customerLocation
 
     },
 
