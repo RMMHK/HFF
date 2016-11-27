@@ -120,7 +120,7 @@ module.exports = {
 
     applicants:
     {
-      collection:'Jobcandidates',
+      collection:'jobcandidates',
       via:'candidates'
     },
 
