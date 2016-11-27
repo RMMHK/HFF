@@ -27,7 +27,7 @@ module.exports = {
     console.log(params)
     //check status of the shop and item
     //make request to provider and wait
-   
+    console.log(params)
     var sector_array =[]
     var results =[]
     var street;
