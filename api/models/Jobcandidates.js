@@ -8,7 +8,7 @@
 module.exports = {
 
   attributes: {
-    guy_id: {
+    guy_token: {
       type: 'string',
       defaultsTo: 'null'
     },

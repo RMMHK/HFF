@@ -124,6 +124,11 @@ module.exports = {
       defaultsTo:false
     },
 
+    apply_to:
+    {
+      type:'Boolean',
+      defaultsTo:true
+    },
     applicants:
     {
       collection:'jobcandidates',
