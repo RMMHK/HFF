@@ -95,7 +95,7 @@ module.exports = {
                                               for(i=0;i<guys.length;i++)
                                               {
 
-                                                initiate_job_request(tempOrder.id,guys[i].token,provider.location,cus.location,function (initiate,err) {
+                                                initiate_job_request(tempOrder.id,guys[i].token,tempOrder.provider_location,tempOrder.customer_location,function (initiate,err) {
 
                                                 })
                                                 //send job notification to guys
