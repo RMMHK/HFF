@@ -92,7 +92,15 @@ module.exports = {
 
                                             if(guys)
                                             {
-                                              console.log(guys)
+                                              for(i=0;i<guys.length;i++)
+                                              {
+
+                                                initiate_job_request(tempOrder.id,guys[i].token,provider.location,cus.location,function (initiate,err) {
+
+                                                })
+                                                //send job notification to guys
+
+                                              }
 
 
                                             }
@@ -367,3 +375,27 @@ function initiate_order_request(provider_token,temp_order_id,dish,type,quantity,
 
 }
 
+function initiate_job_request(order_id,guyToken,providerLocation,customerLocation,callback) {
+  var FCM = require('fcm-node');
+  var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+  var fcm = new FCM(serverKey);
+
+  var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+    to: guyToken,
+
+
+    notification: {
+      title: "JOB ",
+      body: "From" + providerLocation+" "+"\n"+"To"+" "+customerLocation
+
+    },
+
+    data: {  //you can send only notification or only data(or include both)
+
+      temp_order_id:order_id,
+      type:"job"
+    }};
+
+
+  fcm.send(message, function(err, response){})
+}
