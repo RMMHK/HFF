@@ -86,7 +86,21 @@ module.exports = {
 
                                         if(success[0])
                                         {
-                                          console.log("we are done")
+
+
+                                          Guy.find({}).then(function (guys,err) {
+
+                                            if(guys)
+                                            {
+                                              console.log(guys)
+                                              
+
+                                            }
+
+                                          })
+
+
+
                                         }
                                         else if (err)
                                         {
