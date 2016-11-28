@@ -119,11 +119,11 @@ module.exports = {
 
                                                         })
 
-                                                        notify_guy(tempOrder,provider,cus,results.applicants[0],function (ok) {
+                                                      /*  notify_guy(tempOrder,provider,cus,results.applicants[0],function (ok) {
 
                                                         })
                                                       //  release_locks
-                                                        console.log(results.applicants[0]);
+                                                        console.log(results.applicants[0]);*/
                                                       }
 
                                                       else if(results.applicants.length==0)
@@ -542,7 +542,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
               });
 
             }
-            Pending.update({id: order_id}, {ack_scheduler_allowed: true}).then(function (req, res) {
+            Pending.update({id: order.id}, {ack_scheduler_allowed: true}).then(function (req, res) {
               //code for ack scheduler remaining
             })
 
@@ -601,11 +601,11 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
 
 
- function notify_guy() {
+ /*function notify_guy() {
 
  }
 
 
 
-
+*/
 }
