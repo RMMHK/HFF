@@ -26,9 +26,9 @@ module.exports.bootstrap = function(cb) {
            if(data[i].acked_by_customer==false)
            {
 
-                send_again_to_customer(data[i],function () {
+              //  send_again_to_customer(data[i],function () {
 
-                })
+               // })
 
                   //fucntion to re-initiate to customer
            }
