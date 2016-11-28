@@ -15,13 +15,158 @@ module.exports.bootstrap = function(cb) {
     var schedule = require('node-schedule');
 
     var j = schedule.scheduleJob('*/1 * * * *', function(){
-      console.log('i will run after 1 min');
+
+      Pending.find({},{ack_scheduler_allowed:true}).then(function (data,err) {
+
+        if(data)
+        {
+         for(i=0;i<data.length;i++)
+         {
+
+           if(data[i].acked_by_customer==false)
+           {
+
+                send_again_to_customer(data[i],function () {
+
+                })
+
+                  //fucntion to re-initiate to customer
+           }
+           if(data[i].acked_by_provider==false)
+           {
+             send_again_to_provider(data[i],function () {
+
+             })
+           }
+
+           if(data[i].acked_by_guy==false)
+           {
+             send_again_to_guy(data[i],function () {
+
+             })
+           }
+
+         }
+        }
+
+          else if(err)
+        {}
+      })
+
     });
   });
 
 
 
-  // It's very important to trigger this callback method when you are finished
-  // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
-  cb();
+  function send_again_to_customer(order,callback) {
+
+    var FCM = require('fcm-node');
+    var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+    var fcm = new FCM(serverKey);
+
+    var customer_id = order.customer_id;
+
+    Customer.findOne({id:customer_id}).populate('cus_orders').then(function (customerPAYLOAD,err) {
+
+      if(customerPAYLOAD)
+      {
+        var customer_token = customerPAYLOAD.token
+        var guy_status = order.guy_cell
+        if(guy_status!="-1")//means  DG assigned to this order
+        {
+          var customer_order_list = []
+          customer_order_list = customerPAYLOAD.cus_orders
+          var guy_name = order.guy_name;
+          var guy_cell= order.guy_cell;
+
+          var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+            to: customer_token,
+
+            notification: {
+              title: "Delivery Guy Details ",
+              body: guy_name + " " + "\n" + guy_cell + "\n" + "tap to acknowledge"
+            },
+            data: {
+              order: "",
+              type: "assigned"
+            }
+          };
+
+          message.data.order = customer_order_list
+        }
+        else if (guy_status=="-1")//means no DG assigned to this order
+        {
+          var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+            to: customer_token,
+            notification: {
+              title: "No guy is available to deliver :(",
+              body: order.ordered_dish + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "TRY LATER" + "\n" + "tap to exhaust"
+            },
+            data: {
+              type: "N/A"
+            }
+          };
+        }
+
+        fcm.send(message, function (err, response) {
+
+          if (response) {
+            console.log(response)
+          }
+          else if (err) {
+            console.log("error while sending")
+          }
+        });
+
+        //get customer token
+        //check if delivery guy field is not default , if default then it mean no guy assigned
+        //two types of notifications generations
+      }
+      else if(err)
+      {console.log("error")}
+
+    })
+  }
+
+  function send_again_to_provider(order,callback) {
+
+
+  }
+  function send_again_to_guy(order,callback) {
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   cb();
 };

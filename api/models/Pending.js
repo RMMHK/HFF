@@ -18,8 +18,15 @@ module.exports = {
       type: 'string'
     },
 
+
     provider_id: {
       type: 'string'
+    },
+
+    guy_id:
+    {
+      type:'string'
+
     },
 
     customer_cell:

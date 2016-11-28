@@ -466,7 +466,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
   if (mode == "success") {
     Guy.findOne({id: guy.guy_id,}).then(function (guy, err) {
       if (guy) {
-        Pending.update({id: order.id}, {guy_name: guy.name, guy_cell: guy.cell}).then(function (data, err) {
+        Pending.update({id: order.id}, {guy_id:guy.id,guy_name: guy.name, guy_cell: guy.cell}).then(function (data, err) {
           if (data) {
             User.update({id: provider.id}, {fp_orders: order.id}).then(function (prov, err) {
             })//updating provider field
@@ -498,7 +498,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
                         body: guy_name + " " + "\n" + guy_cell + "\n" + "tap to acknowledge"
                       },
                       data: {
-                        order: order,
+                        order: "",
                         type: "assigned"
                       }
                     };
@@ -550,7 +550,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
   }
   else if (mode == "N/A") {
-    console.log("called in")
+
     var FCM = require('fcm-node');
     var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
     var fcm = new FCM(serverKey);
@@ -586,6 +586,10 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
 
   }
+
+  Pending.update({id: order.id}, {ack_scheduler_allowed: true}).then(function (req, res) {
+    //code for ack scheduler remaining
+  })
 }
 
 
@@ -633,9 +637,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
      }
 
    })
-   Pending.update({id: order.id}, {ack_scheduler_allowed: true}).then(function (req, res) {
-     //code for ack scheduler remaining
-   })
+
 }
 
 function release_apply_lock(applicants,callback) {
