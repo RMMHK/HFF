@@ -474,9 +474,9 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
       if (guy) {
         Pending.update({id: order.id}, {guy_name: guy.name, guy_cell: guy.cell}).then(function (data, err) {
           if (data) {
-            User.update({id: provider.id}, {fp_orders: order_id}).then(function (prov, err) {
+            User.update({id: provider.id}, {fp_orders: order.id}).then(function (prov, err) {
             })//updating provider field
-            Customer.update({id: customer.id}, {cus_orders: order_id}).then(function () {
+            Customer.update({id: customer.id}, {cus_orders: order.id}).then(function () {
             })//updating customer order field
 
             User.findOne({id:provider.id}).populate('fp_orders').then(function (providerPAYLOAD,err) {
