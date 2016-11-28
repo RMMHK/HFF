@@ -118,12 +118,13 @@ module.exports = {
                                                         notify_parties(results.applicants[0],tempOrder,provider,cus,"success",function (ok,err) {
 
                                                         })
-                                                      //  notify_guy(tempOrder,provider,cus,function (ok) {
 
-                                                       // })
+                                                        notify_guy(tempOrder,provider,cus,results.applicants[0],function (ok) {
+
+                                                        })
                                                       //  release_locks
                                                         console.log(results.applicants[0]);
-                                                      }
+                                                      }hbg
 
                                                       else if(results.applicants.length==0)
                                                       {
@@ -478,6 +479,33 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
             Customer.update({id: customer.id}, {cus_orders: order_id}).then(function () {
             })//updating customer order field
 
+            User.findOne({id:provider.id}).populate('fp_orders').then(function (providerPAYLOAD,err) {
+
+              if(providerPAYLOAD)
+              {
+                console.log(providerPAYLOAD.fp_orders)
+                Customer.findOne({id:customer.id}).populate('cus_orders').then(function (cusPAYLOAD,err) {
+
+                  if(cusPAYLOAD)
+                  {
+                    console.log(cusPAYLOAD.cus_orders)
+                  }
+                  else if(err)
+                  {
+                    console.log("Customer payload not exeuted")
+                  }
+
+                })
+
+              }
+
+              else if (err)
+              {
+                console.log("not executed")
+              }
+
+            })
+
             var guy_name = guy.name
             var guy_cell = guy.cell
             var token;
@@ -540,7 +568,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
       to: "",
       notification: {
         title: "No guy is available to deliver :(",
-        body: order.ordered_dish+"\n"+order.ordered_quantity+" "+order.ordered_unit+"\n"+"try later"+"\n"+"tap to exhaust"
+        body: order.ordered_dish+"\n"+order.ordered_quantity+" "+order.ordered_unit+"\n"+"TRY LATER"+"\n"+"tap to exhaust"
       },
       data: {
         type: "N/A"
@@ -571,6 +599,11 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
   }
 
+
+
+ function notify_guy() {
+
+ }
 
 
 
