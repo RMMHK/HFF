@@ -539,11 +539,11 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
     var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
       to: "",
       notification: {
-        title: "No guy is available to deliver order",
-        body: order.ordered_dish+"\n"+order.ordered_quantity+" "+order.ordered_unit+"\n"+"tap to exhaust"
+        title: "No guy is available to deliver :(",
+        body: order.ordered_dish+"\n"+order.ordered_quantity+" "+order.ordered_unit+"\n"+"try later"+"\n"+"tap to exhaust"
       },
       data: {
-        type: "order"//N/A
+        type: "N/A"
       }
     };
     for (i = 0; i < 2; i++) {
