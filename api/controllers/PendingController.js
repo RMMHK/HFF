@@ -523,10 +523,6 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
                       });
 
                     }
-                    Pending.update({id: order.id}, {ack_scheduler_allowed: true}).then(function (req, res) {
-                      //code for ack scheduler remaining
-                    })
-
                   }
 
                 })
@@ -587,9 +583,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
       });
 //ack candidate
     }
-    Pending.update({id: order.id}, {ack_scheduler_allowed: true}).then(function (req, res) {
-      //code for ack scheduler remaining
-    })
+
 
   }
 }
@@ -639,7 +633,9 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
      }
 
    })
-
+   Pending.update({id: order.id}, {ack_scheduler_allowed: true}).then(function (req, res) {
+     //code for ack scheduler remaining
+   })
 }
 
 function release_apply_lock(applicants,callback) {
