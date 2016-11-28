@@ -472,7 +472,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
   if (mode == "success") {
     Guy.findOne({id: guy.guy_id,}).then(function (guy, err) {
       if (guy) {
-        Pending.update({id: order_id}, {guy_name: guy.name, guy_cell: guy.cell}).then(function (data, err) {
+        Pending.update({id: order.id}, {guy_name: guy.name, guy_cell: guy.cell}).then(function (data, err) {
           if (data) {
             User.update({id: provider.id}, {fp_orders: order_id}).then(function (prov, err) {
             })//updating provider field
