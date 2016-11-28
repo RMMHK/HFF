@@ -129,11 +129,8 @@ module.exports = {
                                                       else if(results.applicants.length==0)
                                                       {
 
-                                                        notify_parties("",tempOrder,provider,cus,"N/A",function (ok,err) {
+                                                        notify_parties("",tempOrder,provider,cus,"N/A",function (ok,err) {})
 
-                                                        })
-
-                                                        //or notify both parties about non availablity of the guy and try some time later...
                                                       }
                                                       else
 
@@ -606,36 +603,45 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
    console.log(guy.guy_id)
  Guy.update({id:guy.guy_id},{guy_orders:order.id}).then(function (data,err) {
 
-   if(data)
-   {
-     console.log(data.guy_orders)
-   }
-
  })
 
+   Guy.findOne({id:guy.guy_id}).populate('guy_orders').then(function (fullguy,err) {
 
-/*
-   var FCM = require('fcm-node');
-   var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
-   var fcm = new FCM(serverKey);
-   var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
-     to: "",
-     notification: {
-       title: "Order details",
-       body: "tap to view details"
-     },
-     data: {
-       data:order_details,
-       type: "order_details"
+     if(fullguy)
+     {
+       var guy_order_list= fullguy.guy_orders
+       console.log(guy_order_list)
+       var FCM = require('fcm-node');
+       var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+       var fcm = new FCM(serverKey);
+       var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+         to: fullguy.token,
+         notification: {
+           title: "Order details",
+           body: "tap to view details"
+         },
+         data: {
+           data:guy_order_list,
+           type: "order_details"
+         }
+       };
+       fcm.send(message, function (err, response) {
+
+         if (response) {
+           console.log(response)
+         }
+         else if (err) {
+           console.log("error while sending")
+         }
+       });
      }
-   };
-  //stringify an stuff
-*/
 
+     else if (err)
+     {
+       console.log("err")
+     }
 
- }
+   })
 
-
-
-
+}
 
