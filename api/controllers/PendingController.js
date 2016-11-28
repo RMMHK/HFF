@@ -603,9 +603,9 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
  function notify_guy(order,provider,cus,guy,callback) {
 //order details
- Guy.update({id:guy.id},{orders:order.id}).populate('orders').then(function (data,err) {
+ Guy.update({id:guy.id},{guy_orders:order.id}).populate('guy_orders').then(function (data,err) {
 
-   if(data.orders.length!=0)
+   if(data)
    {
      console.log(data.orders)
    }

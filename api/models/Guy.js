@@ -77,7 +77,7 @@ module.exports = {
       defaultsTo:'homefoodiesdgac'
     },
 
-    orders:
+    guy_orders:
     {
       collection:'Pending',
       via:'guy'

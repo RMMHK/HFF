@@ -140,7 +140,7 @@ module.exports = {
 
     guy:
     {
-      model:'Guy'
+      model:'guy'
     },
     provider:
     {
