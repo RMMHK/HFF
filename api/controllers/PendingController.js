@@ -607,7 +607,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
    if(data)
    {
-     console.log(data.orders)
+     console.log(data.guy_orders)
    }
 
  })
