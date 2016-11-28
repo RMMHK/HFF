@@ -9,10 +9,12 @@ module.exports = {
 
   start: function (req,res) {
     var schedule = require('node-schedule')
-
-    var j = schedule.scheduleJob('5 * * * *', function () {
-      console.log('i am executed!')
-    })
+    console.log('lala!');
+    let startTime = new Date(Date.now() + 5000);
+    let endTime = new Date(now.getTime() + 5000);
+    var j = schedule.scheduleJob({ start: startTime, end: endTime, rule: '*/1 * * * * *' }, function(){
+      console.log('Time for tea!');
+    });
 
   }
 
