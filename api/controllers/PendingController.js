@@ -114,7 +114,7 @@ module.exports = {
                                                        //notify the first andidate that he is selected for the job
                                                         //update the order lock // turn the applied lock false
                                                         //release applied lock of all other applications
-                                                        notify_parties(results.applicants[0],tempOrder.id,provider.token,cus.token,function (ok,err) {
+                                                        notify_parties(results.applicants[0],tempOrder.id,provider,cus,function (ok,err) {
 
                                                         })
                                                       //  notify_guy(tempOrder,provider,cus,function (ok) {
@@ -502,6 +502,8 @@ function  notify_parties(guy,order_id,provider,customer,callback) {
 
               if(response)
               {console.log(response)}
+              else if (err)
+              {console.log("error while sending")}
             });
 
           }
