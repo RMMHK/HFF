@@ -9,7 +9,10 @@ module.exports = {
 
   attributes: {
 
-
+   item_id:{
+     type:'string',
+     defaultsTo:null
+   },
 
     customer_id: {
       type: 'string'
@@ -74,25 +77,25 @@ module.exports = {
 
     guy_name: {
       type: 'string',
-      defaultsTo: 'not assigned'
+      defaultsTo: '-1'
     },
 
     guy_cell: {
       type: 'string',
-      defaultsTo: 'not available'
+      defaultsTo: '-1'  //used to check in front end either the guy assigned or not, if not the show order terminated due to no guy available
     },
 
 
     guy_marked_status:
     {
       type: 'string',
-      defaultsTo: 'not status yet'
+      defaultsTo: '-1' //o for cancel +1 for delivered
     },
 
     guy_depart_status:
     {
       type:'string',
-      defaultsTO:'at station'
+      defaultsTO:'-1'//"+1 when acked
     },
 
     acked_by_customer:
@@ -146,6 +149,22 @@ module.exports = {
     customer:
     {
       model:'customer'
+    },
+
+    deleted_by_customer:{
+
+      type:'Boolean',
+      defaultsTo:false
+    },
+    deleted_by_provider:{
+
+      type:'Boolean',
+      defaultsTo:false
+    },
+    deleted_by_guy:{
+
+      type:'Boolean',
+      defaultsTo:false
     }
 
   }

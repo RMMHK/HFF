@@ -42,6 +42,7 @@ module.exports = {
 
               if (location) {
                 Pending.create({
+                  item_id:item_id,
                   customer_id: customer_id,
                   provider_id: provider_id,
                   provider_location: data.eshop.ES_LOCATION,
@@ -114,7 +115,7 @@ module.exports = {
                                                        //notify the first andidate that he is selected for the job
                                                         //update the order lock // turn the applied lock false
                                                         //release applied lock of all other applications
-                                                        notify_parties(results.applicants[0],tempOrder.id,provider,cus,function (ok,err) {
+                                                        notify_parties(results.applicants[0],tempOrder,provider,cus,"success",function (ok,err) {
 
                                                         })
                                                       //  notify_guy(tempOrder,provider,cus,function (ok) {
@@ -126,10 +127,12 @@ module.exports = {
 
                                                       else if(results.applicants.length==0)
                                                       {
-                                                        //turn on the job assignment scheduler lock
-                                                        //job asignment scheduler takes the pending order, broadcast details to guys
-                                                        //the one which accept
-                                                        console.log("no guys")
+
+
+                                                        notify_parties(""+tempOrder,provider,cus,"N/A",function (ok,err) {
+
+                                                        })
+
                                                         //or notify both parties about non availablity of the guy and try some time later...
                                                       }
                                                       else
@@ -460,68 +463,116 @@ function initiate_job_request(order_id,guyToken,providerLocation,customerLocatio
   })
 }
 
-function  notify_parties(guy,order_id,provider,customer,callback) {
+function  notify_parties(guy,order,provider,customer,mode,callback) {
 
 
   var provider_token = provider.token
-  var customer_token= customer.token
-  Guy.findOne({id:guy.guy_id,}).then(function (guy,err) {
-    if(guy) {
-      Pending.update({id: order_id}, {guy_name: guy.name, guy_cell: guy.cell}).then(function (data, err) {
-        if(data)
-        {
-          User.update({id:provider.id},{fp_orders:order_id}).then(function (prov,err) {})//updating provider field
-          Customer.update({id:customer.id},{cus_orders:order_id}).then(function () {})//updating customer order field
+  var customer_token = customer.token
 
-          var guy_name = guy.name
-          var guy_cell = guy.cell
-          var token;
-          var FCM = require('fcm-node');
-          var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
-          var fcm = new FCM(serverKey);
-          var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
-            to: token,
-            notification: {
-              title: "Delivery Guy Details ",
-              body: guy_name + " "+"\n"+guy_cell+"\n"+"tap to acknowledge"},
-            data: {
-              type: "order"
-            }
-          };
-          for (i = 0; i < 2; i++) {
+  if (mode == "success") {
+    Guy.findOne({id: guy.guy_id,}).then(function (guy, err) {
+      if (guy) {
+        Pending.update({id: order_id}, {guy_name: guy.name, guy_cell: guy.cell}).then(function (data, err) {
+          if (data) {
+            User.update({id: provider.id}, {fp_orders: order_id}).then(function (prov, err) {
+            })//updating provider field
+            Customer.update({id: customer.id}, {cus_orders: order_id}).then(function () {
+            })//updating customer order field
 
-            if(i==0)
-            {
-              message.to=provider_token
-            }
-            else if(i==1)
-            {
-              message.to=customer_token
-            }
-            fcm.send(message, function(err, response){
+            var guy_name = guy.name
+            var guy_cell = guy.cell
+            var token;
+            var FCM = require('fcm-node');
+            var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+            var fcm = new FCM(serverKey);
+            var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+              to: token,
+              notification: {
+                title: "Delivery Guy Details ",
+                body: guy_name + " " + "\n" + guy_cell + "\n" + "tap to acknowledge"
+              },
+              data: {
+                order:order,
+                type: "assigned"
+              }
+            };
+            for (i = 0; i < 2; i++) {
 
-              if(response)
-              {console.log(response)}
-              else if (err)
-              {console.log("error while sending")}
-            });
+              if (i == 0) {
+                message.to = provider_token
+              }
+              else if (i == 1) {
+                message.to = customer_token
+              }
+              fcm.send(message, function (err, response) {
+
+                if (response) {
+                  console.log(response)
+                }
+                else if (err) {
+                  console.log("error while sending")
+                }
+              });
+
+            }
+            Pending.update({id: order_id}, {ack_scheduler_allowed: true}).then(function (req, res) {
+              //code for ack scheduler remaining
+            })
 
           }
-          Pending.update({id:order_id},{ack_scheduler_allowed:true}).then(function (req,res) {
-            //code for ack scheduler remaining
-          })
 
+        })
+
+
+      }
+
+
+    })
+    //get the details of the guy , and send it to  parties , release the lock for the notification sceduler
+
+  }
+  else if(mode =="N/A")
+  {
+    var FCM = require('fcm-node');
+    var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+    var fcm = new FCM(serverKey);
+    var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+      to: token,
+      notification: {
+        title: "We are sorry",
+        body: "No guy is available for delivery"+"\n"+"for "+order.ordered_dish+"\n"+order.ordered_quantity+" "+order.ordered_unit+"\n"+"tap to exhaust"
+      },
+      data: {
+        type: "N/A"
+      }
+    };
+    for (i = 0; i < 2; i++) {
+
+      if (i == 0) {
+        message.to = provider_token
+      }
+      else if (i == 1) {
+        message.to = customer_token
+      }
+      fcm.send(message, function (err, response) {
+
+        if (response) {
+          console.log(response)
         }
-
-      })
-
-
-
+        else if (err) {
+          console.log("error while sending")
+        }
+      });
+//ack candidate
     }
+    Pending.update({id: order_id}, {ack_scheduler_allowed: true}).then(function (req, res) {
+      //code for ack scheduler remaining
+    })
+
+  }
 
 
 
-  })
-  //get the details of the guy , and send it to  parties , release the lock for the notification sceduler
+
 
 }
