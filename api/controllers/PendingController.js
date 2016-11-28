@@ -469,7 +469,8 @@ function  notify_parties(guy,order_id,provider,customer,callback) {
     if(guy) {
       Pending.update({id: order_id}, {guy_name: guy.name, guy_cell: guy.cell}).then(function (data, err) {
         if(data)
-        { User.update({id:provider.id},{fp_orders:order_id}).then(function (prov,err) {})//updating provider field
+        {
+          User.update({id:provider.id},{fp_orders:order_id}).then(function (prov,err) {})//updating provider field
           Customer.update({id:customer.id},{cus_orders:order_id}).then(function () {})//updating customer order field
 
           var guy_name = guy.name
@@ -484,7 +485,7 @@ function  notify_parties(guy,order_id,provider,customer,callback) {
               title: "Delivery Guy Details ",
               body: guy_name + " "+"\n"+guy_cell+"\n"+"tap to acknowledge"},
             data: {
-              type: "details"
+              type: "order"
             }
           };
           for (i = 0; i < 2; i++) {
@@ -497,7 +498,11 @@ function  notify_parties(guy,order_id,provider,customer,callback) {
             {
               message.to=customer_token
             }
-            fcm.send(message, function(err, response){});
+            fcm.send(message, function(err, response){
+
+              if(response)
+              {console.log(response)}
+            });
 
           }
           Pending.update({id:order_id},{ack_scheduler_allowed:true}).then(function (req,res) {
