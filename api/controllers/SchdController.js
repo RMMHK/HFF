@@ -14,7 +14,7 @@ module.exports = {
     let startTime = new Date(Date.now() + 10000);
   //  let endTime = new Date(now.getTime() + 5000);
     var j = schedule.scheduleJob({ start: startTime, rule: '*/1 * * * * *' }, function(){
-      console.log('Time for tea!');
+      console.log('EXECUTED!');
     });
 
   }
