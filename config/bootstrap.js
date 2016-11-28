@@ -130,9 +130,80 @@ module.exports.bootstrap = function(cb) {
 
   function send_again_to_provider(order,callback) {
 
+    var FCM = require('fcm-node');
+    var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+    var fcm = new FCM(serverKey);
+
+    var provider_id = order.provider_id;
+
+    User.findOne({id:provider_id}).populate('fp_orders').then(function (providerPAYLOAD,err) {
+
+      if(providerPAYLOAD)
+      {
+        var provider_token = providerPAYLOAD.token
+        var guy_status = order.guy_cell
+        if(guy_status!="-1")//means  DG assigned to this order
+        {
+          var provider_order_list = []
+          provider_order_list = providerPAYLOAD.fp_orders
+          var guy_name = order.guy_name;
+          var guy_cell= order.guy_cell;
+
+          var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+
+
+            notification: {
+              title: "Delivery Guy Details ",
+              body: guy_name + " " + "\n" + guy_cell + "\n" + "tap to acknowledge"
+            },
+            data: {
+              order: "",
+              type: "assigned"
+            }
+          };
+
+          message.data.order = provider_order_list
+        }
+        else if (guy_status=="-1")//means no DG assigned to this order
+        {
+          var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+
+            notification: {
+              title: "No guy is available to deliver :(",
+              body: order.ordered_dish + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "TRY LATER" + "\n" + "tap to exhaust"
+            },
+            data: {
+              type: "N/A"
+            }
+          };
+        }
+          message.to=provider_token
+        fcm.send(message, function (err, response) {
+
+          if (response) {
+            console.log(response)
+          }
+          else if (err) {
+            console.log("error while sending")
+          }
+        });
+
+        //get customer token
+        //check if delivery guy field is not default , if default then it mean no guy assigned
+        //two types of notifications generations
+      }
+      else if(err)
+      {console.log("error")}
+
+    })
 
   }
+
+
   function send_again_to_guy(order,callback) {
+
+
+
 
 
   }
