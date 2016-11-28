@@ -119,11 +119,11 @@ module.exports = {
 
                                                         })
 
-                                                      /*  notify_guy(tempOrder,provider,cus,results.applicants[0],function (ok) {
+                                                        notify_guy(tempOrder,provider,cus,results.applicants[0],function (ok) {
 
                                                         })
                                                       //  release_locks
-                                                        console.log(results.applicants[0]);*/
+                                                        console.log(results.applicants[0]);
                                                       }
 
                                                       else if(results.applicants.length==0)
@@ -479,19 +479,17 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
             Customer.update({id: customer.id}, {cus_orders: order.id}).then(function () {
             })//updating customer order field
 
-            User.findOne({id:provider.id}).populate('fp_orders').then(function (providerPAYLOAD,err) {
+            User.findOne({id: provider.id}).populate('fp_orders').then(function (providerPAYLOAD, err) {
 
-              if(providerPAYLOAD)
-              {
-                var provider_order_list=[]
+              if (providerPAYLOAD) {
+                var provider_order_list = []
                 provider_order_list = providerPAYLOAD.fp_orders
 
-                Customer.findOne({id:customer.id}).populate('cus_orders').then(function (cusPAYLOAD,err) {
+                Customer.findOne({id: customer.id}).populate('cus_orders').then(function (cusPAYLOAD, err) {
 
-                  if(cusPAYLOAD)
-                  {
-                    var customer_order_list=[]
-                    customer_order_list =cusPAYLOAD.cus_orders
+                  if (cusPAYLOAD) {
+                    var customer_order_list = []
+                    customer_order_list = cusPAYLOAD.cus_orders
 
                     var guy_name = guy.name
                     var guy_cell = guy.cell
@@ -506,7 +504,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
                         body: guy_name + " " + "\n" + guy_cell + "\n" + "tap to acknowledge"
                       },
                       data: {
-                        order:order,
+                        order: order,
                         type: "assigned"
                       }
                     };
@@ -514,11 +512,11 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
                       if (i == 0) {
                         message.to = provider_token
-                        message.data.order=provider_order_list//pay load
+                        message.data.order = provider_order_list//pay load
                       }
                       else if (i == 1) {
                         message.to = customer_token
-                        message.data.order=customer_order_list//payload
+                        message.data.order = customer_order_list//payload
                       }
                       fcm.send(message, function (err, response) {
 
@@ -545,26 +543,23 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
             })
           }
-          else if(err)
-          {
+          else if (err) {
             console.log("Customer payload not exeuted")
           }
 
         })
       }
-      else if (err)
-              {
-                console.log("not executed")
-              }
+      else if (err) {
+        console.log("not executed")
+      }
 
-            })
+    })
 
 
     //get the details of the guy , and send it to  parties , release the lock for the notification sceduler
 
   }
-  else if(mode =="N/A")
-  {
+  else if (mode == "N/A") {
     console.log("called in")
     var FCM = require('fcm-node');
     var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
@@ -573,7 +568,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
       to: "",
       notification: {
         title: "No guy is available to deliver :(",
-        body: order.ordered_dish+"\n"+order.ordered_quantity+" "+order.ordered_unit+"\n"+"TRY LATER"+"\n"+"tap to exhaust"
+        body: order.ordered_dish + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "TRY LATER" + "\n" + "tap to exhaust"
       },
       data: {
         type: "N/A"
@@ -603,14 +598,39 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
     })
 
   }
+}
 
 
+ function notify_guy(order,provider,cus,guy,callback) {
+//order details
+   var order_name=order.ordered_dish;
+   var order_type= order.ordered_dish_type;
+   var order_quantity= order.ordered_quantity;
+   var order_bill= order.ordered_bill;
+   var customer_name= cus.name;
+   var customer_location= cus.location;
+   var customer_cell = cus.cell;
+   var provider_name = provider.name;
+   var provider_location= provider.EShop.ES_LOCATION
+   var provider_cell= provider.cell;
+   var order_details = []
+   order_details.push(
+     order_name,
+     order_type,
+     order_quantity,
+     order_bill,
+     customer_name,
+     customer_location,
+     customer_cell,
+     provider_name,
+     provider_location,
+     provider_cell
+   )
 
- /*function notify_guy() {
-
+   console.log(order_details)
  }
 
 
 
-*/
-}
+
+
