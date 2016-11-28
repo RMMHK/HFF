@@ -137,6 +137,7 @@ module.exports = {
                                                       {
 
                                                         notify_parties("",tempOrder,provider,cus,"N/A",function (ok,err) {})
+                                                        Pending.update({id:tempOrder.id},{clean_scheduler_allowed:true}).then(function () {})
 
                                                       }
                                                       else
@@ -175,6 +176,7 @@ module.exports = {
                                 }
                                 else
                                   res.json({status: "-1"})
+                                Pending.update({id:tempOrder.id},{clean_scheduler_allowed:true}).then(function () {})
                               })
 
                             }, 20000)

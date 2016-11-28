@@ -134,6 +134,11 @@ module.exports = {
       type:'Boolean',
       defaultsTo:false
     },
+    clean_scheduler_allowed:
+    {
+      type:'Boolean',
+      defaultsTo:false
+    },
 
     apply_to:
     {

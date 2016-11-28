@@ -41,9 +41,9 @@ module.exports.bootstrap = function(cb) {
 
            if(data[i].acked_by_guy==false&&data[i].guy_id!="-1")
            {
-             send_again_to_guy(data[i],function () {
+        //     send_again_to_guy(data[i],function () {
 
-             })
+       //      })
            }
 
          }
@@ -54,6 +54,37 @@ module.exports.bootstrap = function(cb) {
       })
 
     });
+
+    var k = schedule.scheduleJob('*/2 * * * *', function(){
+
+      Pending.destroy({provider_response:-1,clean_scheduler_allowed:true}).then(function (data,err) {
+
+        if(data)
+        {
+          console.log("operation clean up completed successfully")
+        }
+        else
+          console.log("operation clean up interrupted")
+      })
+
+      Pending.destroy({deleted_by_customer:true,deleted_by_provider:true,deleted_by_guy:true}).then(function (data,err) {
+        if(data)
+        {
+          console.log("operation clean up completed successfully")
+        }
+      })
+
+      Pending.destroy({acked_by_customer:true,acked_by_provider:true,clean_scheduler_allowed:true}).then(function (data,err) {
+        if(data)
+        {
+          console.log("operation clean up completed successfully")
+        }
+      })
+
+      
+
+    })
+
   });
 
 
