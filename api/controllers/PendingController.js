@@ -128,7 +128,7 @@ module.exports = {
                                                       else if(results.applicants.length==0)
                                                       {
 
-
+                                                        console.log("called")
                                                         notify_parties(""+tempOrder,provider,cus,"N/A",function (ok,err) {
 
                                                         })
@@ -533,6 +533,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
   }
   else if(mode =="N/A")
   {
+    console.log("called")
     var FCM = require('fcm-node');
     var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
     var fcm = new FCM(serverKey);
@@ -543,7 +544,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
         body: "No guy is available for delivery"+"\n"+"for "+order.ordered_dish+"\n"+order.ordered_quantity+" "+order.ordered_unit+"\n"+"tap to exhaust"
       },
       data: {
-        type: "N/A"
+        type: "order"//N/A
       }
     };
     for (i = 0; i < 2; i++) {
