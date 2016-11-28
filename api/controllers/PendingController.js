@@ -483,6 +483,10 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
               if(providerPAYLOAD)
               {
+                var array=[]
+                array = providerPAYLOAD.fp_orders
+                console.log(array.length)
+                console.log(array[0])
                 console.log(providerPAYLOAD.fp_orders)
                 Customer.findOne({id:customer.id}).populate('cus_orders').then(function (cusPAYLOAD,err) {
 
