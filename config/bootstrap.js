@@ -34,9 +34,9 @@ module.exports.bootstrap = function(cb) {
            }
            if(data[i].acked_by_provider==false)
            {
-             send_again_to_provider(data[i],function () {
+           //  send_again_to_provider(data[i],function () {
 
-             })
+       //      })
            }
 
            if(data[i].acked_by_guy==false&&data[i].guy_id!="-1")
