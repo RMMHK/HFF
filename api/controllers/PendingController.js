@@ -128,8 +128,7 @@ module.exports = {
                                                       else if(results.applicants.length==0)
                                                       {
 
-                                                        console.log("called")
-                                                        notify_parties(""+tempOrder,provider,cus,"N/A",function (ok,err) {
+                                                        notify_parties("",tempOrder,provider,cus,"N/A",function (ok,err) {
 
                                                         })
 
