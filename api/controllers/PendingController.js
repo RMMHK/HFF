@@ -483,82 +483,83 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
               if(providerPAYLOAD)
               {
-                var array=[]
-                array = providerPAYLOAD.fp_orders
-                console.log(array.length)
-                console.log(array[0])
-                console.log(providerPAYLOAD.fp_orders)
+                var provider_order_list=[]
+                provider_order_list = providerPAYLOAD.fp_orders
+
                 Customer.findOne({id:customer.id}).populate('cus_orders').then(function (cusPAYLOAD,err) {
 
                   if(cusPAYLOAD)
                   {
-                    console.log(cusPAYLOAD.cus_orders)
-                  }
-                  else if(err)
-                  {
-                    console.log("Customer payload not exeuted")
+                    var customer_order_list=[]
+                    customer_order_list =cusPAYLOAD.cus_orders
+
+                    var guy_name = guy.name
+                    var guy_cell = guy.cell
+                    var token;
+                    var FCM = require('fcm-node');
+                    var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+                    var fcm = new FCM(serverKey);
+                    var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+                      to: token,
+                      notification: {
+                        title: "Delivery Guy Details ",
+                        body: guy_name + " " + "\n" + guy_cell + "\n" + "tap to acknowledge"
+                      },
+                      data: {
+                        order:order,
+                        type: "assigned"
+                      }
+                    };
+                    for (i = 0; i < 2; i++) {
+
+                      if (i == 0) {
+                        message.to = provider_token
+                        message.data.order=provider_order_list//pay load
+                      }
+                      else if (i == 1) {
+                        message.to = customer_token
+                        message.data.order=customer_order_list//payload
+                      }
+                      fcm.send(message, function (err, response) {
+
+                        if (response) {
+                          console.log(response)
+                        }
+                        else if (err) {
+                          console.log("error while sending")
+                        }
+                      });
+
+                    }
+                    Pending.update({id: order.id}, {ack_scheduler_allowed: true}).then(function (req, res) {
+                      //code for ack scheduler remaining
+                    })
+
                   }
 
                 })
 
+
               }
 
-              else if (err)
+
+            })
+          }
+          else if(err)
+          {
+            console.log("Customer payload not exeuted")
+          }
+
+        })
+      }
+      else if (err)
               {
                 console.log("not executed")
               }
 
             })
 
-            var guy_name = guy.name
-            var guy_cell = guy.cell
-            var token;
-            var FCM = require('fcm-node');
-            var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
-            var fcm = new FCM(serverKey);
-            var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
-              to: token,
-              notification: {
-                title: "Delivery Guy Details ",
-                body: guy_name + " " + "\n" + guy_cell + "\n" + "tap to acknowledge"
-              },
-              data: {
-                order:order,
-                type: "assigned"
-              }
-            };
-            for (i = 0; i < 2; i++) {
 
-              if (i == 0) {
-                message.to = provider_token
-              }
-              else if (i == 1) {
-                message.to = customer_token
-              }
-              fcm.send(message, function (err, response) {
-
-                if (response) {
-                  console.log(response)
-                }
-                else if (err) {
-                  console.log("error while sending")
-                }
-              });
-
-            }
-            Pending.update({id: order.id}, {ack_scheduler_allowed: true}).then(function (req, res) {
-              //code for ack scheduler remaining
-            })
-
-          }
-
-        })
-
-
-      }
-
-
-    })
     //get the details of the guy , and send it to  parties , release the lock for the notification sceduler
 
   }
