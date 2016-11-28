@@ -123,7 +123,7 @@ module.exports = {
 
                                                         })
                                                       //  release_locks
-                                                        console.log(results.applicants[0]);
+
                                                       }
 
                                                       else if(results.applicants.length==0)
@@ -603,8 +603,8 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
  function notify_guy(order,provider,cus,guy,callback) {
 //order details
-   console.log(guy)
- Guy.update({id:guy.guy_id},{guy_orders:order.id}).populate('guy_orders').then(function (data,err) {
+   console.log(guy.guy_id)
+ Guy.update({id:guy.guy_id},{guy_orders:order.id}).then(function (data,err) {
 
    if(data)
    {
