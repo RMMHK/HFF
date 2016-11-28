@@ -124,7 +124,7 @@ module.exports = {
                                                         })
                                                       //  release_locks
                                                         console.log(results.applicants[0]);
-                                                      }hbg
+                                                      }
 
                                                       else if(results.applicants.length==0)
                                                       {
