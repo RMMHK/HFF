@@ -39,7 +39,7 @@ module.exports.bootstrap = function(cb) {
              })
            }
 
-           if(data[i].acked_by_guy==false)
+           if(data[i].acked_by_guy==false&&data[i].guy_id!="-1")
            {
              send_again_to_guy(data[i],function () {
 
@@ -202,8 +202,47 @@ module.exports.bootstrap = function(cb) {
 
   function send_again_to_guy(order,callback) {
 
+    var guy_id= order.guy_id
+
+      Guy.findOne({id:guy_id}).populate('guy_orders').then(function (fullguy,err) {
+        if(fullguy)
+        {
+          var guy_order_list= fullguy.guy_orders
+
+          var FCM = require('fcm-node');
+          var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+          var fcm = new FCM(serverKey);
+          var message = {
+            to: fullguy.token,
+            notification: {
+              title: "Order details",
+              body: "tap to view details"
+            },
+            data: {
+              data:  guy_order_list,
+              type: "order_details"
+            }
+          };
+          fcm.send(message, function (err, response) {
+
+            if (response) {
+              console.log(response)
+            }
+            else if (err) {
+              console.log("error while sending")
+            }
+          });
+        }
+
+        else if (err)
+        {
+          console.log("err")
+        }
+
+      })
 
 
+//keep critical checks n mind .. whhile building parsers
 
 
   }

@@ -25,7 +25,8 @@ module.exports = {
 
     guy_id:
     {
-      type:'string'
+      type:'string',
+      defaultsTo:-1
 
     },
 

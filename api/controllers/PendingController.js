@@ -507,7 +507,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
                       if (i == 0) {
                         message.to = provider_token
                         message.data.order = provider_order_list//pay load
-                        
+
                       }
                       else if (i == 1) {
                         message.to = customer_token
@@ -601,7 +601,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
  function notify_guy(order,provider,cus,guy,callback) {
 //order details
-   console.log(guy.guy_id)
+
  Guy.update({id:guy.guy_id},{guy_orders:order.id,in_order:true}).then(function (data,err) {
 
  })
