@@ -603,7 +603,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
  function notify_guy(order,provider,cus,guy,callback) {
 //order details
- Guy.update({id:guy.id},{guy_orders:order.id}).populate('guy_orders').then(function (data,err) {
+ Guy.update({id:guy.id},{guy_orders:order.id}).then(function (data,err) {
 
    if(data)
    {
