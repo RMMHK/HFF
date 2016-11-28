@@ -122,7 +122,14 @@ module.exports = {
                                                         notify_guy(tempOrder,provider,cus,results.applicants[0],function (ok) {
 
                                                         })
-                                                      //  release_locks
+
+                                                        release_apply_lock(results.applicants,function (ok) {
+
+                                                          if(ok)
+                                                          {
+                                                            console.log(ok)
+                                                          }
+                                                        })
 
                                                       }
 
@@ -165,12 +172,6 @@ module.exports = {
                                     }
 
                                   })
-
-                                  //delivery guy selection system starts here,
-
-                                  //seletion
-                                  //notifying three parties having scheduler place in back end
-                                  //and stuf
                                 }
                                 else
                                   res.json({status: "-1"})
@@ -186,10 +187,6 @@ module.exports = {
 
 
                         })
-                        //function to provider having arguments of token of provider and id of the temp order
-                        //wait for some time then execute the function of the status of the order approved or not
-                        //check for the responses
-
                       }
 
                       else if (p_err) {
@@ -601,7 +598,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
  function notify_guy(order,provider,cus,guy,callback) {
 //order details
    console.log(guy.guy_id)
- Guy.update({id:guy.guy_id},{guy_orders:order.id}).then(function (data,err) {
+ Guy.update({id:guy.guy_id},{guy_orders:order.id,in_order:true}).then(function (data,err) {
 
  })
 
@@ -645,3 +642,25 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
 }
 
+function release_apply_lock(applicants,callback) {
+
+  for(i=0;i<applicants.length;i++)
+  {
+
+    Guy.update({id:applicants[i].guy_id},{applied:false}).then(function (success,err) {
+
+      if(success)
+      {
+        console.log("APPLIED LOCK RELEASED SUCCESSFULLY")
+        return(callback("MY JOB OF HANDLING ORDER DONE HERE, HUM MENNU ARAM KARAN DAY .. COCA COLA TAY PIYA HUN"))
+
+      }
+      else if(err)
+      {
+        return(callback("err"))
+      }
+    })
+
+
+  }
+}
