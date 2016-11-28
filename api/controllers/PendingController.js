@@ -603,32 +603,35 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
  function notify_guy(order,provider,cus,guy,callback) {
 //order details
-   var order_name=order.ordered_dish;
-   var order_type= order.ordered_dish_type;
-   var order_quantity= order.ordered_quantity;
-   var order_bill= order.ordered_bill;
-   var customer_name= cus.name;
-   var customer_location= cus.location;
-   var customer_cell = cus.cell;
-   var provider_name = provider.name;
-   var provider_location= provider.EShop.ES_LOCATION
-   var provider_cell= provider.cell;
-   var order_details = []
-   order_details.push(
-     order_name,
-     order_type,
-     order_quantity,
-     order_bill,
-     customer_name,
-     customer_location,
-     customer_cell,
-     provider_name,
-     provider_location,
-     provider_cell
-   )
+ Guy.update({id:guy.id},{orders:order.id}).populate('orders').then(function (data,err) {
 
-   console.log(order_details)
-   console.log("DEEH")
+   if(data.orders.length!=0)
+   {
+     console.log(data.orders)
+   }
+
+ })
+
+
+/*
+   var FCM = require('fcm-node');
+   var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+   var fcm = new FCM(serverKey);
+   var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+     to: "",
+     notification: {
+       title: "Order details",
+       body: "tap to view details"
+     },
+     data: {
+       data:order_details,
+       type: "order_details"
+     }
+   };
+  //stringify an stuff
+*/
+
+
  }
 
 

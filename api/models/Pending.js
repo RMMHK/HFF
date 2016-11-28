@@ -138,9 +138,9 @@ module.exports = {
       via:'candidates'
     },
 
-    assigned_guy:
+    guy:
     {
-      model:'Assignedguy'
+      model:'Guy'
     },
     provider:
     {

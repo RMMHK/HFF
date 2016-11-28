@@ -77,15 +77,9 @@ module.exports = {
       defaultsTo:'homefoodiesdgac'
     },
 
-    assigned_order:
+    orders:
     {
-      type:'string', //id of the pending order who's job has beeen accepted by this guy
-      defaultsTo:'no order assigned'
-    },
-
-    completed_orders:
-    {
-      collection:'Order',
+      collection:'Pending',
       via:'guy'
     }
 
