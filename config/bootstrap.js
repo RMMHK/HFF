@@ -169,8 +169,8 @@ module.exports.bootstrap = function(cb) {
           var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
 
             notification: {
-              title: "No guy is available to deliver :(",
-              body: order.ordered_dish + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "TRY LATER" + "\n" + "tap to exhaust"
+              title: "No guy is available to receive",
+              body: order.ordered_dish + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "\n" + "tap to exhaust"
             },
             data: {
               type: "N/A"

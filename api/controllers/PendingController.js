@@ -507,6 +507,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
                       if (i == 0) {
                         message.to = provider_token
                         message.data.order = provider_order_list//pay load
+                        
                       }
                       else if (i == 1) {
                         message.to = customer_token
@@ -567,10 +568,15 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
     for (i = 0; i < 2; i++) {
 
       if (i == 0) {
-        message.to = provider_token
+
+          message.to = provider_token
+          message.notification. title= "No guy is available to receive",
+          message.notification.body= order.ordered_dish + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "\n" + "tap to exhaust"
       }
-      else if (i == 1) {
-        message.to = customer_token
+      else if (i == 1)
+      {
+         message.to = customer_token
+
       }
       fcm.send(message, function (err, response) {
 
