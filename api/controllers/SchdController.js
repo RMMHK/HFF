@@ -17,6 +17,15 @@ module.exports = {
       console.log('EXECUTED!');
     });
 
+  },
+
+  starts:function (req) {
+    var schedule = require('node-schedule');
+
+    var j = schedule.scheduleJob('5 * * * *', function(){
+      console.log('i will run after 5 sec');
+    });
+
   }
 };
 
