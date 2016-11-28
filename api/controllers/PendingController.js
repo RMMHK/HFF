@@ -628,6 +628,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
    )
 
    console.log(order_details)
+   console.log("DEEH")
  }
 
 
