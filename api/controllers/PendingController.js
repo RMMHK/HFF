@@ -465,7 +465,7 @@ function  notify_parties(guy,order_id,provider,customer,callback) {
 
   var provider_token = provider.token
   var customer_token= customer.token
-  guy.findOne({id:guy.guy_id,}).then(function (guy,err) {
+  Guy.findOne({id:guy.guy_id,}).then(function (guy,err) {
     if(guy) {
       Pending.update({id: order_id}, {guy_name: guy.name, guy_cell: guy.cell}).then(function (data, err) {
         if(data)
