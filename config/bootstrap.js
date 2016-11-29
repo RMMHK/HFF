@@ -85,6 +85,22 @@ module.exports.bootstrap = function(cb) {
 
     })
 
+
+    var S = schedule.scheduleJob('*/1 * * * *', function(){
+
+      Apptokens.destroy({working:false}).then(function (data,err) {
+
+        if(data)
+        {
+          console.log("operation clean up completed successfully")
+        }
+        else
+          console.log("operation clean up interrupted")
+      })
+
+    })
+
+
   });
 
 
