@@ -637,7 +637,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
          }
          else if (err) {
 
-           console.log("error while sending")
+           console.log(err)
          }
        });
      }
