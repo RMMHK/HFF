@@ -617,6 +617,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
        var FCM = require('fcm-node');
        var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
        var fcm = new FCM(serverKey);
+       console.log(fullguy.token)
        var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
          to: fullguy.token,
          notification: {
