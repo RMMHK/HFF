@@ -119,7 +119,7 @@ module.exports = {
 
                                                         })
 
-                                                        notify_guy(tempOrder,provider,cus,results.applicants[0],function (ok) {
+                                                        notify_guy(tempOrder,results.applicants[0],function (ok) {
 
                                                         })
 
@@ -598,8 +598,8 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 }
 
 
- function notify_guy(order,provider,cus,guy,callback) {
-//order details
+ function notify_guy(order,guy,callback) {
+
 
  Guy.update({id:guy.guy_id},{in_order:true}).then(function (data,err) {
 
@@ -635,6 +635,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
            console.log(response)
          }
          else if (err) {
+
            console.log("error while sending")
          }
        });
