@@ -139,7 +139,7 @@ module.exports = {
 
                  console.log(err)
                  console.log("Something has gone wrong!");
-                 Apptokens.destroy({application_token:app_token}).then(function (data,err) {
+                 Apptokens.update({application_token:app_token},{working:false}).then(function (data,err) {
 
                  })
 

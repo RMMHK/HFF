@@ -15,10 +15,10 @@ module.exports = {
       defaultsTo:'null'
     },
 
-    common:
+    working:
     {
-      type:'string',
-      defaultsTo:'app_token'
+      type:'Boolean',
+      defaultsTo:true
     }
   }
 };
