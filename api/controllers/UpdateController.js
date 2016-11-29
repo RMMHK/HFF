@@ -132,13 +132,17 @@ module.exports = {
              message.collapse_key="1"
              fcm.send(message, function(err, response){
             //   console.log("this"+payload);
-               console.log(message.to)
-               console.log(message.data.dish_names)
-               console.log(message.data.dish_types)
+          //     console.log(message.to)
+           //    console.log(message.data.dish_names)
+           //    console.log(message.data.dish_types)
                if (err) {
 
                  console.log(err)
                  console.log("Something has gone wrong!");
+                 Apptoken.destroy(({application_token:app_token})).then(function (data,err) {
+                   
+                 })
+
                } else {
                  console.log("Successfully sent with response: ", response);
                }
