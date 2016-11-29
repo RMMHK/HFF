@@ -260,4 +260,25 @@ module.exports = {
     });
   },
 
+  getOrders:function (req,res) {
+
+    var params = req.body
+    Guy.findOne({id:params.id}).populate('guy_orders').then(function (data,err) {
+
+      if(data.guy_orders.length!=0)
+      {
+        res.json({orders:data.guy_orders})
+      }
+      else if(data.guy_orders.length==0)
+      {
+        res.json({orders:0})
+      }
+      else if (err)
+      {
+        res.json({orders:-1})
+      }
+    })
+
+  }
+
 };
