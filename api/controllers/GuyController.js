@@ -124,7 +124,7 @@ module.exports = {
 
     var params = req.body;
 
-    Guy.findOne({v_id:params.v_id}).populate('completed_orders').then(function(data,err) {
+    Guy.findOne({v_id:params.v_id}).populate('guy_orders').then(function(data,err) {
 
 
       var params = req.body;
