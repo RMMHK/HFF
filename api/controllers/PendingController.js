@@ -305,16 +305,13 @@ module.exports = {
 
             })
           }
-
-          else if (order.apply_to == false) {
-            res.json({order: 0})
-          }
-
           else if (err) {
             res.json({order: -1})
           }
         })
-
+      }
+      else if (order.apply_to == false) {
+        res.json({order: 0})
       }
 
       else  if (err)
