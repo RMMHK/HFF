@@ -601,14 +601,17 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
  function notify_guy(order,provider,cus,guy,callback) {
 //order details
 
- Guy.update({id:guy.guy_id},{guy_orders:order.id,in_order:true}).then(function (data,err) {
+ Guy.update({id:guy.guy_id},{in_order:true}).then(function (data,err) {
 
  })
+   Pending.update({id:order.id},{guy:guy.guy_id}).then(function () {
 
+   })
    Guy.findOne({id:guy.guy_id}).populate('guy_orders').then(function (fullguy,err) {
 
      if(fullguy)
      {
+
        var guy_order_list= fullguy.guy_orders
        console.log(guy_order_list)
        var FCM = require('fcm-node');
