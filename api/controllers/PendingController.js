@@ -285,11 +285,11 @@ module.exports = {
     var guy_token= params.guy_token;
     console.log(params)
 
-    Guy.update({id:id},{applied:true}).then(function (applied,err) {
-      if(applied) {
-        Pending.findOne({id: order_id}).then(function (order, err) {
-          if (order.apply_to == true) {
+    Pending.findOne({id: order_id}).then(function (order, err) {
+      if (order.apply_to == true) {
 
+      Guy.update({id:id},{applied:true}).then(function (applied,err) {
+      if(applied) {
             Jobcandidates.create({
               guy_id:id,
               guy_token: guy_token,

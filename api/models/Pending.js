@@ -178,8 +178,19 @@ module.exports = {
 
       type:'Boolean',
       defaultsTo:false
-    }
+    },
 
+    fraud_by_customer:
+    {
+      type:"Boolean",
+      defaultsTo:false,
+    },
+
+    fraud_by_provider:
+    {
+      type:"Boolean",
+      defaultsTo:false,
+    }
   }
 
 
