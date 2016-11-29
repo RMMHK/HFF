@@ -501,7 +501,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
                       },
                       data: {
                         order: "",
-                        type: "assigned"
+                        type: "assigned"            //data payloads to customer and provider
                       }
                     };
                     for (i = 0; i < 2; i++) {
@@ -564,7 +564,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
         body: order.ordered_dish + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "TRY LATER" + "\n" + "tap to exhaust"
       },
       data: {
-        type: "N/A"
+        type: "N/A"                          //no pay load // but notification
       }
     };
     for (i = 0; i < 2; i++) {
@@ -625,7 +625,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
          },
          data: {
            data:guy_order_list,
-           type: "order_details"
+           type: "job_details"              //data pay  load and notification to DG
          }
        };
        fcm.send(message, function (err, response) {
