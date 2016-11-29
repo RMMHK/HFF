@@ -625,6 +625,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
          },
          data: {
            data:guy_order_list,
+           ack:order.id,
            type: "job_details"              //data pay  load and notification to DG
          }
        };
