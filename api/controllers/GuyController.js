@@ -279,6 +279,54 @@ module.exports = {
       }
     })
 
-  }
+  },
 
-};
+  updateStatus:function(req,res)
+  {
+    var params = req.body;
+    var status = params.available
+    Guy.findOne({id:params.id}).then(function (data,err) {
+
+      if (data.applied == false && data.in_order == false) {
+        update_status(params.id, status, function (status,data, err) {
+          if (data == "ok")
+            res.json({status: "+1",bit:status})
+
+          else if (err == "err")
+            res.json({status: "0",bit:status})
+        })}
+
+          else if (data.applied == false && data.in_order == true) {
+            update_status(params.id, status, function (status,data, err) {
+              if (data == "ok")
+                res.json({status: "1",bit:status})
+
+              else if (err == "err")
+                res.json({status: "0",bit:status})
+
+            })}
+          else if (data.applied == true && data.in_order == false) {
+          update_status(params.id, status, function (status,data, err) {
+            if (data == "ok")
+              res.json({status: "-1",bit:status})
+
+            else if (err == "err")
+              res.json({status: "0",bit:status})
+
+          })}
+      else if (err == "err")
+          res.json({status: "0"})
+    })}};
+
+function update_status(id,status,callback) {
+
+  Guy.update({id:id}, {available: status}).then(function (data,err) {
+
+    if(data[0]) {
+      return callback(data[0].available, "ok", "")
+    }
+    else if (err) {
+      return callback(data[0].available,"", "err")
+    }
+  })
+}
