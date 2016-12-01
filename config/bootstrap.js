@@ -14,7 +14,16 @@ module.exports.bootstrap = function(cb) {
   sails.on('lifted', function() {
     var schedule = require('node-schedule');
 
+
+
+
     var j = schedule.scheduleJob('*/1 * * * *', function(){
+
+
+      fraud_manager();
+
+
+
 
       Pending.find({},{ack_scheduler_allowed:true}).then(function (data,err) {
 
@@ -86,19 +95,19 @@ module.exports.bootstrap = function(cb) {
     })
 
 
-    var S = schedule.scheduleJob('*/1 * * * *', function(){
+  //  var S = schedule.scheduleJob('*/1 * * * *', function(){
 
-      Apptokens.destroy({working:false}).then(function (data,err) {
+  //    Apptokens.destroy({working:false}).then(function (data,err) {
 
-        if(data)
-        {
-          console.log("operation clean up completed successfully")
-        }
-        else
-          console.log("operation clean up interrupted")
-      })
+  //      if(data)
+   //     {
+   //       console.log("operation clean up completed successfully")
+  //      }
+  //      else
+   //       console.log("operation clean up interrupted")
+  //    })
 
-    })
+ //   })
 
 
   });
@@ -294,36 +303,49 @@ module.exports.bootstrap = function(cb) {
 
   }
 
+  function  fraud_manager() {
+
+    block_fraud_providers()
+    block_fraud_customer()
+
+  }
 
 
+function  block_fraud_providers() {
+  User.find({}).then(function (data,err) {
 
+    if (data) {
+      for (i = 0; i < data.length; i++) {
+        if (data[i].f_warnings >= 2&&data[i].f_status==false)
+        {
+          data[i].f_status == true
+        }
+      }
 
+    }
+    else if (err)
+    { console.log("error in fraud manager")}
 
+  })
+}
 
+  function  block_fraud_customer() {
+    Customer.find({}).then(function (data,err) {
 
+      if (data) {
+        for (i = 0; i < data.length; i++) {
+          if (data[i].f_warnings >= 2&&data[i].f_status==false)
+          {
+            data[i].f_status == true
+          }
+        }
 
+      }
+      else if (err)
+      { console.log("error in fraud manager")}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    })
+  }
 
    cb();
 };
