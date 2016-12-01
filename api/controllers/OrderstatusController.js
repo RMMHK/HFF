@@ -39,7 +39,7 @@ module.exports = {
        }
 
       })
-    } else if (status  = "cbc")
+    } else if (status == "cbc")
     {
       Pending.update({id: order_id}, {cancelled_by_customer:true,guy_marked_status:"1"}).then(function (data,err) {
         if (data[0])
