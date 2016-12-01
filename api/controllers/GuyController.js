@@ -315,7 +315,7 @@ module.exports = {
 
           })}
       else if (err == "err")
-          res.json({status: "0"})
+          res.json({status: "-2"})
     })}};
 
 function update_status(id,status,callback) {

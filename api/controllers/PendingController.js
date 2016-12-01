@@ -31,216 +31,166 @@ module.exports = {
     var results = []
     var street;
     var sector;
+    Customer.findOne({id: tempOrder.customer_id}).then(function (cus, err) {
+
+      if(cus.f_status!=true) {
+        Fooditem.findOne({id: item_id}).populate('eshop').then(function (data, f_err) {
+
+          if (data != "" && data != undefined && data != null) {
+            if (data.status != false && data.eshop.ES_STATUS != false) {
+              try {
+                get_customer_location(parseFloat(cus_lat), parseFloat(cus_long), function (location, l_error) {
+
+                  if (location) {
+                    Pending.create({
+                      item_id: item_id,
+                      customer_id: customer_id,
+                      provider_id: provider_id,
+                      provider_location: data.eshop.ES_LOCATION,
+                      ordered_dish_type: data.type_of_food,
+                      ordered_dish: data.name,
+                      ordered_quantity: params.quantity,
+                      ordered_bill: params.ordered_price,
+                      ordered_unit: data.selling_unit,
+                      customer_location: location
+                    }).then(function (tempOrder, o_err) {
+                      if (tempOrder) {
 
 
-    Fooditem.findOne({id: item_id}).populate('eshop').then(function (data, f_err) {
+                        User.findOne({id: provider_id}).populate('EShop').then(function (provider, p_err) {
 
-      if (data != "" && data != undefined && data != null) {
-        if (data.status != false && data.eshop.ES_STATUS != false) {
-          try {
-            get_customer_location(parseFloat(cus_lat), parseFloat(cus_long), function (location, l_error) {
-
-              if (location) {
-                Pending.create({
-                  item_id:item_id,
-                  customer_id: customer_id,
-                  provider_id: provider_id,
-                  provider_location: data.eshop.ES_LOCATION,
-                  ordered_dish_type: data.type_of_food,
-                  ordered_dish: data.name,
-                  ordered_quantity: params.quantity,
-                  ordered_bill: params.ordered_price,
-                  ordered_unit: data.selling_unit,
-                  customer_location: location
-                }).then(function (tempOrder, o_err) {
-                  if (tempOrder) {
+                          if (provider != null && provider != undefined && provider != "") {
 
 
-                    User.findOne({id: provider_id}).populate('EShop').then(function (provider, p_err) {
-
-                      if (provider != null && provider != undefined && provider != "") {
-
-
-                        initiate_order_request(provider.token, tempOrder.id, tempOrder.ordered_dish, tempOrder.ordered_dish_type, tempOrder.ordered_quantity, tempOrder.ordered_unit, tempOrder.ordered_bill, function (initiated, err) {
-
-                          if (initiated) {
-
-                            //execute request responder
-                            setTimeout(function () {
-
-                              Pending.update({id: tempOrder.id}, {lock: false}).then(function (order, err) {
-
-                                if (order[0].provider_response == 1) {
-                                  res.json({status: "+1"})
-
-
-                                  Customer.findOne({id: tempOrder.customer_id}).then(function (cus, err) {
-
-                                    if (cus) {
-                                      Pending.update({id: tempOrder.id}, {
-                                        customer_cell: cus.cell,
-                                        provider_cell: provider.cell
-                                      }).then(function (success, err) {
-
-                                        if (success[0]) {
-
-
-                                           Guy.find({}, {
-                                            available: true,
-                                            applied: false,
-                                            in_order: false
-                                          }).then(function (guys, err) {
-
-                                            if (guys) {
-                                              for (i = 0; i < guys.length; i++) {
-
-                                                initiate_job_request(tempOrder.id, guys[i].token, tempOrder.provider_location, tempOrder.customer_location, function (initiate, err) {
-
-                                                })
-                                                //send job notification to guys
-
-                                              }
-
-                                              setTimeout(function () {
-
-                                                Pending.update({id:tempOrder.id},{apply_to:false}).then(function (timeOut,err) {
-
-                                                  if(timeOut)
-                                                  {
-
-                                                    Pending.findOne({id:tempOrder.id}).populate('applicants').then(function (results,err)
-                                                    {
-                                                      if(results.applicants.length!=0)
-                                                      {
-                                                       //notify the first andidate that he is selected for the job
-                                                        //update the order lock // turn the applied lock false
-                                                        //release applied lock of all other applications
-                                                        notify_parties(results.applicants[0],tempOrder,provider,cus,"success",function (ok,err) {
-
-                                                        })
-
-                                                        notify_guy(tempOrder,results.applicants[0],function (ok) {
-
-                                                        })
-
-                                                        release_apply_lock(results.applicants,function (ok) {
-
-                                                          if(ok)
-                                                          {
-                                                            console.log(ok)
-                                                          }
-                                                        })
-
-                                                      }
-
-                                                      else if(results.applicants.length==0)
-                                                      {
-
-                                                        notify_parties("",tempOrder,provider,cus,"N/A",function (ok,err) {})
-                                                        Pending.update({id:tempOrder.id},{clean_scheduler_allowed:true}).then(function () {})
-
-                                                      }
-                                                      else
-
-                                                      {console.log(err)
-                                                        console.log("faaaill")}
-
+                            initiate_order_request(provider.token, tempOrder.id, tempOrder.ordered_dish, tempOrder.ordered_dish_type, tempOrder.ordered_quantity, tempOrder.ordered_unit, tempOrder.ordered_bill, function (initiated, err) {
+                              if (initiated) {
+                                //execute request responder
+                                setTimeout(function () {
+                                  Pending.update({id: tempOrder.id}, {lock: false}).then(function (order, err) {
+                                    if (order[0].provider_response == 1) {
+                                      res.json({status: "+1"})
+                                      Customer.findOne({id: tempOrder.customer_id}).then(function (cus, err) {
+                                        if (cus) {
+                                          Pending.update({id: tempOrder.id}, {
+                                            customer_cell: cus.cell,
+                                            provider_cell: provider.cell
+                                          }).then(function (success, err) {
+                                            if (success[0]) {
+                                              Guy.find({}, {
+                                                available: true,
+                                                applied: false,
+                                                in_order: false
+                                              }).then(function (guys, err) {
+                                                if (guys) {
+                                                  for (i = 0; i < guys.length; i++) {
+                                                    initiate_job_request(tempOrder.id, guys[i].token, tempOrder.provider_location, tempOrder.customer_location, function (initiate, err) {
                                                     })
                                                   }
-                                                  else if(err)
-                                                  {
-                                                    console.log("ffailure")
-                                                   console.log(err)
+                                                  setTimeout(function () {
+                                                    Pending.update({id: tempOrder.id}, {apply_to: false}).then(function (timeOut, err) {
+                                                      if (timeOut) {
+                                                        Pending.findOne({id: tempOrder.id}).populate('applicants').then(function (results, err) {
+                                                          if (results.applicants.length != 0) {
+                                                            notify_parties(results.applicants[0], tempOrder, provider, cus, "success", function (ok, err) {
+                                                            })
+                                                            notify_guy(tempOrder, results.applicants[0], function (ok) {
+                                                            })
+                                                            release_apply_lock(results.applicants, function (ok) {
+                                                              if (ok) {
+                                                                console.log(ok)
+                                                              }
+                                                            })
+                                                          }
+                                                          else if (results.applicants.length == 0) {
+                                                            notify_parties("", tempOrder, provider, cus, "N/A", function (ok, err) {
+                                                            })
+                                                            Pending.update({id: tempOrder.id}, {clean_scheduler_allowed: true}).then(function () {
+                                                            })
 
-                                                  }
-                                                })
-                                              },15000)
-
-
+                                                          }
+                                                          else {
+                                                            console.log(err)
+                                                            console.log("faaaill")
+                                                          }
+                                                        })
+                                                      }
+                                                      else if (err) {
+                                                        console.log("ffailure")
+                                                        console.log(err)
+                                                      }
+                                                    })
+                                                  }, 15000)
+                                                }
+                                              })
                                             }
-
+                                            else if (err) {
+                                              console.log("we are not done")
+                                            }
                                           })
-
-
                                         }
                                         else if (err) {
-                                          console.log("we are not done")
+                                          console.log("no cus find")
                                         }
                                       })
                                     }
-                                    else if (err) {
-                                      console.log("no cus find")
-                                    }
-
+                                    else
+                                      res.json({status: "-1"})
+                                    Pending.update({id: tempOrder.id}, {clean_scheduler_allowed: true}).then(function () {
+                                    })
                                   })
-                                }
-                                else
-                                  res.json({status: "-1"})
-                                Pending.update({id:tempOrder.id},{clean_scheduler_allowed:true}).then(function () {})
-                              })
-
-                            }, 20000)
-
+                                }, 20000)
+                              }
+                              else if (err)
+                                res.json({err})
+                            })
                           }
-
-
-                          else if (err)
-                            res.json({err})
-
-
+                          else if (p_err) {
+                            res.json({exists: 0}) //0 is for error
+                          }
+                          else {
+                            res.json({exists: -1})//-1 is for not existing on the system any more
+                          }
                         })
+                      } else if (o_err) {
+                        res.json({order_creation: -1})
                       }
-
-                      else if (p_err) {
-                        res.json({exists: 0}) //0 is for error
-                      }
-
-                      else {
-                        res.json({exists: -1})//-1 is for not existing on the system any more
-                      }
-
-
                     })
-
-
                   }
 
-                  else if (o_err) {
-                    res.json({order_creation: -1})
+                  else if (l_error) {
+                    res.json({location: -1})
                   }
-
-                })
-
-              }
-
-              else if (l_error) {
+                });
+              } catch (exception) {
+                //response here
                 res.json({location: -1})
               }
+            }
 
-            });
-          } catch (exception) {
-            //response here
-            res.json({location: -1})
-
+            else {
+              res.json({item_online: -1})
+            }
           }
 
-
-        }
-
-        else {
-          res.json({item_online: -1})
-        }
+          else if (data == "" || data == undefined || data == null) {
+            res.json({item_exists: -1})
+          }
+          else if (f_err) {
+            res.json({item_exists: -1})
+          }
+        })
 
       }
+    else if (cus.f_status==true)
+      {
+        res.json({fraud:1})
+      }
+      else if(err)
+      {
+        res.json({err:1})
+      }
 
-      else if (data == "" || data == undefined || data == null) {
-        res.json({item_exists: -1})
-      }
-      else if (f_err) {
-        res.json({item_exists: -1})
-      }
     })
-
   },
 
 
@@ -673,3 +623,14 @@ function release_apply_lock(applicants,callback) {
 
   }
 }
+
+
+
+
+
+
+
+
+
+
+
