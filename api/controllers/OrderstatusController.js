@@ -133,7 +133,15 @@ module.exports = {
       })}
 
 
-
+Guy.update({id:guy_id},{in_order:false}).then(function (data,err) {
+  if(data[0])
+  {
+    console.log("guy order key released")
+  }
+  else if (err)
+  {console.log("error during releasing key")}
+  
+})
 
 
 
