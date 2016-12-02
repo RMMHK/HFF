@@ -31,7 +31,7 @@ module.exports = {
     var results = []
     var street;
     var sector;
-    Customer.findOne({id: tempOrder.customer_id}).then(function (cus, err) {
+    Customer.findOne({id: customer_id}).then(function (cus, err) {
 
       if(cus.f_status!=true) {
         Fooditem.findOne({id: item_id}).populate('eshop').then(function (data, f_err) {
