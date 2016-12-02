@@ -31,14 +31,14 @@ module.exports = {
           notify_customer(data[0],function () {
           })
 
-         sendresponse(guy_id,1,function () {
+         sendresponse(guy_id,1,res,function () {
 
          })
        }
        else if(err)
        {
 
-         sendresponse(guy_id,-1,function () {
+         sendresponse(guy_id,-1,res,function () {
 
          })
        }
@@ -52,14 +52,14 @@ module.exports = {
           notify_provider(data[0],function () {
           })
 
-          sendresponse(guy_id,1,function () {
+          sendresponse(guy_id,1,res,function () {
 
           })
         }
         else if(err)
         {
 
-          sendresponse(guy_id,-1,function () {
+          sendresponse(guy_id,-1,res,function () {
 
           })
         }
@@ -73,14 +73,14 @@ module.exports = {
         if (data[0])
         {
 
-          sendresponse(guy_id,1,function () {
+          sendresponse(guy_id,1,res,function () {
 
           })
         }
         else if(err)
         {
 
-          sendresponse(guy_id,-1,function () {
+          sendresponse(guy_id,-1,res,function () {
 
           })
         }
@@ -103,19 +103,19 @@ module.exports = {
             User.update({id:provider.id},{f_warnings:warnings}).then(function (data,err) {
               if(data[0])
               {
-                sendresponse(guy_id,1,function () {
+                sendresponse(guy_id,1,res,function () {
 
                 })}
               else if (err)
               {
-                sendresponse(guy_id,-1,function () {
+                sendresponse(guy_id,-1,res,function () {
 
                 })}
 
             })}
           else if(err) {
 
-            sendresponse(guy_id,-1,function () {
+            sendresponse(guy_id,-1,res,function () {
 
             })
           }
@@ -124,7 +124,7 @@ module.exports = {
       else if(err)
       {
 
-        sendresponse(guy_id,-1,function () {
+        sendresponse(guy_id,-1,res,function () {
 
         })
       }
@@ -145,12 +145,12 @@ module.exports = {
               Customer.update({id:customer.id},{f_warnings:warnings}).then(function (data,err) {
                 if(data[0])
                 {
-                  sendresponse(guy_id,1,function () {
+                  sendresponse(guy_id,1,res,function () {
 
                   })}
                 else if (err)
                 {
-                  sendresponse(guy_id,-1,function () {
+                  sendresponse(guy_id,-1,res,function () {
 
                   })}
 
@@ -158,7 +158,7 @@ module.exports = {
               })}
             else if(err) {
 
-              sendresponse(guy_id,-1,function () {
+              sendresponse(guy_id,-1,res,function () {
 
               })
             }
@@ -167,7 +167,7 @@ module.exports = {
         else if(err)
         {
 
-          sendresponse(guy_id,-1,function () {
+          sendresponse(guy_id,-1,res,function () {
 
           })
         }
@@ -259,7 +259,7 @@ function notify_provider(order,callback) {
   })
 }
 
-function sendresponse(guy,response) {
+function sendresponse(guy,response,res,) {
 
   Guy.findOne({id:guy.id}).populate('guy_orders').then(function (data,err) {
 
@@ -269,7 +269,7 @@ function sendresponse(guy,response) {
     }
     else if (err)
     {
-      res.json({process:-1})
+      res.json({process:-1,data:data.guy_orders})
     }
   })
 
