@@ -31,9 +31,7 @@ module.exports = {
           notify_customer(data[0],function () {
           })
 
-         sendresponse(guy_id,1,res,function () {
-
-         })
+         sendresponse(guy_id,1,res,function () {})
        }
        else if(err)
        {
@@ -261,7 +259,7 @@ function notify_provider(order,callback) {
 
 function sendresponse(guy,response,res,callback) {
 
-  Guy.findOne({id:guy.id}).populate('guy_orders').then(function (data,err) {
+  Guy.findOne({id:guy}).populate('guy_orders').then(function (data,err) {
 
     if(data)
     {
