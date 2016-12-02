@@ -31,11 +31,16 @@ module.exports = {
           notify_customer(data[0],function () {
           })
 
-         res.json({process:1})
+         sendresponse(guy_id,1,function () {
+
+         })
        }
        else if(err)
        {
-         res.json({process:-1})
+
+         sendresponse(guy_id,-1,function () {
+
+         })
        }
 
       })
@@ -46,11 +51,17 @@ module.exports = {
         {
           notify_provider(data[0],function () {
           })
-          res.json({process:1})
+
+          sendresponse(guy_id,1,function () {
+
+          })
         }
         else if(err)
         {
-          res.json({process:-1})
+
+          sendresponse(guy_id,-1,function () {
+
+          })
         }
 
       })
@@ -61,11 +72,17 @@ module.exports = {
     {Pending.update({id: order_id}, {guy_marked_status:"1"}).then(function (data,err) {
         if (data[0])
         {
-          res.json({process:1})
+
+          sendresponse(guy_id,1,function () {
+
+          })
         }
         else if(err)
         {
-          res.json({process:-1})
+
+          sendresponse(guy_id,-1,function () {
+
+          })
         }
 
       })}
@@ -85,19 +102,31 @@ module.exports = {
             warnings = warnings+1
             User.update({id:provider.id},{f_warnings:warnings}).then(function (data,err) {
               if(data[0])
-              res.json({process:1})
+              {
+                sendresponse(guy_id,1,function () {
+
+                })}
               else if (err)
-                res.json({process:-1})
+              {
+                sendresponse(guy_id,-1,function () {
+
+                })}
 
             })}
           else if(err) {
-            res.json({process: -1})
+
+            sendresponse(guy_id,-1,function () {
+
+            })
           }
         })
       }
       else if(err)
       {
-        res.json({process:-1})
+
+        sendresponse(guy_id,-1,function () {
+
+        })
       }
 
     })}
@@ -115,19 +144,32 @@ module.exports = {
               warnings = warnings+1
               Customer.update({id:customer.id},{f_warnings:warnings}).then(function (data,err) {
                 if(data[0])
-                  res.json({process:1})
+                {
+                  sendresponse(guy_id,1,function () {
+
+                  })}
                 else if (err)
-                  res.json({process:-1})
+                {
+                  sendresponse(guy_id,-1,function () {
+
+                  })}
+
 
               })}
             else if(err) {
-              res.json({process: -1})
+
+              sendresponse(guy_id,-1,function () {
+
+              })
             }
           })
         }
         else if(err)
         {
-          res.json({process:-1})
+
+          sendresponse(guy_id,-1,function () {
+
+          })
         }
 
       })}
@@ -140,10 +182,8 @@ Guy.update({id:guy_id},{in_order:false}).then(function (data,err) {
   }
   else if (err)
   {console.log("error during releasing key")}
-  
+
 })
-
-
 
   }
 
@@ -217,4 +257,20 @@ function notify_provider(order,callback) {
     else if (err)
     {console.log("database error")}
   })
+}
+
+function sendresponse(guy,response) {
+
+  Guy.findOne({id:guy.id}).populate('guy_orders').then(function (data,err) {
+
+    if(data)
+    {
+      res.json({process:response,data:data.guy_orders})
+    }
+    else if (err)
+    {
+      res.json({process:-1})
+    }
+  })
+
 }
