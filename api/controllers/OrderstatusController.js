@@ -198,7 +198,7 @@ function notify_customer(order,callback) {
         to: token,
         notification: {
           title: "Order",
-          body: order.ordered_dish + " " + "\n" + order.ordered_quantity + " " + order.order_unit + "\n" + "cancelled by provider"
+          body: order.ordered_dish + " " + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "cancelled by provider"
         },
         data: {
           type: "cbp"          /// type of notification to customer
@@ -234,7 +234,7 @@ function notify_provider(order,callback) {
         to: token,
         notification: {
           title: "Order",
-          body: order.ordered_dish + " " + "\n" + order.ordered_quantity + " " + order.order_unit + "\n" + "cancelled by customer"
+          body: order.ordered_dish + " " + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "cancelled by customer"
         },
         data:
         {type: "cbc"          /// type of notification to provider
