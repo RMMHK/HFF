@@ -259,7 +259,7 @@ function notify_provider(order,callback) {
   })
 }
 
-function sendresponse(guy,response,res,) {
+function sendresponse(guy,response,res,callback) {
 
   Guy.findOne({id:guy.id}).populate('guy_orders').then(function (data,err) {
 
