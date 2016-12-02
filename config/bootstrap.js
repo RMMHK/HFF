@@ -318,7 +318,7 @@ function  block_fraud_providers() {
       for (i = 0; i < data.length; i++) {
         if (data[i].f_warnings >= 2&&data[i].f_status==false)
         {
-          data[i].f_status == true
+          data[i].f_status = true
         }
       }
 
@@ -336,7 +336,7 @@ function  block_fraud_providers() {
         for (i = 0; i < data.length; i++) {
           if (data[i].f_warnings >= 2&&data[i].f_status==false)
           {
-            data[i].f_status == true
+            data[i].f_status = true
           }
         }
 
