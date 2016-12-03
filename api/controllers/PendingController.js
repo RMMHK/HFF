@@ -448,7 +448,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
                         body: guy_name + " " + "\n" + guy_cell + "\n" + "tap to acknowledge"
                       },
                       data: {
-                        order: order.id,
+                        ack: order.id,
                         type: "assigned"            //data payloads to customer and provider
                       }
                     };
@@ -510,6 +510,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
         body: order.ordered_dish + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "TRY LATER" + "\n" + "tap to exhaust"
       },
       data: {
+        ack:order.id,
         type: "N/A"                          //no pay load // but notification
       }
     };
