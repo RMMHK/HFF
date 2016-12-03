@@ -319,15 +319,24 @@ module.exports = {
 
 
 
-  name_search: function (req,res,next) {
-    Customer.find({name:req.param('name')}).exec(function (err, usersNamedFinn){
-      if (err) {
-        return res.serverError(err);
-      }
-      sails.log('Wow, there are %d users named ' ,console.log(req.param('name')), 'Check it out:', usersNamedFinn.length, usersNamedFinn);
-      return res.json(usersNamedFinn);
-    });
+  getOrders:function (req,res) {
 
+    var params = req.body
+    Customer.findOne({id:params.id}).populate('cus_orders').then(function (data,err) {
+
+      if(data.cus_orders.length!=0)
+      {
+        res.json({orders:data.cus_orders})
+      }
+      else if(data.cus_orders.length==0)
+      {
+        res.json({orders:0})
+      }
+      else if (err)
+      {
+        res.json({orders:-1})
+      }
+    })
 
   },
 

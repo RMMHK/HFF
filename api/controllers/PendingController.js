@@ -417,22 +417,23 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
       if (guy) {
         Pending.update({id: order.id}, {guy_id:guy.id,guy_name: guy.name, guy_cell: guy.cell}).then(function (data, err) {
           if (data) {
-            User.update({id: provider.id}, {fp_orders: order.id}).then(function (prov, err) {
+
+           /* User.update({id: provider.id}, {fp_orders: order.id}).then(function (prov, err) {
             })//updating provider field
             Customer.update({id: customer.id}, {cus_orders: order.id}).then(function () {
-            })//updating customer order field
+            })//updating customer order field*/
 
-            User.findOne({id: provider.id}).populate('fp_orders').then(function (providerPAYLOAD, err) {
+            User.findOne({id: provider.id}).then(function (providerPAYLOAD, err) {
 
               if (providerPAYLOAD) {
-                var provider_order_list = []
-                provider_order_list = providerPAYLOAD.fp_orders
 
-                Customer.findOne({id: customer.id}).populate('cus_orders').then(function (cusPAYLOAD, err) {
+                Pending.update({id:order.id},{provider:providerPAYLOAD.id}).then(function () {})
 
-                  if (cusPAYLOAD) {
-                    var customer_order_list = []
-                    customer_order_list = cusPAYLOAD.cus_orders
+                Customer.findOne({id: customer.id}).then(function (cusPAYLOAD, err) {
+
+                  if (cusPAYLOAD)
+                  {
+                    Pending.update({id:order.id},{customer:cusPAYLOAD.id}).then(function () {})
 
                     var guy_name = guy.name
                     var guy_cell = guy.cell
@@ -447,7 +448,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
                         body: guy_name + " " + "\n" + guy_cell + "\n" + "tap to acknowledge"
                       },
                       data: {
-                        order: "",
+                        order: order.id,
                         type: "assigned"            //data payloads to customer and provider
                       }
                     };
@@ -455,12 +456,10 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
                       if (i == 0) {
                         message.to = provider_token
-                        message.data.order = provider_order_list//pay load
 
                       }
                       else if (i == 1) {
                         message.to = customer_token
-                        message.data.order = customer_order_list//payload
                       }
                       fcm.send(message, function (err, response) {
 
