@@ -7,15 +7,23 @@
 
 module.exports = {
 
-  ackJob:function (req,res) {
+  ackJob: function (req, res) {
     {
-      var params= req.body;
-      Pending.update({id:params.order},{acked_by_guy:true}).then(function (data,err) {
+      var params = req.body;
+      Pending.update({id: params.order}, {acked_by_guy: true}).then(function (data, err) {
 
       })
     }
 
-  }
 
-};
+  },
+
+  ackCustomer: function (req, res) {
+    {
+      var params = req.body;
+      Pending.update({id: params.order}, {acked_by_customer: true}).then(function (data, err) {})
+    }
+
+  }
+}
 
