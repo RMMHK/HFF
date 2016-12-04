@@ -42,7 +42,7 @@ module.exports = {
      	type:'integer'
      },
 
-    shop_location://location through GPS
+      location://location through GPS
     {
     	type:'string',
       defaultsTo:'null'

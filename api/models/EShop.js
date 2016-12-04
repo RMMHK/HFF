@@ -41,6 +41,15 @@ module.exports= {
       type:'string',
       defaultsTo:'N/A'
     },
+    ES_LAT:{
+      type:'string',
+      defaultsTo:"null"
+    },
+    ES_LONG:
+    {
+      type:'string',
+      defaultsTo:"null"
+    },
 /*
    Owner: {
 
