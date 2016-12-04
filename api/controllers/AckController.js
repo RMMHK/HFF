@@ -21,7 +21,10 @@ module.exports = {
   ackCustomer: function (req, res) {
     {
       var params = req.body;
-      Pending.update({id: params.order}, {acked_by_customer: true}).then(function (data, err) {})
+      console.log(params)
+      Pending.update({id: params.order}, {acked_by_customer: true}).then(function (data, err) {
+        console.log(err)
+      })
     }
 
   }

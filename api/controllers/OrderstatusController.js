@@ -25,6 +25,34 @@ module.exports = {
     //fbc
     //delivered
     if(status=="cbp") {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       Pending.update({id: order_id}, {cancelled_by_provider:true,guy_marked_status:"1"}).then(function (data,err) {
        if (data[0])
        {
