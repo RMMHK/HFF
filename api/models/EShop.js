@@ -29,7 +29,7 @@ module.exports= {
     },
     ES_LOCATION: {
       type: 'string',
-      defaultsTo:'need to fix'
+      defaultsTo:'null'
     },
 
     ES_BLOCK: {

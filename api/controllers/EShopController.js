@@ -20,7 +20,7 @@ getEShop:function (req,res,next) {
         EShop.findOne({id:user.EShop.id}).populate('ES_items').then(function (items,err) {
 
          if (items)
-        res.json({status:1,eshop_id:user.EShop.id,eshop_status:user.EShop.ES_STATUS,items:items.ES_items})
+        res.json({status:1,eshop_id:user.EShop.id,eshop_status:user.EShop.ES_STATUS,eshop_location:EShop.ES_LOCATION,items:items.ES_items})
 
           if(err)
           {
@@ -57,7 +57,7 @@ getEShop:function (req,res,next) {
                //needs to fast
               EShop.findOne({id:shop.id}).populate('ES_items').then(function (items,err) {
               if (items)
-                res.json({status:1,eshop_id:shop.id,eshop_status:shop.ES_STATUS,items:items.ES_items}) //returning items
+                res.json({status:1,eshop_id:shop.id,eshop_status:shop.ES_STATUS,eshop_location:shop.ES_LOCATION,items:items.ES_items}) //returning items
 
               if(err)
               {
@@ -111,6 +111,7 @@ getEShop:function (req,res,next) {
 
 setLocation:function (req,res,next) {
 
+      
       //user real id
   // eshop real id
   //shop location
