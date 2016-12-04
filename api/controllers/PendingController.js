@@ -325,7 +325,7 @@ function get_customer_location (lat,long,callback) {
 
   if (err)
   {
-    return callback(address,error)
+    return callback("",error)
   }
   })
 

@@ -111,34 +111,76 @@ getEShop:function (req,res,next) {
 
 setLocation:function (req,res,next) {
 
-      
+
       //user real id
   // eshop real id
   //shop location
       var params = req.body;
 
-    User.update({id:params.user_id},{shop_location:params.location}).then(function (updated,err){
+   var shop_id = params.shop_id
+    var lat= params.shop_lat
+    var long = params.shop_long
 
-      if (updated[0]) {
+  get_shop_location(parseFloat(lat),parseFloat(long),function (location,err) {
+    if(location)
+    {
 
-        EShop.update({id:params.shop_id},{ES_LOCATION:params.location}).then(function(data,err){
+      EShop.update({id:shop_id},{ES_LOCATION:location,ES_LAT:lat,ES_LONG:long}).then(function (updated,err){
 
-          if (err)
-          {
-            res.json({status: 0});
-            // console.log("err"+o);
-          }
-          else if (data==""||!data)
-          {res.json({status: 0});}
+        if (updated[0]) {
+            res.json({location:location})
+        }
+        else if(err)
+        {
+          res.json({location:-1})
+        }
 
-          else if (data)
-          {  res.json({status:1,user:updated[0]})
-          }
-        })
-      }
+      });
+    }
+    else if(err)
+    {
+      res.json({location:-1})
+    }
+  })
 
-    });
   },
 
 
+
+
 };
+function get_shop_location (lat,long,callback) {
+  var address
+  var error= "N/A"
+  var geo_coder= require("geocoder");
+
+  geo_coder.reverseGeocode(lat,long,function (err,location) {
+
+    if(location) {
+
+      results = location.results;
+
+      for (i = 0; i < 2; i++) {
+        var obj = results[i];
+        if (i == 0) {
+          street = obj.formatted_address
+
+        }
+        if (i == 1) {
+          sector_array = obj.address_components
+          sector = sector_array[0].long_name
+        }
+      }
+      address = sector+","+street;
+      console.log(address+"")
+
+      return callback(address,"");
+    }
+
+    if (err)
+    {
+      return callback(address,error)
+    }
+  })
+
+}
