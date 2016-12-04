@@ -52,7 +52,9 @@ module.exports = {
                       ordered_quantity: params.quantity,
                       ordered_bill: params.ordered_price,
                       ordered_unit: data.selling_unit,
-                      customer_location: location
+                      customer_location: location,
+                      price_per_unit:data.price,
+                      description:data.description
                     }).then(function (tempOrder, o_err) {
                       if (tempOrder) {
 

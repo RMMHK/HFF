@@ -36,6 +36,8 @@ module.exports = {
       defaultsTo:"null"
     },
 
+
+
     provider_cell:
     {
       type:'string',
@@ -46,6 +48,18 @@ module.exports = {
       type: 'string',
       defaultsTo:"null"
 
+    },
+
+    price_per_unit:
+    {
+      type:'string',
+      defaultsTo:"null"
+    },
+
+    description:
+    {
+      type:'string',
+      defaultsTo:'null'
     },
 
     provider_location:
@@ -198,10 +212,9 @@ module.exports = {
       defaultsTo:false,
     },
 
-    fraud_by_provider:
-    {
-      type:"Boolean",
-      defaultsTo:false,
+    fraud_by_provider: {
+      type: "Boolean",
+      defaultsTo: false,
 
     }
 
