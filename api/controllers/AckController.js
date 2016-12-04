@@ -27,6 +27,18 @@ module.exports = {
       })
     }
 
+  },
+
+
+  ackProvider: function (req, res) {
+    {
+      var params = req.body;
+      console.log(params)
+      Pending.update({id: params.order}, {acked_by_provider: true}).then(function (data, err) {
+        console.log(err)
+      })
+    }
+
   }
 }
 
