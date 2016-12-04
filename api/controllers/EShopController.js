@@ -120,7 +120,7 @@ setLocation:function (req,res,next) {
    var shop_id = params.shop_id
     var lat= params.shop_lat
     var long = params.shop_long
-
+    console.log(params)
   get_shop_location(parseFloat(lat),parseFloat(long),function (location,err) {
     if(location)
     {
@@ -128,6 +128,7 @@ setLocation:function (req,res,next) {
       EShop.update({id:shop_id},{ES_LOCATION:location,ES_LAT:lat,ES_LONG:long}).then(function (updated,err){
 
         if (updated[0]) {
+          console.log(location)
             res.json({location:location})
         }
         else if(err)
@@ -139,6 +140,7 @@ setLocation:function (req,res,next) {
     }
     else if(err)
     {
+      con
       res.json({location:-1})
     }
   })
