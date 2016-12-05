@@ -190,6 +190,7 @@ search:function (req,res,next) {
                 description: items[index].description,
                 price: items[index].price.toString(),
                 location: km,
+                cusLoc: cus_loc.toString(),
                 taste: items[index].taste_meter.toString(),
                 quality: items[index].quality_meter.toString(),
                 served: items[index].served.toString(),
@@ -206,7 +207,6 @@ search:function (req,res,next) {
                   result.push({
                     real:"true",
                     tag: "new",
-                    cusLoc: cus_loc,
                     item: JSON.stringify(obj)
                   })
                 }
@@ -215,7 +215,6 @@ search:function (req,res,next) {
                   result.push({
                     real:"false",
                     tag: "new",
-                    cusLoc: cus_loc,
                     item: JSON.stringify(obj)
                   })
                 }
@@ -226,7 +225,6 @@ search:function (req,res,next) {
                   result.push({
                     real:"true",
                     tag: "rated",
-                    cusLoc: cus_loc,
                     item: JSON.stringify(obj)
                   })
                 }
@@ -234,7 +232,6 @@ search:function (req,res,next) {
                   result.push({
                     real:"false",
                     tag: "rated",
-                    cusLoc: cus_loc,
                     item: JSON.stringify(obj)
                   })
                 }
