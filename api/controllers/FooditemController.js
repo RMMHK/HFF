@@ -173,16 +173,17 @@ search:function (req,res,next) {
               if (items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false&&params.quick=="false")
             {
 
-              var cus_loc="null";
-              get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
-                cus_loc=cusloc;
 
-              })
 
-              var km;
+
+              var km,cL;
               get_distance(parseFloat(items[index].eshop.ES_LAT),parseFloat(items[index].eshop.ES_LONG),parseFloat(params.lat),parseFloat(params.long),function(distance)
               {
                 km = distance;
+                get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
+                 cL=cusloc;
+
+                })
               })
               var obj =
               {
@@ -190,8 +191,7 @@ search:function (req,res,next) {
                 description: items[index].description,
                 price: items[index].price.toString(),
                 location: km,
-                cusLoc: cus_loc+" ",
-                hhs:'oye',
+                cusLoc: cL,
                 taste: items[index].taste_meter.toString(),
                 quality: items[index].quality_meter.toString(),
                 served: items[index].served.toString(),
