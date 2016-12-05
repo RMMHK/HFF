@@ -168,6 +168,7 @@ search:function (req,res,next) {
 
       get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
         cus_loc=cusloc
+        console.log(cus_loc)
 
       })
 
