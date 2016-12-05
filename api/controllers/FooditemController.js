@@ -167,6 +167,8 @@ search:function (req,res,next) {
 
 
       get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
+        if(cusloc)
+        {
 
       for(index=0;index<items.length;index++)
       {
@@ -307,7 +309,8 @@ search:function (req,res,next) {
                 })
                 }
             }
-      }})
+      }}
+      })
       res.json({items:result,shops:eshop})
     }
 
