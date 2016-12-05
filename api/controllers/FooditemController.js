@@ -170,7 +170,7 @@ search:function (req,res,next) {
         console.log(customerlocation)
         if(customerlocation)
         {
-
+          console.log(customerlocation)
 
       for(index=0;index<items.length;index++)
       {
