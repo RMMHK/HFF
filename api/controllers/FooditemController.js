@@ -166,9 +166,11 @@ search:function (req,res,next) {
 
 
 
-      get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (customerlocation) {
+      get_customer_location(parseFloat(params.lat),parseFloat(params.long),function(customerlocation) {
+        console.log(customerlocation)
         if(customerlocation)
         {
+
 
       for(index=0;index<items.length;index++)
       {
@@ -356,7 +358,7 @@ function get_customer_location (lat,long,callback) {
       }
       address = sector+","+street;
       console.log(address)
-      return callback(address+"")
+      return callback(address);
     }
 
 
