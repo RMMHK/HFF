@@ -153,8 +153,23 @@ search:function (req,res,next) {
     {
       for(index=0;index<items.length;index++)
       {
-              if (items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false)
+              if (items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false&&params.quick=="false")
             {
+
+
+
+              get_distance(parseFloat(items[index].eshop.ES_LAT),parseFloat(items[index].eshop.ES_LONG),parseFloat(params.lat),parseFloat(params.long),function(distance)
+              {
+
+
+
+              })
+
+
+
+              //irst check quick bit, of customer, if true then take the location of the shop and cus in unction and
+              //calculate distance , then decide on the vaue of radius either to include the item in the search result or not
+
 
               var obj =
               {
@@ -306,3 +321,6 @@ search:function (req,res,next) {
 
 };
 
+function get_distance(shop_lat,shop_long,cus_lat,cus_long,callback) {
+
+}
