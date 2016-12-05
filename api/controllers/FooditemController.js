@@ -163,29 +163,20 @@ search:function (req,res,next) {
 
     if(items)
     {
-
-
-
-      get_customer_location(parseFloat(params.lat),parseFloat(params.long),function(customerlocation) {
-        console.log(customerlocation)
-        if(customerlocation)
-        {
-          console.log(customerlocation)
-
       for(index=0;index<items.length;index++)
       {
               if (items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false&&params.quick=="false")
             {
-
-
-
-
               var km;
               get_distance(parseFloat(items[index].eshop.ES_LAT),parseFloat(items[index].eshop.ES_LONG),parseFloat(params.lat),parseFloat(params.long),function(distance)
               {
                 km = distance;
 
               })
+
+              get_customer_location(parseFloat(params.lat),parseFloat(params.long),function(customerlocation) {
+                if(customerlocation)
+                {
               var obj =
               {
                 name: items[index].name,
@@ -202,7 +193,8 @@ search:function (req,res,next) {
 
                 id:items[index].id,
                 status: "available"
-              }
+              }}
+              })
               if((items[index].served)<=20)
               {
                 if(items[index].eshop.ES_REAL=="true") {
@@ -311,8 +303,7 @@ search:function (req,res,next) {
                 })
                 }
             }
-      }}
-      })
+      }
       res.json({items:result,shops:eshop})
     }
 
