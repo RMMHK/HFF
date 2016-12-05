@@ -160,17 +160,12 @@ search:function (req,res,next) {
   Fooditem.find({type_of_food:params.dish,status:true}).populate('eshop').then(function (items,err) {
 
 
-    var cus_loc;
+
     if(items)
     {
 
 
 
-      get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
-        cus_loc=cusloc
-        console.log(cus_loc)
-
-      })
 
 
       for(index=0;index<items.length;index++)
@@ -178,12 +173,17 @@ search:function (req,res,next) {
               if (items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false&&params.quick=="false")
             {
 
+              var cus_loc;
+              get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
+                cus_loc=cusloc
+
+              })
+
               var km;
               get_distance(parseFloat(items[index].eshop.ES_LAT),parseFloat(items[index].eshop.ES_LONG),parseFloat(params.lat),parseFloat(params.long),function(distance)
               {
                 km = distance;
               })
-              console.log(cus_loc)
               var obj =
               {
                 name: items[index].name,
