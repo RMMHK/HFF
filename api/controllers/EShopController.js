@@ -20,7 +20,7 @@ getEShop:function (req,res,next) {
         EShop.findOne({id:user.EShop.id}).populate('ES_items').then(function (items,err) {
 
          if (items)
-        res.json({status:1,eshop_id:user.EShop.id,eshop_status:user.EShop.ES_STATUS,eshop_location:EShop.ES_LOCATION,items:items.ES_items})
+        res.json({status:1,eshop_id:user.EShop.id,eshop_status:user.EShop.ES_STATUS,eshop_location:user.EShop.ES_LOCATION,items:items.ES_items})
 
           if(err)
           {
