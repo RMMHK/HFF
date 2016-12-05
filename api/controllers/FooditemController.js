@@ -173,6 +173,7 @@ search:function (req,res,next) {
 
 
 
+
               //irst check quick bit, of customer, if true then take the location of the shop and cus in unction and
               //calculate distance , then decide on the vaue of radius either to include the item in the search result or not
 
@@ -234,6 +235,70 @@ search:function (req,res,next) {
               })
 
 
+            }
+
+            else if(items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false&&params.quick=="true") {
+
+                var km;
+                get_distance(parseFloat(items[index].eshop.ES_LAT), parseFloat(items[index].eshop.ES_LONG), parseFloat(params.lat), parseFloat(params.long), function (distance) {
+                  km = distance;
+                })
+
+                if(km<=params.radius)
+                {
+                var obj =
+                {
+                  name: items[index].name,
+                  description: items[index].description,
+                  price: items[index].price.toString(),
+                  location: km,
+                  taste: items[index].taste_meter.toString(),
+                  quality: items[index].quality_meter.toString(),
+                  served: items[index].served.toString(),
+                  least_order: items[index].least_order.toString(),
+                  selling_unit: items[index].selling_unit,
+                  token: items[index].eshop.ES_OWNER_REAL_ID,
+                  id: items[index].id,
+                  status: "available"
+                }
+                if ((items[index].served) <= 20) {
+                  if (items[index].eshop.ES_REAL == "true") {
+                    result.push({
+                      real: "true",
+                      tag: "new",
+                      item: JSON.stringify(obj)
+                    })
+                  }
+                  else {
+                    result.push({
+                      real: "false",
+                      tag: "new",
+                      item: JSON.stringify(obj)
+                    })
+                  }
+                }
+                else {
+                  if (items[index].eshop.ES_REAL == "true") {
+                    result.push({
+                      real: "true",
+                      tag: "rated",
+                      item: JSON.stringify(obj)
+                    })
+                  }
+                  else {
+                    result.push({
+                      real: "false",
+                      tag: "rated",
+                      item: JSON.stringify(obj)
+                    })
+                  }
+                }
+                eshop.push({
+                  shop_id: items[index].eshop_id,
+                  real: items[index].eshop.ES_REAL
+
+                })
+                }
             }
       }
 
