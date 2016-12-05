@@ -35,24 +35,24 @@ module.exports.bootstrap = function(cb) {
            if(data[i].acked_by_customer==false)
            {
 
-              //  send_again_to_customer(data[i],function () {
+                send_again_to_customer(data[i],function () {
 
-               // })
+                })
 
                   //fucntion to re-initiate to customer
            }
            if(data[i].acked_by_provider==false)
            {
-           //  send_again_to_provider(data[i],function () {
+             send_again_to_provider(data[i],function () {
 
-       //      })
+             })
            }
 
            if(data[i].acked_by_guy==false&&data[i].guy_id!="-1")
            {
-        //     send_again_to_guy(data[i],function () {
+             send_again_to_guy(data[i],function () {
 
-       //      })
+             })
            }
 
          }
@@ -83,12 +83,12 @@ module.exports.bootstrap = function(cb) {
         }
       })
 
-      Pending.destroy({acked_by_customer:true,acked_by_provider:true,clean_scheduler_allowed:true}).then(function (data,err) {
+   /*   Pending.destroy({acked_by_customer:true,acked_by_provider:true,clean_scheduler_allowed:true}).then(function (data,err) {
         if(data)
         {
           console.log("operation clean up completed successfully")
         }
-      })
+      })*/
 
 
 
