@@ -183,7 +183,7 @@ search:function (req,res,next) {
               {
                 km = distance;
               })
-
+              console.log(cus_loc)
               var obj =
               {
                 name: items[index].name,
