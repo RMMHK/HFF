@@ -151,13 +151,13 @@ search:function (req,res,next) {
   var obj;
   var km;
 
-  get_distance(parseFloat(params.shop_lat),parseFloat(params.shop_long),parseFloat(params.cus_lat),parseFloat(params.cus_long),function (data) {
+ /* get_distance(parseFloat(params.shop_lat),parseFloat(params.shop_long),parseFloat(params.cus_lat),parseFloat(params.cus_long),function (data) {
 
   km = data;
   console.log(km)
-})
+})*/
 
-  /*Fooditem.find({type_of_food:params.dish,status:true}).populate('eshop').then(function (items,err) {
+  Fooditem.find({type_of_food:params.dish,status:true}).populate('eshop').then(function (items,err) {
     if(items)
     {
       for(index=0;index<items.length;index++)
@@ -169,8 +169,6 @@ search:function (req,res,next) {
               get_distance(parseFloat(items[index].eshop.ES_LAT),parseFloat(items[index].eshop.ES_LONG),parseFloat(params.lat),parseFloat(params.long),function(distance)
               {
                 km = distance;
-                console.log(km)
-
               })
 
 
@@ -184,7 +182,7 @@ search:function (req,res,next) {
                 name: items[index].name,
                 description: items[index].description,
                 price: items[index].price.toString(),
-                location: items[index].eshop.ES_LOCATION,
+                location: km,
                 taste: items[index].taste_meter.toString(),
                 quality: items[index].quality_meter.toString(),
                 served: items[index].served.toString(),
@@ -243,7 +241,7 @@ search:function (req,res,next) {
       res.json({items:result,shops:eshop})
     }
 
-  })*/
+  })
 
 
 },
