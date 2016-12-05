@@ -158,8 +158,20 @@ search:function (req,res,next) {
 })*/
 
   Fooditem.find({type_of_food:params.dish,status:true}).populate('eshop').then(function (items,err) {
+
+
+
     if(items)
     {
+
+      var cus_loc;
+
+      get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
+        cus_loc=cusloc
+
+      })
+
+
       for(index=0;index<items.length;index++)
       {
               if (items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false&&params.quick=="false")
@@ -190,6 +202,7 @@ search:function (req,res,next) {
                 least_order: items[index].least_order.toString(),
                 selling_unit: items[index].selling_unit,
                 token:items[index].eshop.ES_OWNER_REAL_ID,
+                cus_loc:cus_loc,
                 id:items[index].id,
                 status: "available"
               }
@@ -301,8 +314,6 @@ search:function (req,res,next) {
                 }
             }
       }
-
-    //  res.json({items:JSON.stringify(result),shops:JSON.stringify(eshop)}
       res.json({items:result,shops:eshop})
     }
 
@@ -310,86 +321,6 @@ search:function (req,res,next) {
 
 
 },
-
-
-
-
-
-
-
-
-
-//FUNCTION OF SEARCHING
-  //parameter foodName
-  searchItem:function (req,res,next) {
-    var params = req.body
-    console.log(params)
-
-     var items=[]
-      var index=0;
-      Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items_array,err) {
-
-
-        if (items_array.length!=0)
-        {
-          var result=[]
-          for(index=0;index<items_array.length;index++)
-          {
-            EShop.findOne({id:items_array[index].eshop_id}).then(function (eshop,err) {
-
-              if (eshop) {
-
-                index = index - 1;
-                console.log(eshop)
-                if (eshop.ES_STATUS == true && eshop.ES_BLOCK == false) {
-                  /*here gps coordinates will be compared*/
-                  var obj =
-
-                  {
-                    name: items_array[index].name,
-                    description: items_array[index].description,
-                    price: items_array[index].price.toString(),
-                    location: items_array[index].eshop.ES_LOCATION,
-                    taste: items_array[index].taste_meter.toString(),
-                    quality: items_array[index].quality_meter.toString(),
-                    served: items_array[index].served.toString(),
-                    least_order: items_array[index].least_order.toString(),
-                    selling_unit: items_array[index].selling_unit,
-                    id: items_array[index].id,
-                    status: "available"
-                  }
-                  var item_json = JSON.stringify(obj)
-
-                  result.push({item_json})
-                  console.log(result)
-
-                }
-              }
-
-
-              if (err)
-                console.log(err)
-
-
-            })}
-          res.json({result:result});
-
-
-
-
-
-        }
-
-        else
-        {
-          res.json({error:err})
-        }})},
-
-
-
-          //  res.json({result: 0})
-
-
 
 };
 
@@ -402,3 +333,110 @@ function get_distance(shop_lat,shop_long,cus_lat,cus_long,callback) {
  var distance = geodist(shop,customer,{unit:'km'})
   return callback(distance)
 }
+
+
+function get_customer_location (lat,long,callback) {
+  var address
+  var error= "N/A"
+  var geo_coder= require("geocoder");
+
+  geo_coder.reverseGeocode(lat,long,function (err,location) {
+
+    if(location) {
+
+      results = location.results;
+
+      for (i = 0; i < 2; i++) {
+        var obj = results[i];
+        if (i == 0) {
+          street = obj.formatted_address
+
+        }
+        if (i == 1) {
+          sector_array = obj.address_components
+          sector = sector_array[0].long_name
+        }
+      }
+      address = sector+","+street;
+      console.log(address+"")
+
+      return callback(address,"");
+    }
+
+    if (err)
+    {
+      return callback(address,error)
+    }
+  })
+
+}
+
+//FUNCTION OF SEARCHING
+//parameter foodName
+/*  searchItem:function (req,res,next) {
+ var params = req.body
+ console.log(params)
+
+ var items=[]
+ var index=0;
+ Fooditem.find({type_of_food:params.foodTypeName,status:true}).then(function (items_array,err) {
+
+
+ if (items_array.length!=0)
+ {
+ var result=[]
+ for(index=0;index<items_array.length;index++)
+ {
+ EShop.findOne({id:items_array[index].eshop_id}).then(function (eshop,err) {
+
+ if (eshop) {
+
+ index = index - 1;
+ console.log(eshop)
+ if (eshop.ES_STATUS == true && eshop.ES_BLOCK == false) {
+ here gps coordinates will be compared
+ /*    var obj =
+
+ {
+ name: items_array[index].name,
+ description: items_array[index].description,
+ price: items_array[index].price.toString(),
+ location: items_array[index].eshop.ES_LOCATION,
+ taste: items_array[index].taste_meter.toString(),
+ quality: items_array[index].quality_meter.toString(),
+ served: items_array[index].served.toString(),
+ least_order: items_array[index].least_order.toString(),
+ selling_unit: items_array[index].selling_unit,
+ id: items_array[index].id,
+ status: "available"
+ }
+ var item_json = JSON.stringify(obj)
+
+ result.push({item_json})
+ console.log(result)
+
+ }
+ }
+
+
+ if (err)
+ console.log(err)
+
+
+ })}
+ res.json({result:result});
+
+
+
+
+
+ }
+
+ else
+ {
+ res.json({error:err})
+ }})},
+
+ */
+
+//  res.json({result: 0})
