@@ -149,7 +149,7 @@ search:function (req,res,next) {
   var result = []
   var eshop=[]
   var obj;
-  var km;
+
 
  /* get_distance(parseFloat(params.shop_lat),parseFloat(params.shop_long),parseFloat(params.cus_lat),parseFloat(params.cus_long),function (data) {
 
@@ -158,8 +158,6 @@ search:function (req,res,next) {
 })*/
 
   Fooditem.find({type_of_food:params.dish,status:true}).populate('eshop').then(function (items,err) {
-
-
 
     if(items)
     {
@@ -174,9 +172,7 @@ search:function (req,res,next) {
 
               })
 
-              get_customer_location(parseFloat(params.lat),parseFloat(params.long),function(customerlocation) {
-                if(customerlocation)
-                {
+
               var obj =
               {
                 name: items[index].name,
@@ -193,8 +189,7 @@ search:function (req,res,next) {
 
                 id:items[index].id,
                 status: "available"
-              }}
-              })
+              }
               if((items[index].served)<=20)
               {
                 if(items[index].eshop.ES_REAL=="true") {
