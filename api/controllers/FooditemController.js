@@ -160,11 +160,11 @@ search:function (req,res,next) {
   Fooditem.find({type_of_food:params.dish,status:true}).populate('eshop').then(function (items,err) {
 
 
-
+    var cus_loc;
     if(items)
     {
 
-      var cus_loc;
+
 
       get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
         cus_loc=cusloc
