@@ -175,18 +175,22 @@ verify:function (req,res,next){
               if (!data || data == "" || data.undefined) {
                 Apptokens.create({application_token: params.token}).then(function (data, err) {
                   if (data) {
-                    res.json({exists: true, user: user[0]})//response
-                  }
 
+                    getMenue(function (dish_names, list)
+                    {
+                      res.json({exists: true, user: user[0],dish_names:stringify(dish_names),list:stringify(list)})//response
+
+                    })
+                  }
                   else if (err) {
                     res.json({exists: false})
                   }
                 })
               }
 
-              else if (data) {
+             /* else if (data) {
                 res.json({exists: true, user: user[0]})
-              }
+              }*/
 
               else if (err) {
                 res.json({exists: false})
@@ -344,7 +348,73 @@ verify:function (req,res,next){
 };
 
 
+function  getMenue(callback) {
 
+  var dish_names=[]
+  var container=[]
+  var dish_types=[]
+  Dishname.find({}).populate('Types').then(function(data,err)
+  {
+    if (data)  // for preparing dishname file..
+    {
+
+      var data_length= data.length;
+
+      for(i=0;i<data_length;i++)
+      {
+        var Obj ={
+
+          name : data[i].DishName
+        }
+        var jsonObj = JSON.stringify(Obj)
+
+        dish_names.push(
+          {
+            jsonObj
+          }
+        )
+
+      }//dishnames working fine
+      for(i=0;i<data.length;i++)
+      {
+        var o = {
+
+          dish_name: data[i].DishName
+        }
+
+        var dish_name=  JSON.stringify(o)//JSON dishnmae
+
+        var object = {
+
+          unit : data[i].order_unit
+        }
+
+        var order= JSON.stringify(object)//order
+
+        for(j=0;j<data[i].Types.length;j++)
+        {
+
+          var obj =  {
+            name : data[i].Types[j].single_name
+          }
+
+          var json = JSON.stringify(obj)
+          dish_types.push(
+            {
+              json
+            })}
+        //   var types = JSON.stringify(dish_types)
+        container.push({
+          dish_name:dish_name,order_unit:order,dishType:dish_types
+        })
+        dish_types=[]
+      }
+     return callback(dish_names,container)
+//      res.json({dish_names:dish_names,list:container})
+    }
+
+})
+}
 
 
 
