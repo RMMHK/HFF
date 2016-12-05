@@ -246,7 +246,6 @@ search:function (req,res,next) {
                   description: items[index].description,
                   price: items[index].price.toString(),
                   location: km,
-                  cusLoc:cus_loc,
                   taste: items[index].taste_meter.toString(),
                   quality: items[index].quality_meter.toString(),
                   served: items[index].served.toString(),
