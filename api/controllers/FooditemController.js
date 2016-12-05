@@ -149,12 +149,15 @@ search:function (req,res,next) {
   var result = []
   var eshop=[]
   var obj;
+  var km;
 
   get_distance(parseFloat(params.shop_lat),parseFloat(params.shop_long),parseFloat(params.cus_lat),parseFloat(params.cus_long),function (data) {
 
+  km = data;
+  console.log(km)
 })
-/*
-  Fooditem.find({type_of_food:params.dish,status:true}).populate('eshop').then(function (items,err) {
+
+  /*Fooditem.find({type_of_food:params.dish,status:true}).populate('eshop').then(function (items,err) {
     if(items)
     {
       for(index=0;index<items.length;index++)
@@ -162,12 +165,11 @@ search:function (req,res,next) {
               if (items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false&&params.quick=="false")
             {
 
-
-
+              var km;
               get_distance(parseFloat(items[index].eshop.ES_LAT),parseFloat(items[index].eshop.ES_LONG),parseFloat(params.lat),parseFloat(params.long),function(distance)
               {
-
-
+                km = distance;
+                console.log(km)
 
               })
 
@@ -241,9 +243,9 @@ search:function (req,res,next) {
       res.json({items:result,shops:eshop})
     }
 
-  })
+  })*/
 
-*/
+
 },
 
 
@@ -335,5 +337,5 @@ function get_distance(shop_lat,shop_long,cus_lat,cus_long,callback) {
   var customer={lat:cus_lat,long:cus_long}
 
  var distance = geodist(shop,customer,{unit:'km'})
-  console.log(distance)
+  return callback(distance)
 }
