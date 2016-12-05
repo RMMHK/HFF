@@ -166,7 +166,7 @@ search:function (req,res,next) {
 
 
 
-
+      get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
 
       for(index=0;index<items.length;index++)
       {
@@ -176,14 +176,11 @@ search:function (req,res,next) {
 
 
 
-              var km,cL;
+              var km;
               get_distance(parseFloat(items[index].eshop.ES_LAT),parseFloat(items[index].eshop.ES_LONG),parseFloat(params.lat),parseFloat(params.long),function(distance)
               {
                 km = distance;
-                get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
-                 cL=cusloc;
 
-                })
               })
               var obj =
               {
@@ -191,7 +188,7 @@ search:function (req,res,next) {
                 description: items[index].description,
                 price: items[index].price.toString(),
                 location: km,
-                cusLoc: cL,
+                cusLoc: cusloc,
                 taste: items[index].taste_meter.toString(),
                 quality: items[index].quality_meter.toString(),
                 served: items[index].served.toString(),
@@ -310,7 +307,7 @@ search:function (req,res,next) {
                 })
                 }
             }
-      }
+      }})
       res.json({items:result,shops:eshop})
     }
 
