@@ -412,7 +412,7 @@ function  getMenue(callback) {
         })
         dish_types=[]
       }
-     return callback(dish_names,container)
+     return callback(JSON.stringify(dish_names),JSON.stringify(container))
 //      res.json({dish_names:dish_names,list:container})
     }
 
