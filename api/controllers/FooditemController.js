@@ -184,26 +184,20 @@ search:function (req,res,next) {
                 km = distance;
               })
 
-
-
-
-              //irst check quick bit, of customer, if true then take the location of the shop and cus in unction and
-              //calculate distance , then decide on the vaue of radius either to include the item in the search result or not
-
-
               var obj =
               {
                 name: items[index].name,
                 description: items[index].description,
                 price: items[index].price.toString(),
                 location: km,
+                cus_loc:cus_loc,
                 taste: items[index].taste_meter.toString(),
                 quality: items[index].quality_meter.toString(),
                 served: items[index].served.toString(),
                 least_order: items[index].least_order.toString(),
                 selling_unit: items[index].selling_unit,
                 token:items[index].eshop.ES_OWNER_REAL_ID,
-                cus_loc:cus_loc,
+
                 id:items[index].id,
                 status: "available"
               }
@@ -266,12 +260,12 @@ search:function (req,res,next) {
                   description: items[index].description,
                   price: items[index].price.toString(),
                   location: km,
+                  cus_loc:cus_loc,
                   taste: items[index].taste_meter.toString(),
                   quality: items[index].quality_meter.toString(),
                   served: items[index].served.toString(),
                   least_order: items[index].least_order.toString(),
                   selling_unit: items[index].selling_unit,
-                  cus_loc:cus_loc,
                   token: items[index].eshop.ES_OWNER_REAL_ID,
                   id: items[index].id,
                   status: "available"
