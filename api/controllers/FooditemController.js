@@ -166,8 +166,8 @@ search:function (req,res,next) {
 
 
 
-      get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
-        if(cusloc)
+      get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (customerlocation) {
+        if(customerlocation)
         {
 
       for(index=0;index<items.length;index++)
@@ -190,7 +190,7 @@ search:function (req,res,next) {
                 description: items[index].description,
                 price: items[index].price.toString(),
                 location: km,
-                cusLoc: cusloc,
+                cusLoc: customerlocation,
                 taste: items[index].taste_meter.toString(),
                 quality: items[index].quality_meter.toString(),
                 served: items[index].served.toString(),
@@ -356,8 +356,9 @@ function get_customer_location (lat,long,callback) {
       }
       address = sector+","+street;
       console.log(address)
+      return callback(address)
     }
-    return callback(address)
+
 
   })
 
