@@ -154,7 +154,6 @@ verify:function (req,res,next){
       var params = req.body;
       console.log(params.v_id);
       console.log(params.token);
-
       if (err) {
         res.json({exists: false});
         // console.log("err"+o);
@@ -188,9 +187,13 @@ verify:function (req,res,next){
                 })
               }
 
-             /* else if (data) {
-                res.json({exists: true, user: user[0]})
-              }*/
+              else if (data) {
+                getMenue(function (dish_names, list)
+                {
+                  res.json({exists: true, user: user[0],dish_names:dish_names,list:list})//response
+
+                })
+              }
 
               else if (err) {
                 res.json({exists: false})
