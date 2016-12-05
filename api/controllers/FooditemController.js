@@ -173,7 +173,7 @@ search:function (req,res,next) {
               if (items[index].eshop.ES_STATUS == true && items[index].eshop.ES_BLOCK == false&&params.quick=="false")
             {
 
-              var cus_loc;
+              var cus_loc="null";
               get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
                 cus_loc=cusloc
 
@@ -355,15 +355,11 @@ function get_customer_location (lat,long,callback) {
         }
       }
       address = sector+","+street;
-      console.log(address+"")
+      console.log(address)
 
-      return callback(address,"");
+      return callback(address);
     }
 
-    if (err)
-    {
-      return callback(address,error)
-    }
   })
 
 }
