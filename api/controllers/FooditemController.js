@@ -141,13 +141,19 @@ module.exports = {
 
 search:function (req,res,next) {
 
+
+
+
     var params = req.body
    console.log(params)
   var result = []
   var eshop=[]
   var obj;
 
+  get_distance(parseFloat(params.shop_lat),parseFloat(params.shop_long),parseFloat(params.cus_lat),parseFloat(params.cus_long),function (data) {
 
+})
+/*
   Fooditem.find({type_of_food:params.dish,status:true}).populate('eshop').then(function (items,err) {
     if(items)
     {
@@ -237,6 +243,7 @@ search:function (req,res,next) {
 
   })
 
+*/
 },
 
 
@@ -322,5 +329,11 @@ search:function (req,res,next) {
 };
 
 function get_distance(shop_lat,shop_long,cus_lat,cus_long,callback) {
+  var geodist = require('geodist')
 
+  var shop = {lat:shop_lat,long:shop_long}
+  var customer={lat:cus_lat,long:cus_long}
+
+ var distance = geodist(shop,customer,{unit:'km'})
+  console.log(distance)
 }
