@@ -47,7 +47,11 @@ module.exports = {
                    Apptokens.create({application_token:params.token}).then(function (data,err) {
                       if (data)
                       {
-                        res.json({status:true,user:user});//response
+                        getMenue(function (dish_names, list)
+                        {
+                          res.json({status: true, user:user,dish_names:dish_names,types:list})//response
+
+                        })
                       }
 
                       else if (err)
@@ -59,7 +63,11 @@ module.exports = {
 
                  else if(data)
                  {
-                   res.json({status:true,user:user})
+                   getMenue(function (dish_names, list)
+                   {
+                     res.json({status: true, user:user,dish_names:dish_names,types:list})//response
+
+                   })
                  }
                  else if (err)
                  {(res.json({status:false}));}
@@ -99,7 +107,11 @@ module.exports = {
                    }
 
                    else if (data) {
-                     res.json({status: true, user: data})//response
+                     getMenue(function (dish_names, list)
+                     {
+                       res.json({status: true, user: data,dish_names:dish_names,types:list})//response
+
+                     })
                    }
                  })
 
@@ -121,7 +133,11 @@ module.exports = {
              }
 
              else if (data) {
-               res.json({status: true, user: data})//response
+               getMenue(function (dish_names, list)
+               {
+                 res.json({status: true, user:data,dish_names:dish_names,types:list})//response
+
+               })
              }
            })})
      }
