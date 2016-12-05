@@ -175,7 +175,7 @@ search:function (req,res,next) {
 
               var cus_loc="null";
               get_customer_location(parseFloat(params.lat),parseFloat(params.long),function (cusloc) {
-                cus_loc=cusloc
+                cus_loc=cusloc;
 
               })
 
