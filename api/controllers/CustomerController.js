@@ -47,7 +47,11 @@ module.exports = {
                 Apptokens.create({application_token:params.token}).then(function (data,err) {
                   if (data)
                   {
-                    res.json({status:true,user:user});//response
+                    getMenue(function (dish_names, list)
+                    {
+                      res.json({status: true, user:user,dish_names:dish_names,types:list})//response
+
+                    })
                   }
 
                   else if (err)
@@ -59,7 +63,11 @@ module.exports = {
 
               else if(data)
               {
-                res.json({status:true,user:user})
+                getMenue(function (dish_names, list)
+                {
+                  res.json({status: true, user:user,dish_names:dish_names,types:list})//response
+
+                })
               }
               else if (err)
               {(res.json({status:false}));}
@@ -99,7 +107,11 @@ module.exports = {
                   }
 
                   else if (data) {
-                    res.json({status: true, user: data})//response
+                    getMenue(function (dish_names, list)
+                    {
+                      res.json({status: true, user: data,dish_names:dish_names,types:list})//response
+
+                    })//response
                   }
                 })
 
@@ -121,7 +133,11 @@ module.exports = {
             }
 
             else if (data) {
-              res.json({status: true, user: data})//response
+              getMenue(function (dish_names, list)
+              {
+                res.json({status: true, user:data,dish_names:dish_names,types:list})//response
+
+              })
             }
           })})
       }
@@ -175,7 +191,10 @@ module.exports = {
               if (!data || data == "" || data.undefined) {
                 Apptokens.create({application_token: params.token}).then(function (data, err) {
                   if (data) {
-                    res.json({exists: true, user: user[0]})//response
+                    getMenue(function (dish_names, list)
+                    {
+                      res.json({exists: true, user: user[0],dish_names:dish_names,types:list})//response
+                    })
                   }
 
                   else if (err) {
@@ -185,7 +204,11 @@ module.exports = {
               }
 
               else if (data) {
-                res.json({exists: true, user: user[0]})
+                getMenue(function (dish_names, list)
+                {
+                  res.json({exists: true, user: user[0],dish_names:dish_names,types:list})//response
+
+                })
               }
 
               else if (err) {
@@ -366,3 +389,70 @@ module.exports = {
 
 };
 
+function  getMenue(callback) {
+
+  var dish_names=[]
+  var container=[]
+  var dish_types=[]
+  Dishname.find({}).populate('Types').then(function(data,err)
+  {
+    if (data)  // for preparing dishname file..
+    {
+
+      var data_length= data.length;
+
+      for(i=0;i<data_length;i++)
+      {
+        var Obj ={
+
+          name : data[i].DishName
+        }
+        var jsonObj = JSON.stringify(Obj)
+
+        dish_names.push(
+          {
+            jsonObj
+          }
+        )
+
+      }//dishnames working fine
+      for(i=0;i<data.length;i++)
+      {
+        var o = {
+
+          dish_name: data[i].DishName
+        }
+
+        var dish_name=  JSON.stringify(o)//JSON dishnmae
+
+        var object = {
+
+          unit : data[i].order_unit
+        }
+
+        var order= JSON.stringify(object)//order
+
+        for(j=0;j<data[i].Types.length;j++)
+        {
+
+          var obj =  {
+            name : data[i].Types[j].single_name
+          }
+
+          var json = JSON.stringify(obj)
+          dish_types.push(
+            {
+              json
+            })}
+        //   var types = JSON.stringify(dish_types)
+        container.push({
+          dish_name:dish_name,order_unit:order,dishType:dish_types
+        })
+        dish_types=[]
+      }
+      return callback(JSON.stringify(dish_names),JSON.stringify(container))
+//      res.json({dish_names:dish_names,list:container})
+    }
+
+  })
+}
