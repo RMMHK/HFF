@@ -178,7 +178,7 @@ verify:function (req,res,next){
 
                     getMenue(function (dish_names, list)
                     {
-                      res.json({exists: true, user: user[0],dish_names:stringify(dish_names),list:stringify(list)})//response
+                      res.json({exists: true, user: user[0],dish_names:dish_names,list:list})//response
 
                     })
                   }
