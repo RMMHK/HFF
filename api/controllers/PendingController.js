@@ -563,9 +563,7 @@ function  notify_parties(guy,order,provider,customer,mode,callback) {
 
      if(fullguy)
      {
-       var guy_order_list=[]
-        guy_order_list= fullguy.guy_orders
-       console.log(guy_order_list)
+
        var FCM = require('fcm-node');
        var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
        var fcm = new FCM(serverKey);

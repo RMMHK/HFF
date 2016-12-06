@@ -143,7 +143,7 @@ module.exports.bootstrap = function(cb) {
               body: guy_name + " " + "\n" + guy_cell + "\n" + "tap to acknowledge"
             },
             data: {
-              order: "",
+              ack:order.id,
               type: "assigned"
             }
           };
@@ -159,6 +159,7 @@ module.exports.bootstrap = function(cb) {
               body: order.ordered_dish + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "TRY LATER" + "\n" + "tap to exhaust"
             },
             data: {
+              ack:order.id,
               type: "N/A"
             }
           };
@@ -213,7 +214,7 @@ module.exports.bootstrap = function(cb) {
               body: guy_name + " " + "\n" + guy_cell + "\n" + "tap to acknowledge"
             },
             data: {
-              order: "",
+              ack: order.id,
               type: "assigned"
             }
           };
@@ -229,6 +230,7 @@ module.exports.bootstrap = function(cb) {
               body: order.ordered_dish + "\n" + order.ordered_quantity + " " + order.ordered_unit + "\n" + "\n" + "tap to exhaust"
             },
             data: {
+              ack:order.id,
               type: "N/A"
             }
           };
@@ -275,8 +277,8 @@ module.exports.bootstrap = function(cb) {
               body: "tap to view details"
             },
             data: {
-              data:  guy_order_list,
-              type: "order_details"
+              ack:order.id,
+              type: "job_details"
             }
           };
           fcm.send(message, function (err, response) {
