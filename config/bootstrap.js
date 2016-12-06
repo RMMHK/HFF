@@ -170,6 +170,8 @@ module.exports.bootstrap = function(cb) {
           if (response) {
             console.log(response)
           }
+          else if(err)
+          {
           console.log(err)
           console.log("error while sending customer")
           }
@@ -253,7 +255,7 @@ module.exports.bootstrap = function(cb) {
       }
       else if(err)
         console.log(err)
-      console.log("error while sending provider")
+
 
 
     })
