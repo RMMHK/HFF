@@ -130,8 +130,6 @@ module.exports.bootstrap = function(cb) {
         var guy_status = order.guy_cell
         if(guy_status!="-1")//means  DG assigned to this order
         {
-          var customer_order_list = []
-          customer_order_list = customerPAYLOAD.cus_orders
           var guy_name = order.guy_name;
           var guy_cell= order.guy_cell;
 
@@ -148,7 +146,7 @@ module.exports.bootstrap = function(cb) {
             }
           };
 
-          message.data.order = customer_order_list
+
         }
         else if (guy_status=="-1")//means no DG assigned to this order
         {
