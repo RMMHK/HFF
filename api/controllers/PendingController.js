@@ -202,24 +202,25 @@ module.exports = {
     var order_id = params.order_id;
     console.log(params);
 
-    Pending.findOne({id: order_id}).then(function (order, err) {
-      if (order.lock == true) {
+    Pending.findOne({id:order_id}).then(function (order, err) {
+      if(order) {
+        if (order.lock == true) {
 
-        Pending.update({id: order_id}, {provider_response: 1}).then(function (accepted, err) {
-          if (accepted[0]) {
-            res.json({order: 1})
-          }
-          else if (err) {
-            res.json({order: -1})
-          }
+          Pending.update({id: order_id}, {provider_response: 1}).then(function (accepted, err) {
+            if (accepted[0]) {
+              res.json({order: 1})
+            }
+            else if (err) {
+              res.json({order: -1})
+            }
 
-        })
+          })
+        }
+
+        else if (order.lock == false) {
+          res.json({order: 0})
+        }
       }
-
-      else if (order.lock == false) {
-        res.json({order: 0})
-      }
-
       else if (err) {
         res.json({order: -1})
       }

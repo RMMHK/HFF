@@ -64,11 +64,11 @@ module.exports.bootstrap = function(cb) {
 
     });
 
-    var k = schedule.scheduleJob('*/2 * * * *', function(){
+  //  var k = schedule.scheduleJob('*/2 * * * *', function(){
 
-      Pending.destroy({provider_response:-1,clean_scheduler_allowed:true}).then(function (data,err) {
+//      Pending.destroy({provider_response:-1,clean_scheduler_allowed:true}).then(function (data,err) {
 
-        if(data)
+/*        if(data)
         {
           console.log("operation clean up completed successfully")
         }
@@ -92,7 +92,7 @@ module.exports.bootstrap = function(cb) {
 
 
 
-    })
+    //})*/
 
 
   //  var S = schedule.scheduleJob('*/1 * * * *', function(){
