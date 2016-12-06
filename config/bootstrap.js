@@ -170,8 +170,8 @@ module.exports.bootstrap = function(cb) {
           if (response) {
             console.log(response)
           }
-          else if (err) {
-            console.log("error while sending")
+          console.log(err)
+          console.log("error while sending customer")
           }
         });
 
@@ -242,7 +242,8 @@ module.exports.bootstrap = function(cb) {
             console.log(response)
           }
           else if (err) {
-            console.log("error while sending")
+            console.log(err)
+            console.log("error while sending provider")
           }
         });
 
@@ -251,7 +252,9 @@ module.exports.bootstrap = function(cb) {
         //two types of notifications generations
       }
       else if(err)
-      {console.log("error")}
+        console.log(err)
+      console.log("error while sending provider")
+
 
     })
 
@@ -287,7 +290,8 @@ module.exports.bootstrap = function(cb) {
               console.log(response)
             }
             else if (err) {
-              console.log("error while sending")
+              console.log(err)
+              console.log("error while sending guy")
             }
           });
         }
