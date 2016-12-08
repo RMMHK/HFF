@@ -219,7 +219,6 @@ module.exports.bootstrap = function(cb) {
             }
           };
 
-          message.data.order = provider_order_list
         }
         else if (guy_status=="-1")//means no DG assigned to this order
         {
