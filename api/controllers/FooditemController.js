@@ -139,6 +139,7 @@ module.exports = {
   },
 
 
+
 search:function (req,res,next) {
 
 
@@ -302,6 +303,72 @@ search:function (req,res,next) {
 
 
 },
+
+
+  rate:function(req,res) {
+
+  var params = req.body
+    console.log(params)
+
+    var quality;
+    var taste;
+    var served;
+    Pending.findOne({id:params.order_id}).then(function (order,err) {
+      if(order)
+        Fooditem.findOne({id:order.item_id}).then(function (item,err) {
+
+          if(params.quality=="+Q")
+          {
+            quality= item.quality_meter+2.5
+          }
+          else if(params.quality=="-Q")
+          {
+            quality= item.quality_meter-2.5
+          }
+
+          if(params.taste=="+T")
+          {
+            taste= item.taste_meter+2.5
+          }
+          else if(params.taste=="-T")
+          {
+            taste= item.taste_meter-2.5
+          }
+          served = item.served+1;
+          Fooditem.update({id:item.id},{quality_meter:quality,taste_meter:taste,served:served}).then(function (data,err) {
+            if(data[0])
+            {
+              Customer.findOne({id:order.customer_id}).populate('cus_orders').then(function (data,err) {
+
+                if(data.cus_orders.length!=0)
+                {
+                  res.json({orders:data.cus_orders})
+                }
+                else if(data.cus_orders.length==0)
+                {
+                  res.json({orders:0})
+                }
+                else if (err)
+                {
+                  res.json({orders:-1})
+                }
+              })
+
+            }
+            else if(err)
+            {
+              res.json({orders:-1})
+            }
+
+          })
+
+
+        })
+    })
+
+  }
+
+
 
 };
 

@@ -216,8 +216,17 @@ module.exports = {
       type: "Boolean",
       defaultsTo: false,
 
-    }
+    },
 
+    delivered:
+    {
+      type:"Boolean",
+      defaultsTo:false
+    },
+    rated:{
+      type:"Boolean",
+      defaultsTo:false
+    }
   }
 
 

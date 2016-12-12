@@ -25,34 +25,6 @@ module.exports = {
     //fbc
     //delivered
     if(status=="cbp") {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       Pending.update({id: order_id}, {cancelled_by_provider:true,guy_marked_status:"1"}).then(function (data,err) {
        if (data[0])
        {
@@ -78,9 +50,9 @@ module.exports = {
           notify_provider(data[0],function () {
           })
 
-          sendresponse(guy_id,1,res,function () {
+          sendresponse(guy_id,1,res,function () {})
 
-          })
+
         }
         else if(err)
         {
@@ -95,13 +67,44 @@ module.exports = {
     }
 
     else if (status =="delivered")
-    {Pending.update({id: order_id}, {guy_marked_status:"1"}).then(function (data,err) {
+    {Pending.update({id: order_id}, {guy_marked_status:"1",delivered:true}).then(function (data,err) {
         if (data[0])
         {
-
           sendresponse(guy_id,1,res,function () {
 
           })
+          // send ratings notifications to customer
+         setTimeout(function sendRatingNotification(order,callback) {
+            Customer.findOne({id: order.customer_id}).then(function (cusPAYLOAD, err) {
+              if (cusPAYLOAD) {
+                var token = cusPAYLOAD.token;
+                var FCM = require('fcm-node');
+                var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
+                var fcm = new FCM(serverKey);
+                var message = { //this may vary according to the message type (single recipient, multicast, topic, et cetera)
+                  to: token,
+                  notification: {
+                    title: "So how was it!!!!!",
+                    body: order.ordered_dish + " " + "\n" + order.ordered_quantity + " " + order.ordered_unit
+                  },
+                  data: {
+                    order:order.id,
+                    type: "rating"          /// type of notification to customer
+                  }
+                };
+
+                fcm.send(message, function (err, response) {
+
+                  if (response) {
+                    console.log(response)
+                  }
+                  else if (err) {
+                    console.log("error while sending")
+                  }
+                });
+
+              }
+            })},900000)
         }
         else if(err)
         {
@@ -298,5 +301,4 @@ function sendresponse(guy,response,res,callback) {
       res.json({process:-1,orders:data.guy_orders})
     }
   })
-
 }
