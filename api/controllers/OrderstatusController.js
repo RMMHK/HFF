@@ -85,10 +85,10 @@ module.exports = {
                   to: token,
                   notification: {
                     title: "So how was it!!!!!",
-                    body: order.ordered_dish + " " + "\n" + order.ordered_quantity + " " + order.ordered_unit
+                    body: data[0].ordered_dish + " " + "\n" + data[0].ordered_quantity + " " + data[0].ordered_unit
                   },
                   data: {
-                    order:order.id,
+                    order:data[0].id,
                     type: "rating"          /// type of notification to customer
                   }
                 };
