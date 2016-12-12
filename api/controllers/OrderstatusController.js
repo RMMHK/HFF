@@ -75,7 +75,7 @@ module.exports = {
           })
           // send ratings notifications to customer
          setTimeout(function () {
-            Customer.findOne({id: data.customer_id}).then(function (cusPAYLOAD, err) {
+            Customer.findOne({id: data[0].customer_id}).then(function (cusPAYLOAD, err) {
               if (cusPAYLOAD) {
                 var token = cusPAYLOAD.token;
                 var FCM = require('fcm-node');
