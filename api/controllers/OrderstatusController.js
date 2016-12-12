@@ -74,7 +74,7 @@ module.exports = {
 
           })
           // send ratings notifications to customer
-         setTimeout(function sendRatingNotification(order,callback) {
+         setTimeout(function () {
             Customer.findOne({id: data.customer_id}).then(function (cusPAYLOAD, err) {
               if (cusPAYLOAD) {
                 var token = cusPAYLOAD.token;
