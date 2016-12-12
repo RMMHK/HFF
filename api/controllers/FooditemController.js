@@ -335,6 +335,9 @@ search:function (req,res,next) {
             taste= item.taste_meter-2.5
           }
           served = item.served+1;
+          Pending.update({id:order.id},{rated:true}).then(function (data,err) {
+
+          })
           Fooditem.update({id:item.id},{quality_meter:quality,taste_meter:taste,served:served}).then(function (data,err) {
             if(data[0])
             {
@@ -343,9 +346,7 @@ search:function (req,res,next) {
                 if(data.cus_orders.length!=0)
                 {
                   res.json({orders:data.cus_orders})
-                  Pending.update({id:order.id},{rated:true}).then(function (data,err) {
 
-                  })
                 }
                 else if(data.cus_orders.length==0)
                 {
