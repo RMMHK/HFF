@@ -343,8 +343,8 @@ search:function (req,res,next) {
                 if(data.cus_orders.length!=0)
                 {
                   res.json({orders:data.cus_orders})
-                  Pending.update({id:params.order_id},{rated:true}).then(function (data,err) {
-                    
+                  Pending.update({id:order.id},{rated:true}).then(function (data,err) {
+
                   })
                 }
                 else if(data.cus_orders.length==0)
