@@ -32,13 +32,13 @@ module.exports = {
     },
     quality_meter:
     {
-      type:'integer',
+      type:'float',
       defaultsTo: 0
     },
 
     taste_meter:
     {
-      type:'integer',
+      type:'float',
       defaultsTo: 0
     },
 

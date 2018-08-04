@@ -65,7 +65,7 @@ module.exports.bootstrap = function(cb) {
     });
 
   //  var k = schedule.scheduleJob('*/2 * * * *', function(){
-
+6
 //      Pending.destroy({provider_response:-1,clean_scheduler_allowed:true}).then(function (data,err) {
 
 /*        if(data)
@@ -120,8 +120,7 @@ module.exports.bootstrap = function(cb) {
     var serverKey = 'AIzaSyAqx0agqYXjwKC5z1VjuS9ZneYIeAs63WU';
     var fcm = new FCM(serverKey);
 
-    var customer_id = order.customer_id;
-
+   var customer_id = order.customer_id;
     Customer.findOne({id:customer_id}).populate('cus_orders').then(function (customerPAYLOAD,err) {
 
       if(customerPAYLOAD)

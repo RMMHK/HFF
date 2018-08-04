@@ -169,6 +169,8 @@ module.exports = {
     {
       model:'guy'
     },
+
+
     provider:
     {
       model:'user'

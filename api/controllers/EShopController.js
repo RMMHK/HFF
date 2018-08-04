@@ -140,7 +140,7 @@ setLocation:function (req,res,next) {
     }
     else if(err)
     {
-      con
+
       res.json({location:-1})
     }
   })
